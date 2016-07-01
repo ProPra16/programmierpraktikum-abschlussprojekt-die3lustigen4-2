@@ -23,11 +23,13 @@ import java.util.Scanner;
 
 public class Controller {
 
-    public Button nextStep = new Button("Nächster Schritt");
-    public Button reworkTest = new Button("Test korrigieren");
-    public Label testOverview = new Label("Blala");
-    public Label codeOverview = new Label("Blala");
-    public TextArea writeHere = new TextArea("Write your Code here");
+    public Button nextStep = new Button();
+    public Button reworkTest = new Button();
+    //public Label testOverview = new Label("Blala");
+    //public Label codeOverview = new Label("Blala");
+    public TextArea testOverview = new TextArea();
+    public TextArea codeOverview = new TextArea();
+    public TextArea writeHere = new TextArea();
     public HBox buttonBox = new HBox();
     public static Label timerLabel = new Label();
     public Label aktuellePhase = new Label();
@@ -58,8 +60,6 @@ public class Controller {
     }
 
     public static void chooseTask(Stage primaryStage) throws IOException {
-        GridPane root = new GridPane();
-        root.setAlignment(Pos.CENTER);
         Katalog[] kataloge = createKatalogArr();
         Button[] auswahlButtons = new Button[kataloge.length];
         for (int j = 0; j < kataloge.length; j++) {
@@ -68,10 +68,11 @@ public class Controller {
             for (String s: kataloge[j].beschreibung)
                 text = text + s + "\n";
             auswahlButtons[j].setText(text);
-            auswahlButtons[j].setPrefSize(1000/kataloge.length, 600/kataloge.length);
+            auswahlButtons[j].setPrefSize(800, 600/kataloge.length);
             auswahlButtons[j].setOnAction(event -> {
                 try {
                     Parent newRoot = FXMLLoader.load(Main.class.getResource("sample.fxml"));
+                    primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
                     primaryStage.setScene(new Scene(newRoot, 1000,800));
                     primaryStage.show();
                 } catch (IOException e) {
@@ -79,6 +80,8 @@ public class Controller {
                 }
             });
         }
+        GridPane root = new GridPane();
+        root.setAlignment(Pos.CENTER);
         root.setHgap(35);
         root.setVgap(35);
         for (int j = 0; j < auswahlButtons.length; j++)

@@ -9,7 +9,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Controller.createTimer();
         Controller.chooseTask(primaryStage);
-        primaryStage.setTitle("TDD");
+        primaryStage.setTitle("Wähle einen Katalog aus");
         primaryStage.setOnCloseRequest(event -> Controller.run = false);
         primaryStage.show();
     }
