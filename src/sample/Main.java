@@ -8,17 +8,15 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         Controller.createTimer();
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-
+        primaryStage.setTitle("TDD");
         primaryStage.setOnCloseRequest(event -> Controller.run = false);
 
+        Controller.chooseTask(primaryStage);
         primaryStage.setScene(new Scene(root, 1000,800));
         primaryStage.show();
     }

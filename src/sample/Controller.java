@@ -5,7 +5,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Scanner;
 
 public class Controller {
 
@@ -42,4 +51,17 @@ public class Controller {
         });
         t.start();
     }
+
+    public static void chooseTask(Stage primaryStage){
+        GridPane root = new GridPane();
+        root.setPrefSize(1000, 800);
+        System.out.println("Wo ist der Katalog gespeichert? (Pfad angeben)");
+        final Path pa = Paths.get(new Scanner(System.in).next());
+        try {
+            final List<String> f = Files.readAllLines(pa);
+        } catch (IOException e) {
+            System.out.println("didn't work: " + e);
+        }
+    }
+
 }
