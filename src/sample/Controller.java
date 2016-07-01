@@ -2,6 +2,7 @@ package sample;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -52,16 +54,57 @@ public class Controller {
         t.start();
     }
 
-    public static void chooseTask(Stage primaryStage){
+    public static void chooseTask(Stage primaryStage) throws IOException {
         GridPane root = new GridPane();
-        root.setPrefSize(1000, 800);
-        System.out.println("Wo ist der Katalog gespeichert? (Pfad angeben)");
-        final Path pa = Paths.get(new Scanner(System.in).next());
-        try {
+        // /home/leander/workspace/Projekt7/src/katalogFiles/TestKatalog.txt
+        System.out.println("Wo ist einer der Kataloge gespeichert? (Pfad angeben mit der datei, also z.B. bla/bla/katalog.txt)");
+        Path pa = Paths.get(new Scanner(System.in).next());
+        //gibt die Anzahl der dateien im Verzeichnis zurück
+        long numberOfCatalogs = Files.list(pa.getParent()).count();
+
+        //Einlesen der Katalogkomponenten wie aufgaben Name oder Beschreibung
+        //Zur speicherung von abschnitten die größer als 1 Zeile sind werden Listen verwendet
+        //Der Vorteil ist das diese keine feste größe haben wie z.b. ein String Array
+        Katalog[] katalogArr = new Katalog[(int) numberOfCatalogs];
+        for (int j = 0; j < numberOfCatalogs ; j++) {
             final List<String> f = Files.readAllLines(pa);
-        } catch (IOException e) {
-            System.out.println("didn't work: " + e);
+            String aufgabenName = f.get(1);
+            ArrayList<String> beschreibung = new ArrayList<>();
+            ArrayList<String> classHeader = new ArrayList<>();
+            ArrayList<String> testHeader = new ArrayList<>();
+            int i = 3;
+            while (!f.get(i).equals("Classname:")) {
+                beschreibung.add(f.get(i));
+                i++;
+            }
+            String className = f.get(++i);
+            i = i + 2;
+            while (!f.get(i).equals("Testname:")) {
+                classHeader.add(f.get(i));
+                i++;
+            }
+            String testName = f.get(++i);
+            i = i + 2;
+            while (!f.get(i).equals("BabySteps:")) {
+                testHeader.add(f.get(i));
+                i++;
+            }
+            boolean babysteps = f.get(++i).equals("true");
+            i++;
+            boolean timetracking = f.get(++i).equals("true");
+            katalogArr[j] = new Katalog(aufgabenName, className, testName, babysteps, timetracking, beschreibung, classHeader, testHeader);
+        /* Das hier könnte jemand zu einem Test machen mit asserEquals. Hab das jetzt einfach nur selber zum testen verwendet
+        System.out.println(aufgabenName);
+        System.out.println(beschreibung.get(0));
+        System.out.println(className);
+        System.out.println(classHeader.get(0));
+        System.out.println(testName);
+        System.out.println(testHeader.get(0));
+        System.out.println(babysteps);
+        System.out.println(timetracking);
+        */
         }
+        primaryStage.setScene(new Scene(root, 1000, 800));
     }
 
 }
