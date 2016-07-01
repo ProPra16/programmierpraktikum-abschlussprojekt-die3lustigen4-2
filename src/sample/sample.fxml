@@ -5,15 +5,20 @@
 <GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sample.Controller">
    <children>
        <Label fx:id="testOverview" scaleX="2" scaleY="2" text="TESTS" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
-   
+
        <Label fx:id="codeOverview" scaleX="2" scaleY="2" text="CODE" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
+
        <HBox fx:id="buttonBox" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
-       <Button fx:id="nextStep" prefHeight="50" prefWidth="150" text="Next Step" GridPane.columnSpan="1" GridPane.rowIndex="13" GridPane.rowSpan="1" />
-   
+
+       <Button fx:id="nextStep" prefHeight="50" prefWidth="150" text="Next Step" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="13" GridPane.rowSpan="1" />
+
        <Button fx:id="reworkTest" prefHeight="50" prefWidth="150" text="Test korrigieren" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="13" GridPane.rowSpan="1" />
 
        <Label fx:id="timerLabel" scaleX="1" scaleY="1" GridPane.columnIndex="4" GridPane.columnSpan="1" GridPane.rowIndex="0" GridPane.rowSpan="1" />
 
+       <Label fx:id="rueckmeldung" alignment="CENTER" scaleX="1" scaleY="1" text="Rückmeldung" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="20" GridPane.rowSpan="1" />
+
+       <Label fx:id="aktuellePhase" scaleX="1" scaleY="1" text="aktuelle Phase" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="20" GridPane.rowSpan="1" />
 
        <TextArea fx:id="writeHere" scaleX="1" scaleY="1" text="Write your code Here" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="20" GridPane.rowSpan="1" prefHeight="300"/>
    </children>

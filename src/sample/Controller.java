@@ -16,6 +16,8 @@ public class Controller {
     public TextArea writeHere = new TextArea("Write your Code here");
     public HBox buttonBox = new HBox();
     public static Label timerLabel = new Label();
+    public Label aktuellePhase = new Label();
+    public Label rueckmeldung = new Label();
 
     static volatile SimpleIntegerProperty i = new SimpleIntegerProperty(0);
     static volatile boolean run = true;
