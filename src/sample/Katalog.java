@@ -23,4 +23,18 @@ public class Katalog {
         this.classHeader = classHeader;
         this.testHeader = testHeader;
     }
+
+    public void ausgeben(){
+        System.out.println(aufgabenName);
+        for (String s: beschreibung)
+            System.out.println(s);
+        System.out.println(className);
+        for (String s: classHeader)
+            System.out.println(s);
+        System.out.println(testName);
+        for (String s: testHeader)
+            System.out.println(s);
+        System.out.println(babysteps);
+        System.out.println(timetracking);
+    }
 }

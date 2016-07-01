@@ -61,7 +61,6 @@ public class Controller {
         Path pa = Paths.get(new Scanner(System.in).next());
         //gibt die Anzahl der dateien im Verzeichnis zurück
         long numberOfCatalogs = Files.list(pa.getParent()).count();
-
         //Einlesen der Katalogkomponenten wie aufgaben Name oder Beschreibung
         //Zur speicherung von abschnitten die größer als 1 Zeile sind werden Listen verwendet
         //Der Vorteil ist das diese keine feste größe haben wie z.b. ein String Array
@@ -93,16 +92,7 @@ public class Controller {
             i++;
             boolean timetracking = f.get(++i).equals("true");
             katalogArr[j] = new Katalog(aufgabenName, className, testName, babysteps, timetracking, beschreibung, classHeader, testHeader);
-        /* Das hier könnte jemand zu einem Test machen mit asserEquals. Hab das jetzt einfach nur selber zum testen verwendet
-        System.out.println(aufgabenName);
-        System.out.println(beschreibung.get(0));
-        System.out.println(className);
-        System.out.println(classHeader.get(0));
-        System.out.println(testName);
-        System.out.println(testHeader.get(0));
-        System.out.println(babysteps);
-        System.out.println(timetracking);
-        */
+            // Test ausgabe katalogArr[j].ausgeben();
         }
         primaryStage.setScene(new Scene(root, 1000, 800));
     }
