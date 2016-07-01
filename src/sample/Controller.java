@@ -2,6 +2,9 @@ package sample;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,9 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,17 +59,45 @@ public class Controller {
 
     public static void chooseTask(Stage primaryStage) throws IOException {
         GridPane root = new GridPane();
-        // /home/leander/workspace/Projekt7/src/katalogFiles/TestKatalog.txt
-        System.out.println("Wo ist einer der Kataloge gespeichert? (Pfad angeben mit der datei, also z.B. bla/bla/katalog.txt)");
-        Path pa = Paths.get(new Scanner(System.in).next());
-        //gibt die Anzahl der dateien im Verzeichnis zurück
-        long numberOfCatalogs = Files.list(pa.getParent()).count();
+        root.setAlignment(Pos.CENTER);
+        Katalog[] kataloge = createKatalogArr();
+        Button[] auswahlButtons = new Button[kataloge.length];
+        for (int j = 0; j < kataloge.length; j++) {
+            auswahlButtons[j] = new Button();
+            String text = "";
+            for (String s: kataloge[j].beschreibung)
+                text = text + s + "\n";
+            auswahlButtons[j].setText(text);
+            auswahlButtons[j].setPrefSize(1000/kataloge.length, 600/kataloge.length);
+            auswahlButtons[j].setOnAction(event -> {
+                try {
+                    Parent newRoot = FXMLLoader.load(Main.class.getResource("sample.fxml"));
+                    primaryStage.setScene(new Scene(newRoot, 1000,800));
+                    primaryStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        root.setHgap(35);
+        root.setVgap(35);
+        for (int j = 0; j < auswahlButtons.length; j++)
+            root.add(auswahlButtons[j],0,j);
+        primaryStage.setScene(new Scene(root, 1000, 800));
+    }
+
+    public static Katalog[] createKatalogArr() throws IOException {
+        // /home/leander/workspace/Projekt7/src/katalogFiles
+        System.out.println("Wo sind die Kataloge gespeichert? (Pfad angeben)");
+        String path = new Scanner(System.in).next();
+        File folder = new File(path);
+        File[] listOfFiles = folder.listFiles();
         //Einlesen der Katalogkomponenten wie aufgaben Name oder Beschreibung
         //Zur speicherung von abschnitten die größer als 1 Zeile sind werden Listen verwendet
         //Der Vorteil ist das diese keine feste größe haben wie z.b. ein String Array
-        Katalog[] katalogArr = new Katalog[(int) numberOfCatalogs];
-        for (int j = 0; j < numberOfCatalogs ; j++) {
-            final List<String> f = Files.readAllLines(pa);
+        Katalog[] katalogArr = new Katalog[listOfFiles.length];
+        for (int j = 0; j < listOfFiles.length ; j++) {
+            final List<String> f = Files.readAllLines(Paths.get(path + "/" + listOfFiles[j].getName()));
             String aufgabenName = f.get(1);
             ArrayList<String> beschreibung = new ArrayList<>();
             ArrayList<String> classHeader = new ArrayList<>();
@@ -92,9 +123,8 @@ public class Controller {
             i++;
             boolean timetracking = f.get(++i).equals("true");
             katalogArr[j] = new Katalog(aufgabenName, className, testName, babysteps, timetracking, beschreibung, classHeader, testHeader);
-            // Test ausgabe katalogArr[j].ausgeben();
         }
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        return katalogArr;
     }
 
 }

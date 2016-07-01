@@ -1,10 +1,13 @@
 AufgabenName:
 Römische Zahlen
 Beschreibung:
-Konvertiert zahlen
-blablabka
-kblbalab
-
+Gaaaaaaanzzzz ttttoolll
+erfegege
+rgergeg
+egegreherg
+gegegege
+egegergerg
+ergeg
 Classname:
 RomanNumberConverter
 ClassHeader:
