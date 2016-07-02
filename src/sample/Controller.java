@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -19,7 +21,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Controller {
 
@@ -91,9 +92,15 @@ public class Controller {
 
     public static Katalog[] createKatalogArr() throws IOException {
         // /home/leander/workspace/Projekt7/src/katalogFiles
-        System.out.println("Wo sind die Kataloge gespeichert? (Pfad angeben)");
-        String path = new Scanner(System.in).next();
-        File folder = new File(path);
+        //System.out.println("Wo sind die Kataloge gespeichert? (Pfad angeben)");
+
+        /** Silvan added FileChooser 2.7.2016 */
+
+        DirectoryChooser dialog = new DirectoryChooser();
+        dialog.setTitle("Choose Catalog-Folder");
+        File folder = dialog.showDialog(new Stage());
+        String path = folder.getAbsolutePath();
+
         File[] listOfFiles = folder.listFiles();
         //Einlesen der Katalogkomponenten wie aufgaben Name oder Beschreibung
         //Zur speicherung von abschnitten die größer als 1 Zeile sind werden Listen verwendet
