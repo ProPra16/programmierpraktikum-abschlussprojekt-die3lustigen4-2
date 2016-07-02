@@ -69,12 +69,17 @@ public class Controller {
             for (String s: kataloge[j].beschreibung)
                 text = text + s + "\n";
             auswahlButtons[j].setText(text);
+            auswahlButtons[j].setId("auswahlButtons");
             auswahlButtons[j].setPrefSize(800, 600/kataloge.length);
             auswahlButtons[j].setOnAction(event -> {
                 try {
                     Parent newRoot = FXMLLoader.load(Main.class.getResource("sample.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
-                    primaryStage.setScene(new Scene(newRoot, 1000,800));
+                    Scene scene = new Scene(newRoot, 1000,800);
+                    primaryStage.setScene(scene);
+                    scene.getStylesheets().add
+                            (Main.class.getResource("Design.css").toExternalForm());
+
                     primaryStage.show();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -94,7 +99,7 @@ public class Controller {
         // /home/leander/workspace/Projekt7/src/katalogFiles
         //System.out.println("Wo sind die Kataloge gespeichert? (Pfad angeben)");
 
-        /** Silvan added FileChooser 2.7.2016 */
+        /** Silvan added FileChooser on 2.7.2016 */
 
         DirectoryChooser dialog = new DirectoryChooser();
         dialog.setTitle("Choose Catalog-Folder");
