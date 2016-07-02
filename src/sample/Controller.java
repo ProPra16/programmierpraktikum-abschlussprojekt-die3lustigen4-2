@@ -94,7 +94,7 @@ public class Controller {
         // /home/leander/workspace/Projekt7/src/katalogFiles
         //System.out.println("Wo sind die Kataloge gespeichert? (Pfad angeben)");
 
-        /** Silvan added FileChooser 2.7.2016 */
+        /** Silvan added FileChooser on 2.7.2016 */
 
         DirectoryChooser dialog = new DirectoryChooser();
         dialog.setTitle("Choose Catalog-Folder");
