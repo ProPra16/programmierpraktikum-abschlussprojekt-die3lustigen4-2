@@ -32,7 +32,7 @@ public class Controller {
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
     public HBox buttonBox = new HBox();
-    public static Label timerLabel = new Label();
+    //public static Label timerLabel = new Label();
     public Label aktuellePhase = new Label();
     public Label rueckmeldung = new Label();
 
@@ -40,15 +40,28 @@ public class Controller {
     static volatile boolean run = true;
     static volatile int k = 0;
 
-
+    /** Timer startet in separatem Fenster */
     public static void createTimer(){
-        run=true;
-        timerLabel.textProperty().bind(i.asString());
+        run = true;
+        //timerLabel.textProperty().bind(i.asString());
+
+        Stage timer = new Stage();
+
+        timer.setTitle("Timer");
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        Label time = new Label();
+        grid.add(time, 1, 1);
+        time.setText(k+"");
+
+
 
         Thread t = new Thread(() -> {
             while (run) {
+                Platform.runLater(() -> {
+                time.setText(k+"");
                 k++;
-                Platform.runLater(() -> i.set(k));
+                });
 
                 try {
                     Thread.sleep(1000);
@@ -58,6 +71,9 @@ public class Controller {
             }
         });
         t.start();
+        Scene tscene = new Scene(grid, 100, 100);
+        timer.setScene(tscene);
+        timer.show();
     }
 
     public static void chooseTask(Stage primaryStage) throws IOException {
@@ -74,7 +90,10 @@ public class Controller {
                 try {
                     Parent newRoot = FXMLLoader.load(Main.class.getResource("sample.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
-                    primaryStage.setScene(new Scene(newRoot, 1000,800));
+                    Scene scene = new Scene(newRoot, 1000,800);
+                    primaryStage.setScene(scene);
+                    scene.getStylesheets().add
+                            (Main.class.getResource("design.css").toExternalForm());
                     primaryStage.show();
                 } catch (IOException e) {
                     e.printStackTrace();
