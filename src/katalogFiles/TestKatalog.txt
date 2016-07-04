@@ -1,0 +1,28 @@
+AufgabenName:
+Römische Zahlen
+Beschreibung:
+Konvertiert zahlen
+blablabka
+kblbalab sflöflkfölk!!! lmflew ööööööööööö
+Classname:
+RomanNumberConverter
+ClassHeader:
+public class RomanNumberConverter {
+
+}
+Testname:
+RomanNumberConverterTest
+TestHeader:
+import static org.junit.Assert.*; 
+import org.junit.Test; 
+public class RomanNumbersTest { 
+	@Test 
+	public void testSomething() {
+
+	} 
+}
+BabySteps:
+true
+Timetracking:
+true
+
