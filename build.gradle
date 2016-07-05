@@ -2,7 +2,13 @@
 * Dieses Gradle Skript wird von Travis aufgerufen.
 * Nach Änderungen muss überprüft werden, ob es
 * weiterhin von Travis kompiliert werden kann!
-*  Überprüfen auf: www.travis-ci.org
+*    Überprüfen auf: www.travis-ci.org
+*
+* Daemon (Hintergrundausführung) nicht aktiviert
+* wegen Continious Integration
+* https://docs.gradle.org/current/userguide/gradle_daemon.html
+*
+* 
 ************************************************/
 
 apply plugin: 'java'
@@ -13,10 +19,10 @@ repositories {
 	mavenCentral()
 }
 
-println("Gradle repositories GELADEN")
+println("!!!!!!!!!!!Gradle: repositories GELADEN!!!!!!!!!!!!!!!!")
 
 dependencies {
-//	url: "https://github.com/bendisposto/virtual-kata-lib"
+	url "https://github.com/bendisposto/virtual-kata-lib"
 	testCompile "junit:junit:4.8.2"
 }
 
