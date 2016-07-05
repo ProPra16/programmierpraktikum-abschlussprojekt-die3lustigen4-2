@@ -8,5 +8,6 @@ repositories {
 
 
 dependencies {
-	testCompile 'junit:junit:4
+	"url": "https://github.com/bendisposto/virtual-kata-lib"
+	testCompile 'junit:junit:4'
 }
