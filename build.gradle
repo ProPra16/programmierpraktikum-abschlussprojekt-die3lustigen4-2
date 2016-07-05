@@ -9,8 +9,8 @@ repositories {
 println("Gradle repositories GELADEN")
 
 dependencies {
-	url: "https://github.com/bendisposto/virtual-kata-lib"
+//	url: "https://github.com/bendisposto/virtual-kata-lib"
 	testCompile "junit:junit:4.8.2"
 }
 
-println("Gradle FUNKTIONIERT")
+//println("Gradle FUNKTIONIERT")
