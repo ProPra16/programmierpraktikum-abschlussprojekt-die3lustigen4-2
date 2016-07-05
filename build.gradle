@@ -1,3 +1,10 @@
+/***********************************************
+* Dieses Gradle Skript wird von Travis aufgerufen.
+* Nach Änderungen muss überprüft werden, ob es
+* weiterhin von Travis kompiliert werden kann!
+*  Überprüfen auf: www.travis-ci.org
+************************************************/
+
 apply plugin: 'java'
 
 sourceCompatibility= 1.8
