@@ -11,7 +11,7 @@ import javafx.beans.property.StringProperty;
 import userInput.CodeInput;
 import userInput.TestInput;
 
-public class exercise {
+public class Exercise {
 	boolean writeCode;			// aktuelle Stufe (Step) speichern
 	boolean writeTest;
 	boolean refactoring;

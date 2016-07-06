@@ -3,11 +3,10 @@
  ********************************************************/
 
 
-package userInput;
-
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+import userInput.TestInput;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestInputTest {
 

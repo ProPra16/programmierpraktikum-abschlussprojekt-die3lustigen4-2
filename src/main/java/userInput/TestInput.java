@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class TestInput {
-	StringProperty testcode;
+	public StringProperty testcode;
 	
 	public TestInput(String code){
 		this.testcode=new SimpleStringProperty(code);

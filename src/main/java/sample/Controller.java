@@ -12,7 +12,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -26,13 +25,10 @@ public class Controller {
 
     public Button nextStep = new Button();
     public Button reworkTest = new Button();
-    //public Label testOverview = new Label("Blala");
-    //public Label codeOverview = new Label("Blala");
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
     public HBox buttonBox = new HBox();
-    //public static Label timerLabel = new Label();
     public Label aktuellePhase = new Label();
     public Label rueckmeldung = new Label();
 
@@ -53,7 +49,6 @@ public class Controller {
         Label time = new Label();
         grid.add(time, 1, 1);
         time.setText(k+"");
-
 
 
         Thread t = new Thread(() -> {
@@ -88,12 +83,11 @@ public class Controller {
             auswahlButtons[j].setPrefSize(800, 600/kataloge.length);
             auswahlButtons[j].setOnAction(event -> {
                 try {
-                    Parent newRoot = FXMLLoader.load(Main.class.getResource("sample.fxml"));
+                    Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("sample.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
                     Scene scene = new Scene(newRoot, 1000,800);
                     primaryStage.setScene(scene);
-                    scene.getStylesheets().add
-                            (Main.class.getResource("design.css").toExternalForm());
+                    scene.getStylesheets().add(Main.class.getClassLoader().getResource("design.css").toExternalForm());
                     primaryStage.show();
                 } catch (IOException e) {
                     e.printStackTrace();
