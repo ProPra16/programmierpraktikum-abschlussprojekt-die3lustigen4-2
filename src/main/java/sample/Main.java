@@ -11,7 +11,7 @@ public class Main extends Application {
         Controller.chooseTask(primaryStage);
         primaryStage.setTitle("Wähle einen Katalog aus");
         primaryStage.show();
-
+        System.out.print("test");
         /** Beendet Timer-Thread, wenn das Programm geschlossen wird*/
         primaryStage.setOnCloseRequest(we -> Controller.run = false);
     }
