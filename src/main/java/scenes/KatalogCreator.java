@@ -20,14 +20,25 @@ public class KatalogCreator {
 
     public static void chooseTask(Stage primaryStage) throws IOException {
         Katalog[] kataloge = createKatalogArr();
-        Button[] auswahlButtons = new Button[kataloge.length];
-        for (int j = 0; j < kataloge.length; j++) {
+        Button[] auswahlButtons = createButtonArr(kataloge.length, primaryStage, kataloge);
+        GridPane root = new GridPane();
+        root.setAlignment(Pos.CENTER);
+        root.setHgap(35);
+        root.setVgap(35);
+        for (int j = 0; j < auswahlButtons.length; j++)
+            root.add(auswahlButtons[j],0,j);
+        primaryStage.setScene(new Scene(root, 1000, 800));
+    }
+
+    public static Button[] createButtonArr(int length, Stage primaryStage, Katalog[] kataloge){
+        Button[] auswahlButtons = new Button[length];
+        for (int j = 0; j < length; j++) {
             auswahlButtons[j] = new Button();
             String text = "";
             for (String s: kataloge[j].beschreibung)
                 text = text + s + "\n";
             auswahlButtons[j].setText(text);
-            auswahlButtons[j].setPrefSize(800, 600/kataloge.length);
+            auswahlButtons[j].setPrefSize(800, 600/length);
             auswahlButtons[j].setOnAction(event -> {
                 try {
                     Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("sample.fxml"));
@@ -41,13 +52,7 @@ public class KatalogCreator {
                 }
             });
         }
-        GridPane root = new GridPane();
-        root.setAlignment(Pos.CENTER);
-        root.setHgap(35);
-        root.setVgap(35);
-        for (int j = 0; j < auswahlButtons.length; j++)
-            root.add(auswahlButtons[j],0,j);
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        return auswahlButtons;
     }
 
     public static Katalog[] createKatalogArr() throws IOException {

@@ -43,19 +43,19 @@ public class Exercise {
 	
 	public void nextStep(){
 		//TODO Aufruf des Compilertool von Bendisposto (this.actualCode)
-		if((writeTest==true)&&(writeCode==false)&&(refactoring==false)){
+		if((writeTest)&&(!writeCode)&&(!refactoring)){
 			this.writeTest=false;
 			this.writeCode=true;
 			return;
 		}
 		
-		if((writeTest==false)&&(writeCode==true)&&(refactoring==false)){
+		if((!writeTest)&&(writeCode)&&(!refactoring)){
 			this.writeCode=false;
 			this.refactoring=true;
 			return;
 		}
 
-		if((writeTest==false)&&(writeCode==false)&&(refactoring==true)){
+		if((!writeTest)&&(!writeCode)&&(refactoring)){
 			this.refactoring=false;
 			this.writeTest=true;
 			return;

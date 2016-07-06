@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -13,8 +14,8 @@ import javafx.stage.Stage;
 
 public class Controller {
 
-    public Button nextStep = new Button();
-    public Button reworkTest = new Button();
+    public static Button nextStep = new Button();
+    public static Button reworkTest = new Button();
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
@@ -59,6 +60,21 @@ public class Controller {
         Scene tscene = new Scene(grid, 100, 100);
         timer.setScene(tscene);
         timer.show();
+    }
+
+    public static void createButtonActions(){
+        nextStep.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Hallo Welt");
+            alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
+            alert.showAndWait();
+        });
+        reworkTest.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Hallo Welt");
+            alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
+            alert.showAndWait();
+        });
     }
 
 }

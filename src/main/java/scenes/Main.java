@@ -9,6 +9,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Controller.createTimer();
         KatalogCreator.chooseTask(primaryStage);
+        Controller.createButtonActions();
         primaryStage.setTitle("Wähle einen Katalog aus");
         primaryStage.show();
 
