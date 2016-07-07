@@ -14,8 +14,8 @@ import javafx.stage.Stage;
 
 public class Controller {
 
-    public static Button nextStep = new Button();
-    public static Button reworkTest = new Button();
+    public  Button nextStep = new Button();
+    public  Button reworkTest = new Button();
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
@@ -62,14 +62,16 @@ public class Controller {
         timer.show();
     }
 
-    public static void createButtonActions(){
+    //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
+    public void setNextStep(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Hallo Welt");
+        alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
+        alert.showAndWait();
+    }
+
+    public void setReworkTest(){
         nextStep.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Hallo Welt");
-            alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
-            alert.showAndWait();
-        });
-        reworkTest.setOnAction(event -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Hallo Welt");
             alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");

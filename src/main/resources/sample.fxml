@@ -10,11 +10,16 @@
 
        <HBox fx:id="buttonBox" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
 
-       <Button fx:id="nextStep" alignment="CENTER" prefHeight="50" prefWidth="150" text="Next Step" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="1" />
+       <Button fx:id="nextStep" alignment="CENTER" prefHeight="50" prefWidth="150"
+               text="Next Step" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="1"
+               onAction="#setNextStep"/>
 
-       <Button fx:id="reworkTest" alignment="CENTER" prefHeight="50" prefWidth="150" text="Test korrigieren" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="1" />
+       <Button fx:id="reworkTest" alignment="CENTER" prefHeight="50" prefWidth="150"
+               text="Test korrigieren" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="1"
+                onAction="#setReworkTest"/>
 
-       <Label fx:id="timerLabel" scaleX="1" scaleY="1" GridPane.columnIndex="4" GridPane.columnSpan="1" GridPane.rowIndex="0" GridPane.rowSpan="1" />
+       <Label fx:id="timerLabel" scaleX="1" scaleY="1"
+              GridPane.columnIndex="4" GridPane.columnSpan="1" GridPane.rowIndex="0" GridPane.rowSpan="1" />
 
        <Label fx:id="rueckmeldung" alignment="CENTER" scaleX="1" scaleY="1" text="Rückmeldung" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="20" GridPane.rowSpan="1" />
 
