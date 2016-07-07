@@ -22,6 +22,20 @@ public class Exercise {
 	TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
 	CodeInput exerciseCode;
 	
+	CompilationUnit code;	// Übergabe an Bendisposto-Code
+	CompilationUnit test;
+	
+	JavaStringCompiler compileFolder;
+	
+	
+	public Exercise(String exerciseName, String exerciseFramework, String testName, String testFramework){
+		this.exerciseName=exerciseName;
+		this.writeCode= false;
+		this.writeTest=true;
+		this.refactoring=false;
+		this.code=new CompilationUnit(String exerciseName, String exerciseFramework, false);
+		this.test=new CompilationUnit(String testName, String testFramework, true);
+	}
 	
 	public StringProperty actualCode(){
 		if(writeTest){
@@ -42,7 +56,16 @@ public class Exercise {
 	}
 	
 	public void nextStep(){
-		//TODO Aufruf des Compilertool von Bendisposto (this.actualCode)
+		if(writeTest){
+			this.compileFolder = CompilerFactory.getCompiler(this.code, this.test);
+			test.compileAndRunTests();
+			if(hasC)
+				// TODO hier fehlt noch was
+		}
+	}
+
+		
+	public void passed(){
 		if((writeTest)&&(!writeCode)&&(!refactoring)){
 			this.writeTest=false;
 			this.writeCode=true;
