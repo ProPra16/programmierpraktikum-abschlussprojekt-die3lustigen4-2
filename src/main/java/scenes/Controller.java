@@ -68,6 +68,7 @@ public class Controller {
         alert.setTitle("Hallo Welt");
         alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
         alert.showAndWait();
+        //Falsch: Exercise exercise = new Exercise();
     }
 
     public void setReworkTest(){

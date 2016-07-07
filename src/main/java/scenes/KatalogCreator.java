@@ -39,8 +39,10 @@ public class KatalogCreator {
                 text = text + s + "\n";
             auswahlButtons[j].setText(text);
             auswahlButtons[j].setPrefSize(800, 600/length);
+            Katalog tmpKatalog = kataloge[j];
             auswahlButtons[j].setOnAction(event -> {
                 try {
+                    Main.choosenKatalog = tmpKatalog;
                     Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("sample.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
                     Scene scene = new Scene(newRoot, 1000,800);

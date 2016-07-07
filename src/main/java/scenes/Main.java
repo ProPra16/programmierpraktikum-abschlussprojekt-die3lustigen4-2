@@ -5,12 +5,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    //choosenKatalog ist der Katalog der vom Benutzer ausgewählt wurde und alle benötigten Daten enthält wie:aufgabenName class Name testHeader usw...
+    static Katalog choosenKatalog;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Controller.createTimer();
         KatalogCreator.chooseTask(primaryStage);
-        Controller controller = new Controller();
-        controller.createButtonActions();
         primaryStage.setTitle("Wähle einen Katalog aus");
         primaryStage.show();
 
