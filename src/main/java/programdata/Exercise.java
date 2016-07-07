@@ -10,6 +10,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import userInput.CodeInput;
 import userInput.TestInput;
+import vk.core.api.CompilationUnit;
+import vk.core.api.CompilerFactory;
+import vk.core.api.JavaStringCompiler;
 
 public class Exercise {
 	boolean writeCode;			// aktuelle Stufe (Step) speichern
@@ -33,8 +36,8 @@ public class Exercise {
 		this.writeCode= false;
 		this.writeTest=true;
 		this.refactoring=false;
-		this.code=new CompilationUnit(String exerciseName, String exerciseFramework, false);
-		this.test=new CompilationUnit(String testName, String testFramework, true);
+		this.code=new CompilationUnit(exerciseName, exerciseFramework, false);
+		this.test=new CompilationUnit(testName, testFramework, true);
 	}
 	
 	public StringProperty actualCode(){
@@ -58,8 +61,8 @@ public class Exercise {
 	public void nextStep(){
 		if(writeTest){
 			this.compileFolder = CompilerFactory.getCompiler(this.code, this.test);
-			test.compileAndRunTests();
-			if(hasC)
+			compileFolder.compileAndRunTests();
+			//if(hasC)
 				// TODO hier fehlt noch was
 		}
 	}
