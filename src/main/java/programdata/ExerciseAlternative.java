@@ -38,7 +38,6 @@ public class ExerciseAlternative {
 		writeCode = false;
 		refactoring = false;
 		acutalStep();
-
 	}
 
 	public static StringProperty actualCode(){
@@ -62,10 +61,16 @@ public class ExerciseAlternative {
 			compileFolder = CompilerFactory.getCompiler(code, test);
 			compileFolder.compileAndRunTests();
 			//if(hasC)
-				// TODO hier fehlt noch was mehr
+				// TO-DO hier fehlt noch was mehr
 		}
 	}
 
+	public static void reworkTest(){
+		writeCode = false;
+		refactoring = false;
+		writeTest = true;
+		acutalStep();
+	}
 		
 	public static void passed(){
 		if((writeTest)&&(!writeCode)&&(!refactoring)){

@@ -36,7 +36,7 @@ public class Controller implements Initializable{
     public StringProperty codeProperty = new SimpleStringProperty("CODE");
     public StringProperty testProperty = new SimpleStringProperty("TESTS");
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("Aktuelle Phase:");
-    public StringProperty rueckmeldungProperty = new SimpleStringProperty("Rückmeldung:");
+    public static StringProperty rueckmeldungProperty = new SimpleStringProperty("Rückmeldung:");
 
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
@@ -53,10 +53,12 @@ public class Controller implements Initializable{
         alert.setTitle("Hallo Welt");
         alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
         alert.showAndWait();
+        ExerciseAlternative.reworkTest();
     }
 
     public void setStart(){
         ExerciseAlternative.start();
+        start.setDisable(true);
     }
 
     //Hier werden die StringPropertys gebinded sodass wir diese nun von überall aktualisieren können und sich der Text
