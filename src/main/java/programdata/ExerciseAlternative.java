@@ -16,8 +16,8 @@ import vk.core.api.CompilerFactory;
 import vk.core.api.JavaStringCompiler;
 
 public class ExerciseAlternative {
-	static boolean writeCode;			// aktuelle Stufe (Step) speichern
-	static boolean writeTest;
+	public static boolean writeCode;			// aktuelle Stufe (Step) speichern
+	public static boolean writeTest;
 	static boolean refactoring;
 
 	static String failure;				// Speicher für zurückgegebene Compilierfehler
@@ -34,10 +34,19 @@ public class ExerciseAlternative {
 	public static void start() {
 		//testausgabe
 		KatalogCreator.choosenKatalog.ausgeben();
+		String completeClassHeader = "";
+		String completeTestHeader = "";
+		for (String s: KatalogCreator.choosenKatalog.classHeader)
+			completeClassHeader = completeClassHeader + s +"\n";
+		for (String s: KatalogCreator.choosenKatalog.testHeader)
+			completeTestHeader = completeTestHeader + s +"\n";
+
 		writeTest = true;
 		writeCode = false;
 		refactoring = false;
-		acutalStep();
+		exerciseCode = new CodeInput(completeClassHeader);
+		exerciseTest = new TestInput(completeTestHeader);
+		actualStep();
 	}
 
 	public static StringProperty actualCode(){
@@ -47,7 +56,7 @@ public class ExerciseAlternative {
 		return exerciseCode.content();
 	}
 	
-	public static void acutalStep(){
+	public static void actualStep(){
 		if(writeCode)
 			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteCode");
 		else if(refactoring)
@@ -69,21 +78,23 @@ public class ExerciseAlternative {
 		writeCode = false;
 		refactoring = false;
 		writeTest = true;
-		acutalStep();
+		actualStep();
 	}
 		
 	public static void passed(){
 		if((writeTest)&&(!writeCode)&&(!refactoring)){
+			Controller.testProperty.setValue(Controller.testPropertyTmp.getValue());
 			writeTest=false;
 			writeCode=true;
 		} else if((!writeTest)&&(writeCode)&&(!refactoring)){
+			Controller.codeProperty.setValue(Controller.codePropertyTmp.getValue());
 			writeCode=false;
 			refactoring=true;
 		} else if((!writeTest)&&(!writeCode)&&(refactoring)){
 			refactoring=false;
 			writeTest=true;
 		}
-		acutalStep();
+		actualStep();
 	}
 
 }

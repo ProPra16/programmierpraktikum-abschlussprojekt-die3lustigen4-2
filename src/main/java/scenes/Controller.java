@@ -33,17 +33,31 @@ public class Controller implements Initializable{
 
     SimpleIntegerProperty timeSeconds = new SimpleIntegerProperty(0);
 
-    public StringProperty codeProperty = new SimpleStringProperty("CODE");
-    public StringProperty testProperty = new SimpleStringProperty("TESTS");
+    public static StringProperty codeProperty = new SimpleStringProperty("CODE");
+    public static StringProperty testProperty = new SimpleStringProperty("TESTS");
+    public static StringProperty codePropertyTmp = new SimpleStringProperty("CODE");
+    public static StringProperty testPropertyTmp = new SimpleStringProperty("TESTS");
+
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("Aktuelle Phase:");
     public static StringProperty rueckmeldungProperty = new SimpleStringProperty("Rückmeldung:");
 
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
+        String schritt;
+        if(ExerciseAlternative.writeCode){
+            reworkTest.setDisable(true);
+            schritt = "Refactorn";
+        } else if(ExerciseAlternative.writeTest){
+            reworkTest.setDisable(false);
+            schritt = "Code schreiben";
+        } else{
+            reworkTest.setDisable(true);
+            schritt = "Test schreiben";
+        }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Hallo Welt");
-        alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
+        alert.setContentText("Nächster Schritt: " + schritt);
         alert.showAndWait();
         ExerciseAlternative.passed();
     }
@@ -51,7 +65,7 @@ public class Controller implements Initializable{
     public void setReworkTest(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Hallo Welt");
-        alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
+        alert.setContentText("Korrigiere nun deinen Test.");
         alert.showAndWait();
         ExerciseAlternative.reworkTest();
     }
@@ -59,6 +73,7 @@ public class Controller implements Initializable{
     public void setStart(){
         ExerciseAlternative.start();
         start.setDisable(true);
+        reworkTest.setDisable(true);
     }
 
     //Hier werden die StringPropertys gebinded sodass wir diese nun von überall aktualisieren können und sich der Text
@@ -67,8 +82,8 @@ public class Controller implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         codeOverview.textProperty().bind(codeProperty);
         testOverview.textProperty().bind(testProperty);
-        codeProperty.bindBidirectional(writeHere.textProperty());
-        testProperty.bindBidirectional(writeHere.textProperty());
+        codePropertyTmp.bindBidirectional(writeHere.textProperty());
+        testPropertyTmp.bindBidirectional(writeHere.textProperty());
         aktuellePhase.textProperty().bind(aktuellePhaseProperty);
         rueckmeldung.textProperty().bind(rueckmeldungProperty);
 

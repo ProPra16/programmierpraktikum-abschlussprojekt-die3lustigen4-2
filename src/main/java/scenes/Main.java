@@ -16,7 +16,7 @@ public class Main extends Application {
         KatalogCreator.chooseTask(primaryStage);
         primaryStage.setTitle("Wähle einen Katalog aus");
         primaryStage.show();
-        //choosenExcersie.acutalStep();
+        //choosenExcersie.actualStep();
     }
 
 
