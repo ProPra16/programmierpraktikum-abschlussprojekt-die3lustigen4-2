@@ -10,13 +10,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Controller.createTimer();
+        //Controller.createTimer();
         KatalogCreator.chooseTask(primaryStage);
         primaryStage.setTitle("Wähle einen Katalog aus");
         primaryStage.show();
 
         /** Beendet Timer-Thread, wenn das Programm geschlossen wird*/
-        primaryStage.setOnCloseRequest(we -> Controller.run = false);
+        //primaryStage.setOnCloseRequest(we -> run = false);
     }
 
 
