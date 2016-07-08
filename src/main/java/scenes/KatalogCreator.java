@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import programdata.Exercise;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +19,9 @@ import java.util.List;
 
 public class KatalogCreator {
 
-    public static void chooseTask(Stage primaryStage) throws IOException {
+    public static Exercise choosenExercise;
+
+    public static Exercise chooseTask(Stage primaryStage) throws IOException {
         Katalog[] kataloge = createKatalogArr();
         Button[] auswahlButtons = createButtonArr(kataloge.length, primaryStage, kataloge);
         GridPane root = new GridPane();
@@ -28,6 +31,7 @@ public class KatalogCreator {
         for (int j = 0; j < auswahlButtons.length; j++)
             root.add(auswahlButtons[j],0,j);
         primaryStage.setScene(new Scene(root, 1000, 800));
+        return choosenExercise;
     }
 
     public static Button[] createButtonArr(int length, Stage primaryStage, Katalog[] kataloge){
@@ -39,10 +43,21 @@ public class KatalogCreator {
                 text = text + s + "\n";
             auswahlButtons[j].setText(text);
             auswahlButtons[j].setPrefSize(800, 600/length);
+
             Katalog tmpKatalog = kataloge[j];
+            String completeClassHeader = "";
+            for (String s: tmpKatalog.classHeader)
+                completeClassHeader = completeClassHeader + s +"\n";
+            final String finalCompleteClassHeader = completeClassHeader;
+
+            String completeTestHeader = "";
+            for (String s: tmpKatalog.testHeader)
+                completeTestHeader = completeTestHeader + s +"\n";
+            final String finalCompleteTestHeader = completeTestHeader;
+
             auswahlButtons[j].setOnAction(event -> {
                 try {
-                    Main.choosenKatalog = tmpKatalog;
+                    choosenExercise = new Exercise(tmpKatalog.aufgabenName, finalCompleteClassHeader, tmpKatalog.testName, finalCompleteTestHeader);
                     Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("layout.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
                     Scene scene = new Scene(newRoot, 1000,800);

@@ -33,6 +33,9 @@ public class Controller implements Initializable{
 
     public StringProperty codeProperty = new SimpleStringProperty("CODE");
     public StringProperty testProperty = new SimpleStringProperty("TESTS");
+    public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
+    public StringProperty rueckmeldungProperty = new SimpleStringProperty("");
+
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
@@ -57,6 +60,8 @@ public class Controller implements Initializable{
         testOverview.textProperty().bind(testProperty);
         codeProperty.bindBidirectional(writeHere.textProperty());
         testProperty.bindBidirectional(writeHere.textProperty());
+        aktuellePhase.textProperty().bind(aktuellePhaseProperty);
+        rueckmeldung.textProperty().bind(rueckmeldungProperty);
 
         Timeline timer = new Timeline();
         timeSeconds.set(0);

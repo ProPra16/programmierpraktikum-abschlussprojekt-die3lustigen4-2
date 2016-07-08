@@ -7,10 +7,10 @@
 
 
     <TextArea fx:id="testOverview" text="TESTS" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="4"
-              GridPane.rowSpan="1" disable="true"/>
+              GridPane.rowSpan="1" />
 
     <TextArea fx:id="codeOverview" text="CODE" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4"
-              GridPane.rowSpan="1" disable="true"/>
+              GridPane.rowSpan="1" />
 
     <HBox fx:id="buttonBox" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3"
           GridPane.rowSpan="1"/>
@@ -26,7 +26,7 @@
             onAction="#setReworkTest"/>
 
     <Label fx:id="timerLabel" scaleX="1" scaleY="1"
-           GridPane.columnIndex="4" GridPane.columnSpan="1" GridPane.rowIndex="0" GridPane.rowSpan="1"/>
+           GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="0" GridPane.rowSpan="1"/>
 
     <Label fx:id="rueckmeldung" alignment="CENTER" scaleX="1" scaleY="1" text="Rückmeldung" GridPane.columnIndex="2"
            GridPane.columnSpan="1" GridPane.rowIndex="20" GridPane.rowSpan="1"/>
