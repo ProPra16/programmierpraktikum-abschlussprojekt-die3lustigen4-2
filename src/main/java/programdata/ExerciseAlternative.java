@@ -67,10 +67,21 @@ public class ExerciseAlternative {
 	}
 	
 	public static void nextStep(){
-		if(writeTest){
+		if(writeTest) {
 			compileFolder = CompilerFactory.getCompiler(code, test);
 			compileFolder.compileAndRunTests();
-			//if(hasC)
+			if (compileFolder.getCompilerResult().hasCompileErrors()) {
+
+				actualStep();
+				return;
+			} else {
+				passed();
+				actualStep();
+				return;
+			}
+		}
+		if(refactoring){
+
 				// TO-DO hier fehlt noch was mehr
 		}
 	}
