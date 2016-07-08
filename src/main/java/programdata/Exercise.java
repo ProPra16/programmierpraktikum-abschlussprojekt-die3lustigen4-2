@@ -63,7 +63,7 @@ public class Exercise {
 			this.compileFolder = CompilerFactory.getCompiler(this.code, this.test);
 			compileFolder.compileAndRunTests();
 			//if(hasC)
-				// TODO hier fehlt noch was mehr
+				// TODO hier fehlt noch was
 		}
 	}
 
