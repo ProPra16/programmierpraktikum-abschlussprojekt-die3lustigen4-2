@@ -1,5 +1,8 @@
 language: java
 
+before_install:
+  - sudo apt-get -qq update
+
 jdk:
   - oraclejdk8
   - oraclejdk7
