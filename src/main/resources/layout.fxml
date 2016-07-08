@@ -9,7 +9,7 @@
     <TextArea fx:id="testOverview" text="TESTS" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="4"
               GridPane.rowSpan="1"/>
 
-    <TextArea fx:id="codeOverview" text="CODE" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4"
+    <TextArea fx:id="codeOverview" text="${writeHere.text}" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4"
               GridPane.rowSpan="1"/>
 
     <HBox fx:id="buttonBox" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3"

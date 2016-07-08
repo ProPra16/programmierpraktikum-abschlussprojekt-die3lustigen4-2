@@ -2,6 +2,9 @@ package scenes;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -12,7 +15,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable{
 
     public  Button nextStep = new Button();
     public  Button reworkTest = new Button();
@@ -26,6 +32,9 @@ public class Controller {
     static volatile SimpleIntegerProperty i = new SimpleIntegerProperty(0);
     static volatile boolean run = true;
     static volatile int k = 0;
+
+    public StringProperty codeProperty = new SimpleStringProperty("CODE");
+    public StringProperty testProperty = new SimpleStringProperty("TESTS");
 
     /** Timer startet in separatem Fenster */
     public static void createTimer(){
@@ -68,7 +77,6 @@ public class Controller {
         alert.setTitle("Hallo Welt");
         alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
         alert.showAndWait();
-        //Falsch: Exercise exercise = new Exercise();
     }
 
     public void setReworkTest(){
@@ -80,4 +88,9 @@ public class Controller {
         });
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        codeOverview.textProperty().bind(codeProperty);
+        testOverview.textProperty().bind(testProperty);
+    }
 }
