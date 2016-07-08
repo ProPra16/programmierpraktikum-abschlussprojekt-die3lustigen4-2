@@ -13,14 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
+import programdata.ExerciseAlternative;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
 
-    public  Button nextStep = new Button();
-    public  Button reworkTest = new Button();
+    public Button nextStep = new Button();
+    public Button reworkTest = new Button();
+    public Button start = new Button();
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
@@ -33,8 +35,8 @@ public class Controller implements Initializable{
 
     public StringProperty codeProperty = new SimpleStringProperty("CODE");
     public StringProperty testProperty = new SimpleStringProperty("TESTS");
-    public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
-    public StringProperty rueckmeldungProperty = new SimpleStringProperty("");
+    public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("Aktuelle Phase:");
+    public StringProperty rueckmeldungProperty = new SimpleStringProperty("Rückmeldung:");
 
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
@@ -43,6 +45,7 @@ public class Controller implements Initializable{
         alert.setTitle("Hallo Welt");
         alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
         alert.showAndWait();
+        ExerciseAlternative.passed();
     }
 
     public void setReworkTest(){
@@ -50,6 +53,10 @@ public class Controller implements Initializable{
         alert.setTitle("Hallo Welt");
         alert.setContentText("Hier müsste die Buttonfunktionalität eingefügt werden.");
         alert.showAndWait();
+    }
+
+    public void setStart(){
+        ExerciseAlternative.start();
     }
 
     //Hier werden die StringPropertys gebinded sodass wir diese nun von überall aktualisieren können und sich der Text
