@@ -22,8 +22,8 @@ public class ExerciseAlternative {
 
 	static String failure;				// Speicher für zurückgegebene Compilierfehler
 
-	static TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
-	static CodeInput exerciseCode;
+	public static TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
+	public static CodeInput exerciseCode;
 
 	static CompilationUnit code;	// Übergabe an Bendisposto-Code
 	static CompilationUnit test;
@@ -46,6 +46,7 @@ public class ExerciseAlternative {
 		refactoring = false;
 		exerciseCode = new CodeInput(completeClassHeader);
 		exerciseTest = new TestInput(completeTestHeader);
+		Controller.writeHereProperty.setValue(exerciseTest.asString());
 		actualStep();
 	}
 
@@ -83,11 +84,9 @@ public class ExerciseAlternative {
 		
 	public static void passed(){
 		if((writeTest)&&(!writeCode)&&(!refactoring)){
-			Controller.testProperty.setValue(Controller.testPropertyTmp.getValue());
 			writeTest=false;
 			writeCode=true;
 		} else if((!writeTest)&&(writeCode)&&(!refactoring)){
-			Controller.codeProperty.setValue(Controller.codePropertyTmp.getValue());
 			writeCode=false;
 			refactoring=true;
 		} else if((!writeTest)&&(!writeCode)&&(refactoring)){

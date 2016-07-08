@@ -35,8 +35,7 @@ public class Controller implements Initializable{
 
     public static StringProperty codeProperty = new SimpleStringProperty("CODE");
     public static StringProperty testProperty = new SimpleStringProperty("TESTS");
-    public static StringProperty codePropertyTmp = new SimpleStringProperty("CODE");
-    public static StringProperty testPropertyTmp = new SimpleStringProperty("TESTS");
+    public static StringProperty writeHereProperty = new SimpleStringProperty("");
 
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("Aktuelle Phase:");
     public static StringProperty rueckmeldungProperty = new SimpleStringProperty("Rückmeldung:");
@@ -47,11 +46,17 @@ public class Controller implements Initializable{
         String schritt;
         if(ExerciseAlternative.writeCode){
             reworkTest.setDisable(true);
+            codeProperty.setValue(writeHereProperty.getValue());
+            writeHereProperty.setValue(codeOverview.getText());
             schritt = "Refactorn";
         } else if(ExerciseAlternative.writeTest){
+            testProperty.setValue(writeHereProperty.getValue());
             reworkTest.setDisable(false);
+            writeHereProperty.setValue(codeOverview.getText());
             schritt = "Code schreiben";
         } else{
+            codeProperty.setValue(writeHereProperty.getValue());
+            writeHereProperty.setValue(testOverview.getText());
             reworkTest.setDisable(true);
             schritt = "Test schreiben";
         }
@@ -67,6 +72,7 @@ public class Controller implements Initializable{
         alert.setTitle("Hallo Welt");
         alert.setContentText("Korrigiere nun deinen Test.");
         alert.showAndWait();
+        writeHereProperty.setValue(testOverview.getText());
         ExerciseAlternative.reworkTest();
     }
 
@@ -74,6 +80,8 @@ public class Controller implements Initializable{
         ExerciseAlternative.start();
         start.setDisable(true);
         reworkTest.setDisable(true);
+        codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
+        testProperty.setValue(ExerciseAlternative.exerciseTest.asString());
     }
 
     //Hier werden die StringPropertys gebinded sodass wir diese nun von überall aktualisieren können und sich der Text
@@ -82,8 +90,7 @@ public class Controller implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         codeOverview.textProperty().bind(codeProperty);
         testOverview.textProperty().bind(testProperty);
-        codePropertyTmp.bindBidirectional(writeHere.textProperty());
-        testPropertyTmp.bindBidirectional(writeHere.textProperty());
+        writeHereProperty.bindBidirectional(writeHere.textProperty());
         aktuellePhase.textProperty().bind(aktuellePhaseProperty);
         rueckmeldung.textProperty().bind(rueckmeldungProperty);
 
