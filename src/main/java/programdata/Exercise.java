@@ -6,8 +6,8 @@
 
 package programdata;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import scenes.Controller;
 import userInput.CodeInput;
 import userInput.TestInput;
 import vk.core.api.CompilationUnit;
@@ -48,14 +48,14 @@ public class Exercise {
 	}
 	
 	public StringProperty acutalStep(){
-		StringProperty temp =new SimpleStringProperty("writeTest");
-		if(this.writeCode){
-			temp.setValue("writeCode");
-		}
-		if(this.refactoring){
-			temp.setValue("refactoring");
-		}
-		return temp;
+		//StringProperty temp =new SimpleStringProperty("writeTest");
+		if(writeCode)
+			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteCode");
+		else if(refactoring)
+			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nrefactoring");
+		else if(writeTest)
+			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteTest");
+		return Controller.aktuellePhaseProperty;
 	}
 	
 	public void nextStep(){

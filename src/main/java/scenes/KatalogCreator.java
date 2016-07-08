@@ -18,6 +18,8 @@ import java.util.List;
 
 public class KatalogCreator {
 
+    public static Katalog choosenKatalog;
+
     public static void chooseTask(Stage primaryStage) throws IOException {
         Katalog[] kataloge = createKatalogArr();
         Button[] auswahlButtons = createButtonArr(kataloge.length, primaryStage, kataloge);
@@ -39,11 +41,25 @@ public class KatalogCreator {
                 text = text + s + "\n";
             auswahlButtons[j].setText(text);
             auswahlButtons[j].setPrefSize(800, 600/length);
-            Katalog tmpKatalog = kataloge[j];
+
+            final Katalog tmpKatalog = kataloge[j];
+            /*
+            String completeClassHeader = "";
+            for (String s: tmpKatalog.classHeader)
+                completeClassHeader = completeClassHeader + s +"\n";
+            final String finalCompleteClassHeader = completeClassHeader;
+
+            String completeTestHeader = "";
+            for (String s: tmpKatalog.testHeader)
+                completeTestHeader = completeTestHeader + s +"\n";
+            final String finalCompleteTestHeader = completeTestHeader;
+            */
+
             auswahlButtons[j].setOnAction(event -> {
                 try {
-                    Main.choosenKatalog = tmpKatalog;
-                    Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("sample.fxml"));
+                    //choosenExercise = new Exercise(tmpKatalog.aufgabenName, finalCompleteClassHeader, tmpKatalog.testName, finalCompleteTestHeader);
+                    choosenKatalog = tmpKatalog;
+                    Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("layout.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
                     Scene scene = new Scene(newRoot, 1000,800);
                     primaryStage.setScene(scene);
@@ -58,9 +74,6 @@ public class KatalogCreator {
     }
 
     public static Katalog[] createKatalogArr() throws IOException {
-        // /home/leander/workspace/Projekt7/src/katalogFiles
-        //System.out.println("Wo sind die Kataloge gespeichert? (Pfad angeben)");
-
         /** Silvan added FileChooser 2.7.2016 */
 
         DirectoryChooser dialog = new DirectoryChooser();

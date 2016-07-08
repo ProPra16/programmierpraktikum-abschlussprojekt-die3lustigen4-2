@@ -5,18 +5,18 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    //choosenKatalog ist der Katalog der vom Benutzer ausgewählt wurde und alle benötigten Daten enthält wie:aufgabenName class Name testHeader usw...
-    static Katalog choosenKatalog;
-
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Controller.createTimer();
+        /*funktioniert noch nicht weil der return befehl von choosenTask vor dem klicken auf den button ausgeführt und
+        choosenExercise somit zum NullObjekt wird. Mir ist irgendwie auch immer noch nicht so richtig klar wo Excercise eigentlich
+        aufgerufen werden soll, da es hier nicht wirklich Sinn macht. Wäre es nicht vielleicht schlau Exercise mit allen Funktion static
+        zu machen? Die Instanzvariabeln von Excersize können zum Teil auch static gemacht werden oder direkt durch den Inhalt
+        des Katalog-Objektes ersetzt werden.*/
+
         KatalogCreator.chooseTask(primaryStage);
         primaryStage.setTitle("Wähle einen Katalog aus");
         primaryStage.show();
-
-        /** Beendet Timer-Thread, wenn das Programm geschlossen wird*/
-        primaryStage.setOnCloseRequest(we -> Controller.run = false);
+        //choosenExcersie.actualStep();
     }
 
 

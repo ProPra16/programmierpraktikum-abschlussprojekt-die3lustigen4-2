@@ -10,8 +10,8 @@ public class Katalog {
     boolean babysteps;
     boolean timetracking;
     ArrayList<String> beschreibung;
-    ArrayList<String> classHeader;
-    ArrayList<String> testHeader;
+    public ArrayList<String> classHeader;
+    public ArrayList<String> testHeader;
 
     public Katalog(String aufgabenName, String className, String testName, boolean babysteps, boolean timetracking, ArrayList<String> beschreibung, ArrayList<String> classHeader, ArrayList<String> testHeader){
         this.aufgabenName = aufgabenName;
