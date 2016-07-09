@@ -3,7 +3,6 @@
  * Programmablaufs
  *****************************************/
 
-
 package programdata;
 
 import javafx.beans.property.StringProperty;
