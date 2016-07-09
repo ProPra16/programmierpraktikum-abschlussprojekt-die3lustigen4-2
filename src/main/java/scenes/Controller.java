@@ -14,6 +14,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import programdata.ExerciseAlternative;
+import userInput.CodeInput;
+import userInput.TestInput;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,8 +35,8 @@ public class Controller implements Initializable{
 
     SimpleIntegerProperty timeSeconds = new SimpleIntegerProperty(0);
 
-    public static StringProperty codeProperty = new SimpleStringProperty("CODE");
-    public static StringProperty testProperty = new SimpleStringProperty("TESTS");
+    CodeInput codeProperty = new CodeInput("CODE");
+    TestInput testProperty = new TestInput("TESTS");
     public static StringProperty writeHereProperty = new SimpleStringProperty("");
 
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("Aktuelle Phase:");
@@ -46,16 +48,16 @@ public class Controller implements Initializable{
         String schritt;
         if(ExerciseAlternative.writeCode){
             reworkTest.setDisable(true);
-            codeProperty.setValue(writeHereProperty.getValue());
+            codeProperty.setCode(writeHereProperty.getValue());
             writeHereProperty.setValue(codeOverview.getText());
             schritt = "Refactorn";
         } else if(ExerciseAlternative.writeTest){
-            testProperty.setValue(writeHereProperty.getValue());
+            testProperty.setTest(writeHereProperty.getValue());
             reworkTest.setDisable(false);
             writeHereProperty.setValue(codeOverview.getText());
             schritt = "Code schreiben";
         } else{
-            codeProperty.setValue(writeHereProperty.getValue());
+            codeProperty.setCode(writeHereProperty.getValue());
             writeHereProperty.setValue(testOverview.getText());
             reworkTest.setDisable(true);
             schritt = "Test schreiben";
@@ -80,16 +82,16 @@ public class Controller implements Initializable{
         ExerciseAlternative.start();
         start.setDisable(true);
         reworkTest.setDisable(true);
-        codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
-        testProperty.setValue(ExerciseAlternative.exerciseTest.asString());
+        codeProperty.setCode(ExerciseAlternative.exerciseCode.asString());
+        testProperty.setTest(ExerciseAlternative.exerciseTest.asString());
     }
 
     //Hier werden die StringPropertys gebinded sodass wir diese nun von überall aktualisieren können und sich der Text
     // in den TextAreas automatisch ändert ich hab jetzt auch mal beide Text
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        codeOverview.textProperty().bind(codeProperty);
-        testOverview.textProperty().bind(testProperty);
+        codeOverview.textProperty().bind(codeProperty.content());
+        testOverview.textProperty().bind(testProperty.content());
         writeHereProperty.bindBidirectional(writeHere.textProperty());
         aktuellePhase.textProperty().bind(aktuellePhaseProperty);
         rueckmeldung.textProperty().bind(rueckmeldungProperty);

@@ -18,6 +18,8 @@ public class TestInput {
 	public void addCode(String codeToAdd){
 		this.testcode.setValue(this.testcode.getValue()+codeToAdd);
 	}
+
+	public void setTest(String test){this.testcode.setValue(test);}
 	
 	public String asString(){
 		return this.testcode.getValue();

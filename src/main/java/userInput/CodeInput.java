@@ -14,6 +14,8 @@ public class CodeInput implements ContentContainer{
 	public CodeInput(String code){
 		this.quellcode=new SimpleStringProperty(code);
 	}
+
+	public void setCode(String code){this.quellcode.setValue(code);}
 	
 	public void addCode(String codeToAdd){
 		this.quellcode.setValue(this.quellcode.getValue()+codeToAdd);
