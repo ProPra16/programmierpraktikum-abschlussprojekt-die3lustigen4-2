@@ -26,4 +26,12 @@ public class CodeFailure {
     public StringProperty testStringProperty(){
         return this.messageForTest;
     }
+
+    public void addMessage(String message){
+        if(this.messageForCode.getValue().equals("")){
+            this.messageForCode.setValue(message);
+        }else{
+            this.messageForCode.setValue(this.messageForCode.getValue()+ "\n \n" + message);
+        }
+    }
 }

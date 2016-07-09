@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -27,6 +28,7 @@ public class KatalogCreator {
         root.setAlignment(Pos.CENTER);
         root.setHgap(35);
         root.setVgap(35);
+
         for (int j = 0; j < auswahlButtons.length; j++)
             root.add(auswahlButtons[j],0,j);
         primaryStage.setScene(new Scene(root, 1000, 800));

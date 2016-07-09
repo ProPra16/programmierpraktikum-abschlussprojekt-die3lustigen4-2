@@ -7,26 +7,31 @@
 package programdata;
 
 import javafx.beans.property.StringProperty;
+import junit.framework.*;
 import scenes.Controller;
 import scenes.KatalogCreator;
 import userInput.CodeInput;
 import userInput.TestInput;
-import vk.core.api.CompilationUnit;
-import vk.core.api.CompilerFactory;
-import vk.core.api.JavaStringCompiler;
+import vk.core.api.*;
+import vk.core.api.TestFailure;
+
+import java.util.Collection;
 
 public class ExerciseAlternative {
 	public static boolean writeCode;			// aktuelle Stufe (Step) speichern
 	public static boolean writeTest;
 	static boolean refactoring;
 
-	static String failure;				// Speicher für zurückgegebene Compilierfehler
+//	static String failure;				// Speicher für zurückgegebene Compilierfehler
 
 	public static TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
 	public static CodeInput exerciseCode;
+	public static CodeFailure compileFailure;
+	public static CodeFailure testFailure;
 
 	static CompilationUnit code;	// Übergabe an Bendisposto-Code
 	static CompilationUnit test;
+
 
 	static JavaStringCompiler compileFolder;
 
@@ -67,26 +72,47 @@ public class ExerciseAlternative {
 	}
 	
 	public static void nextStep(){
-		if(writeTest) {
-			compileFolder = CompilerFactory.getCompiler(code, test);
-			compileFolder.compileAndRunTests();
-			if (compileFolder.getCompilerResult().hasCompileErrors()) {
-
-				actualStep();
-				return;
-			} else {
+		compileFolder = CompilerFactory.getCompiler(code, test);
+		compileFolder.compileAndRunTests();
+		if (compileFolder.getCompilerResult().hasCompileErrors()) {
+			CompilerResult compilerResult =compileFolder.getCompilerResult();
+			if(writeTest) {
+				Collection<CompileError> testerror=compilerResult.getCompilerErrorsForCompilationUnit(test);
+				for(CompileError error: testerror) {
+					compileFailure.addMessage(error.toString());
+				}
+			}
+			if(refactoring){
+				Collection<CompileError> codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
+				for (CompileError error : codeerror) {
+					compileFailure.addMessage(error.toString());
+				}
+			}
+			if(writeCode){
+				Collection<CompileError> codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
+				for(CompileError error: codeerror){
+					compileFailure.addMessage(error.toString());
+				}
+			}
+			actualStep();
+			return;
+		} else {
+			if(compileFolder.getTestResult().getNumberOfFailedTests()==0) {
 				passed();
 				actualStep();
 				return;
 			}
-		}
-		if(refactoring){
+			Collection<TestFailure> testFehler= compileFolder.getTestResult().getTestFailures();
+			for(TestFailure failure: testFehler){
+				testFailure.addMessage(failure.getMessage());
+			}
 
-				// TO-DO hier fehlt noch was mehr
 		}
+
 	}
 
 	public static void reworkTest(){
+	//	Exercise temp = new Exercise
 		writeCode = false;
 		refactoring = false;
 		writeTest = true;
