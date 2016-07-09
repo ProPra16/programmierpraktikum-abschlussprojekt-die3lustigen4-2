@@ -20,10 +20,10 @@ public class CodeFailure {
     }
 
 
-    public CodeFailure(String code, String test, int line){
-        this.messageForCode=new SimpleStringProperty(code);
-        this.messageForTest=new SimpleStringProperty(test);
-        this.line=new SimpleIntegerProperty(line);
+    public CodeFailure(){
+        this.messageForCode=new SimpleStringProperty();
+        this.messageForTest=new SimpleStringProperty();
+        this.line=new SimpleIntegerProperty(0);
     }
 
     public StringProperty codeStringProperty(){
@@ -34,7 +34,7 @@ public class CodeFailure {
         return this.messageForTest;
     }
 
-    public String CodeAsString(){
+    public String codeAsString(){
         return this.messageForCode.getValue();
     }
 

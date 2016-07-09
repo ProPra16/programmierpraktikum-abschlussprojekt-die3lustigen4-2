@@ -19,7 +19,7 @@ import java.util.Collection;
 public class ExerciseAlternative {
 	public static boolean writeCode;			// aktuelle Stufe (Step) speichern
 	public static boolean writeTest;
-	static boolean refactoring;
+	public static boolean refactoring;
 
 //	static String failure;				// Speicher für zurückgegebene Compilierfehler
 
