@@ -19,12 +19,23 @@ public class CodeFailure {
         this.line=new SimpleIntegerProperty(line);
     }
 
+
+    public CodeFailure(String code, String test, int line){
+        this.messageForCode=new SimpleStringProperty(code);
+        this.messageForTest=new SimpleStringProperty(test);
+        this.line=new SimpleIntegerProperty(line);
+    }
+
     public StringProperty codeStringProperty(){
         return this.messageForCode;
     }
 
     public StringProperty testStringProperty(){
         return this.messageForTest;
+    }
+
+    public String CodeAsString(){
+        return this.messageForCode.getValue();
     }
 
     public void addMessage(String message){

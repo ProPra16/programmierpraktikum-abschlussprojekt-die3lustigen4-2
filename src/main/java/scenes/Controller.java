@@ -13,10 +13,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
+import programdata.CodeFailure;
 import programdata.ExerciseAlternative;
+import userInput.CodeInput;
+import userInput.TestInput;
+import vk.core.api.*;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
+
+import static programdata.ExerciseAlternative.actualStep;
+import static programdata.ExerciseAlternative.passed;
 
 public class Controller implements Initializable{
 
@@ -41,9 +49,74 @@ public class Controller implements Initializable{
     public static StringProperty rueckmeldungProperty = new SimpleStringProperty("Rückmeldung:");
 
 
+
+    TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
+    CodeInput exerciseCode;
+    CodeFailure compileFailure;
+    CodeFailure testFailure;
+
+    CompilationUnit code;	// Übergabe an Bendisposto-Code
+    CompilationUnit test;
+
+    String exerciseName= "RomanNumberConverter";
+    String testName="RomanNumbersTest";
+
+    JavaStringCompiler compileFolder;
+
+
+
+
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
         String schritt;
+
+        compileFailure=new CodeFailure();
+        testFailure= new CodeFailure();
+
+        code=new CompilationUnit(exerciseName, codeProperty.getValue(),false);	// Übergabe an Bendisposto-Code
+        test=new CompilationUnit(testName, testProperty.getValue(), true);
+
+        JavaStringCompiler compileFolder;
+
+        compileFolder = CompilerFactory.getCompiler(code, test);
+        compileFolder.compileAndRunTests();
+        if (compileFolder.getCompilerResult().hasCompileErrors()) {
+            CompilerResult compilerResult = compileFolder.getCompilerResult();
+            if (ExerciseAlternative.writeTest) {
+                Collection<CompileError> testerror = compilerResult.getCompilerErrorsForCompilationUnit(test);
+                for (CompileError error : testerror) {
+                    compileFailure.addMessage(error.toString());
+                }
+            }else{
+                if(ExerciseAlternative.refactoring) {
+                    Collection<CompileError> codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
+                    for (CompileError error : codeerror) {
+                        compileFailure.addMessage(error.toString());
+                    }
+                } else {
+                    Collection<CompileError> codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
+                    for (CompileError error : codeerror) {
+                        compileFailure.addMessage(error.toString());
+                    }
+                }
+            }
+            rueckmeldungProperty.setValue(compileFailure.codeAsString());
+        }else {
+            if(compileFolder.getTestResult().getNumberOfFailedTests()==0) {
+                passed();
+                actualStep();
+            }
+            Collection<TestFailure> testFehler= compileFolder.getTestResult().getTestFailures();
+            for(TestFailure failure: testFehler){
+                testFailure.addMessage(failure.getMessage());
+            }
+            rueckmeldungProperty.setValue(testFailure.codeAsString());
+        }
+
+
+
+
+
         if(ExerciseAlternative.writeCode){
             reworkTest.setDisable(true);
             codeProperty.setValue(writeHereProperty.getValue());
@@ -64,7 +137,7 @@ public class Controller implements Initializable{
         alert.setTitle("Hallo Welt");
         alert.setContentText("Nächster Schritt: " + schritt);
         alert.showAndWait();
-        ExerciseAlternative.passed();
+        passed();
     }
 
     public void setReworkTest(){
