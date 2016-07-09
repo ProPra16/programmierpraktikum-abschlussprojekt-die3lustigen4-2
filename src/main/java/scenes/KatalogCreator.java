@@ -9,6 +9,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import programdata.Exercise;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,20 +22,21 @@ public class KatalogCreator {
 
     public static Katalog choosenKatalog;
 
-    public static void chooseTask(Stage primaryStage) throws IOException {
+
+
+
+    public void chooseTask(Stage primaryStage) throws IOException {
         Katalog[] kataloge = createKatalogArr();
-        Button[] auswahlButtons = createButtonArr(kataloge.length, primaryStage, kataloge);
         GridPane root = new GridPane();
         root.setAlignment(Pos.CENTER);
         root.setHgap(35);
         root.setVgap(35);
-
-        for (int j = 0; j < auswahlButtons.length; j++)
-            root.add(auswahlButtons[j],0,j);
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        createButtonArr(kataloge.length, primaryStage, kataloge, root);
     }
 
-    public static Button[] createButtonArr(int length, Stage primaryStage, Katalog[] kataloge){
+
+
+    public  void createButtonArr(int length, Stage primaryStage, Katalog[] kataloge, GridPane root){
         Button[] auswahlButtons = new Button[length];
         for (int j = 0; j < length; j++) {
             auswahlButtons[j] = new Button();
@@ -58,9 +60,9 @@ public class KatalogCreator {
             */
 
             auswahlButtons[j].setOnAction(event -> {
+                Exercise choosenExercise = new Exercise(tmpKatalog.aufgabenName, listToString(tmpKatalog.classHeader), tmpKatalog.testName, listToString(tmpKatalog.testHeader));
                 try {
-                    //choosenExercise = new Exercise(tmpKatalog.aufgabenName, finalCompleteClassHeader, tmpKatalog.testName, finalCompleteTestHeader);
-                    choosenKatalog = tmpKatalog;
+                    //  choosenKatalog = tmpKatalog;
                     Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("layout.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
                     Scene scene = new Scene(newRoot, 1000,800);
@@ -72,7 +74,11 @@ public class KatalogCreator {
                 }
             });
         }
-        return auswahlButtons;
+        for (int j = 0; j < auswahlButtons.length; j++){
+            root.add(auswahlButtons[j],0,j);
+            primaryStage.setScene(new Scene(root, 1000, 800));
+        }
+        return;
     }
 
     public static Katalog[] createKatalogArr() throws IOException {
@@ -117,6 +123,13 @@ public class KatalogCreator {
             katalogArr[j] = new Katalog(aufgabenName, className, testName, babysteps, timetracking, beschreibung, classHeader, testHeader);
         }
         return katalogArr;
+    }
+
+    public static String listToString(ArrayList<String> liste){
+        String temp=liste.get(0);
+        for(int i=0; i<liste.size(); i++){
+            temp+= "\n" + liste.get(i);
+        }
     }
 
 
