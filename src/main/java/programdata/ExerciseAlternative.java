@@ -108,7 +108,6 @@ public class ExerciseAlternative {
 			}
 
 		}
-
 	}
 
 	public static void reworkTest(){
