@@ -44,7 +44,7 @@ public class CodeFailureTest{
     public void addMessageTest(){
         CodeFailure test =new CodeFailure("Testen wir mal", "", 0);
         test.addMessage("die Funktionen.");
-        assertEquals(test.codeAsString(), "Testen wir mal\n\ndieFunktionen.");
+        assertEquals(test.codeAsString(), "Testen wir mal\n\ndie Funktionen.");
     }
 
 }
