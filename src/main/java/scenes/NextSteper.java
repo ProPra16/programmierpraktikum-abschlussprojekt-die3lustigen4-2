@@ -38,7 +38,7 @@ public class NextSteper {
     public static void stepAnnouncement(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Nächster Schritt");
-        alert.setContentText(nextStep());
+        alert.setContentText(ExerciseAlternative.followingStep);
         alert.showAndWait();
     }
 
@@ -51,9 +51,8 @@ public class NextSteper {
         CompilationUnit code=new CompilationUnit(codeName, codeProperty.getValue(),false);	// Übergabe an Bendisposto-Code
         CompilationUnit test=new CompilationUnit(testName, testProperty.getValue(), true);
 
-        JavaStringCompiler compileFolder;
+        JavaStringCompiler compileFolder = CompilerFactory.getCompiler(code, test);
 
-        compileFolder = CompilerFactory.getCompiler(code, test);
         compileFolder.compileAndRunTests();
 
         if (compileFolder.getCompilerResult().hasCompileErrors()) {
@@ -63,11 +62,7 @@ public class NextSteper {
             if (ExerciseAlternative.writeTest) {
                 codeerror = compilerResult.getCompilerErrorsForCompilationUnit(test);
             }else{
-                if(ExerciseAlternative.refactoring) {
-                    codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
-                } else {
-                    codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
-                }
+                codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
             }
             for (CompileError error : codeerror) {
                 compileFailure.addMessage(error.toString());
@@ -75,27 +70,33 @@ public class NextSteper {
             return compileFailure;
         }else {
             if(compileFolder.getTestResult().getNumberOfFailedTests()==0) {
-            //    passed();
-            //    actualStep();
-                NextSteper.stepAnnouncement();
                 return compileFailure;
             }
+            testFailure.hastestfailures();
             Collection<TestFailure> testFehler= compileFolder.getTestResult().getTestFailures();
             for(TestFailure failure: testFehler){
                 testFailure.addMessage(failure.getMessage());
             }
             return testFailure;
         }
-
     }
 
-
-
-
-
-
-
-
-
-
+    public static void passed() {
+         if((ExerciseAlternative.writeTest)&&(!ExerciseAlternative.writeCode)&&(!ExerciseAlternative.refactoring)){
+             ExerciseAlternative.writeTest=false;
+             ExerciseAlternative.writeCode=true;
+             Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteCode");
+             ExerciseAlternative.followingStep="Refactoring";
+         } else if((!ExerciseAlternative.writeTest)&&(ExerciseAlternative.writeCode)&&(!ExerciseAlternative.refactoring)){
+             ExerciseAlternative.writeCode=false;
+             ExerciseAlternative.refactoring=true;
+             Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nrefactoring");
+             ExerciseAlternative.followingStep="Write Test";
+         } else if((!ExerciseAlternative.writeTest)&&(!ExerciseAlternative.writeCode)&&(ExerciseAlternative.refactoring)){
+             ExerciseAlternative.refactoring=false;
+             ExerciseAlternative.writeTest=true;
+             Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteTest");
+             ExerciseAlternative.followingStep="Write Code";
+         }
+    }
 }

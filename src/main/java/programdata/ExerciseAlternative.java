@@ -35,6 +35,7 @@ public class ExerciseAlternative {
 
 	public static String codeName;
 	public static String testName;
+	public static String followingStep="write Code";
 
 
 	//Hiermit wird das Programm erst richtig gestartet
@@ -56,7 +57,7 @@ public class ExerciseAlternative {
 		codeName = KatalogCreator.choosenKatalog.getClassName();
 		testName = KatalogCreator.choosenKatalog.getTestName();
 		Controller.writeHereProperty.setValue(exerciseTest.asString());
-		actualStep();
+		actualStep();																	//Markierung
 	}
 
 	public static StringProperty actualCode(){

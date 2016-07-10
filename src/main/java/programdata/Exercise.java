@@ -47,7 +47,7 @@ public class Exercise {
 		return this.exerciseCode.content();
 	}
 	
-	public StringProperty acutalStep(){
+	public StringProperty actualStep(){
 		//StringProperty temp =new SimpleStringProperty("writeTest");
 		if(writeCode)
 			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteCode");

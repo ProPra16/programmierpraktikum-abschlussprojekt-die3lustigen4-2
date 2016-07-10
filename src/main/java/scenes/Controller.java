@@ -70,11 +70,18 @@ public class Controller implements Initializable{
     public void setNextStep(){
         labelManager();
         CodeFailure result= NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
-        rueckmeldungProperty.setValue(result.codeAsString());
-        if(!result.problems()){
+        if(result.problems() || result.testfailures()) {
+            rueckmeldungProperty.setValue(result.codeAsString());
+        }else{
+            rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");
             NextSteper.stepAnnouncement();
+            NextSteper.passed();
         }
-        ExerciseAlternative.passed();
+
+      /*  if(!result.problems()){
+            NextSteper.stepAnnouncement();
+        } */
+
     }
 
     //MARKIERUNG
@@ -96,22 +103,6 @@ public class Controller implements Initializable{
             //    schritt = "Test schreiben";
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void setReworkTest(){
