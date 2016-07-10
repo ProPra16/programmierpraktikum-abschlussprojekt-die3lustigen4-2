@@ -24,6 +24,14 @@ public class Katalog {
         this.testHeader = testHeader;
     }
 
+    public String getClassName(){
+        return this.className;
+    }
+
+    public String getTestName(){
+        return this.testName;
+    }
+
     public void ausgeben(){
         System.out.println(aufgabenName);
         for (String s: beschreibung)

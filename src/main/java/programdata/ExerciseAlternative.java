@@ -31,8 +31,11 @@ public class ExerciseAlternative {
 	static CompilationUnit code;	// Übergabe an Bendisposto-Code
 	static CompilationUnit test;
 
-
 	static JavaStringCompiler compileFolder;
+
+	public static String codeName;
+	public static String testName;
+
 
 	//Hiermit wird das Programm erst richtig gestartet
 	public static void start() {
@@ -50,6 +53,8 @@ public class ExerciseAlternative {
 		refactoring = false;
 		exerciseCode = new CodeInput(completeClassHeader);
 		exerciseTest = new TestInput(completeTestHeader);
+		codeName = KatalogCreator.choosenKatalog.getClassName();
+		testName = KatalogCreator.choosenKatalog.getTestName();
 		Controller.writeHereProperty.setValue(exerciseTest.asString());
 		actualStep();
 	}

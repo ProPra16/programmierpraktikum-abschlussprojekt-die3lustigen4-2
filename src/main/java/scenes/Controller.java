@@ -58,8 +58,8 @@ public class Controller implements Initializable{
     CompilationUnit code;	// Übergabe an Bendisposto-Code
     CompilationUnit test;
 
-    String exerciseName= "RomanNumberConverter";
-    String testName="RomanNumbersTest";
+    String codeName;
+    String testName;
 
     JavaStringCompiler compileFolder;
 
@@ -73,7 +73,7 @@ public class Controller implements Initializable{
         compileFailure=new CodeFailure();
         testFailure= new CodeFailure();
 
-        code=new CompilationUnit(exerciseName, codeProperty.getValue(),false);	// Übergabe an Bendisposto-Code
+        code=new CompilationUnit(codeName, codeProperty.getValue(),false);	// Übergabe an Bendisposto-Code
         test=new CompilationUnit(testName, testProperty.getValue(), true);
 
         JavaStringCompiler compileFolder;
@@ -113,10 +113,6 @@ public class Controller implements Initializable{
             rueckmeldungProperty.setValue(testFailure.codeAsString());
         }
 
-
-
-
-
         if(ExerciseAlternative.writeCode){
             reworkTest.setDisable(true);
             codeProperty.setValue(writeHereProperty.getValue());
@@ -155,10 +151,12 @@ public class Controller implements Initializable{
         reworkTest.setDisable(true);
         codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
         testProperty.setValue(ExerciseAlternative.exerciseTest.asString());
+        codeName= new String(ExerciseAlternative.codeName);
+        testName= new String(ExerciseAlternative.testName);
     }
 
-    //Hier werden die StringPropertys gebinded sodass wir diese nun von überall aktualisieren können und sich der Text
-    // in den TextAreas automatisch ändert ich hab jetzt auch mal beide Text
+    //Hier werden die StringPropertys gebinded, sodass wir diese nun von überall aktualisieren können und sich der Text
+    // in den TextAreas automatisch ändert. ich hab jetzt auch mal beide Text
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         codeOverview.textProperty().bind(codeProperty);
