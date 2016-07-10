@@ -70,6 +70,27 @@ public class Controller implements Initializable{
     public void setNextStep(){
         String schritt;
 
+        if(ExerciseAlternative.writeCode){
+            reworkTest.setDisable(true);
+            codeProperty.setValue(writeHereProperty.getValue());
+            writeHereProperty.setValue(codeOverview.getText());
+            schritt = "Refactorn";
+        } else if(ExerciseAlternative.writeTest){
+            testProperty.setValue(writeHereProperty.getValue());
+            reworkTest.setDisable(false);
+            writeHereProperty.setValue(codeOverview.getText());
+            schritt = "Code schreiben";
+        } else{
+            codeProperty.setValue(writeHereProperty.getValue());
+            writeHereProperty.setValue(testOverview.getText());
+            reworkTest.setDisable(true);
+            schritt = "Test schreiben";
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Hallo Welt");
+        alert.setContentText("Nächster Schritt: " + schritt);
+        alert.showAndWait();
+
         compileFailure=new CodeFailure();
         testFailure= new CodeFailure();
 
@@ -113,26 +134,7 @@ public class Controller implements Initializable{
             rueckmeldungProperty.setValue(testFailure.codeAsString());
         }
 
-        if(ExerciseAlternative.writeCode){
-            reworkTest.setDisable(true);
-            codeProperty.setValue(writeHereProperty.getValue());
-            writeHereProperty.setValue(codeOverview.getText());
-            schritt = "Refactorn";
-        } else if(ExerciseAlternative.writeTest){
-            testProperty.setValue(writeHereProperty.getValue());
-            reworkTest.setDisable(false);
-            writeHereProperty.setValue(codeOverview.getText());
-            schritt = "Code schreiben";
-        } else{
-            codeProperty.setValue(writeHereProperty.getValue());
-            writeHereProperty.setValue(testOverview.getText());
-            reworkTest.setDisable(true);
-            schritt = "Test schreiben";
-        }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Hallo Welt");
-        alert.setContentText("Nächster Schritt: " + schritt);
-        alert.showAndWait();
+
         passed();
     }
 
