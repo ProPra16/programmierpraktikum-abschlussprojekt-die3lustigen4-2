@@ -21,8 +21,8 @@ public class CodeFailure {
 
 
     public CodeFailure(){
-        this.messageForCode=new SimpleStringProperty();
-        this.messageForTest=new SimpleStringProperty();
+        this.messageForCode=new SimpleStringProperty("");
+        this.messageForTest=new SimpleStringProperty("");
         this.line=new SimpleIntegerProperty(0);
     }
 
