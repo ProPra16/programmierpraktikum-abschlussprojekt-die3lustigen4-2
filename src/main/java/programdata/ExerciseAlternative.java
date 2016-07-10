@@ -5,14 +5,12 @@
 
 package programdata;
 
-import javafx.beans.property.StringProperty;
 import scenes.Controller;
 import scenes.KatalogCreator;
 import userInput.CodeInput;
 import userInput.TestInput;
-import vk.core.api.*;
-
-import java.util.Collection;
+import vk.core.api.CompilationUnit;
+import vk.core.api.JavaStringCompiler;
 
 public class ExerciseAlternative {
 	public static boolean writeCode;			// aktuelle Stufe (Step) speichern
@@ -55,13 +53,6 @@ public class ExerciseAlternative {
 		Controller.writeHereProperty.setValue(exerciseTest.asString());
 		actualStep();																	//Markierung
 	}
-
-	public static StringProperty actualCode(){
-		if(writeTest){
-			return exerciseTest.content();
-		}
-		return exerciseCode.content();
-	}
 	
 	public static void actualStep(){
 		if(writeCode)
@@ -70,45 +61,6 @@ public class ExerciseAlternative {
 			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nrefactoring");
 		else if(writeTest)
 			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteTest");
-	}
-	
-	public static void nextStep(){
-		compileFolder = CompilerFactory.getCompiler(code, test);
-		compileFolder.compileAndRunTests();
-		if (compileFolder.getCompilerResult().hasCompileErrors()) {
-			CompilerResult compilerResult =compileFolder.getCompilerResult();
-			if(writeTest) {
-				Collection<CompileError> testerror=compilerResult.getCompilerErrorsForCompilationUnit(test);
-				for(CompileError error: testerror) {
-					compileFailure.addMessage(error.toString());
-				}
-			}
-			if(refactoring){
-				Collection<CompileError> codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
-				for (CompileError error : codeerror) {
-					compileFailure.addMessage(error.toString());
-				}
-			}
-			if(writeCode){
-				Collection<CompileError> codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
-				for(CompileError error: codeerror){
-					compileFailure.addMessage(error.toString());
-				}
-			}
-			actualStep();
-			return;
-		} else {
-			if(compileFolder.getTestResult().getNumberOfFailedTests()==0) {
-				passed();
-				actualStep();
-				return;
-			}
-			Collection<TestFailure> testFehler= compileFolder.getTestResult().getTestFailures();
-			for(TestFailure failure: testFehler){
-				testFailure.addMessage(failure.getMessage());
-			}
-
-		}
 	}
 
 	public static void reworkTest(){

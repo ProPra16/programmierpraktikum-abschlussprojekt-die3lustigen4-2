@@ -60,9 +60,6 @@ public class Controller implements Initializable{
 
     JavaStringCompiler compileFolder;
 
-
-
-
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
         labelManager();
