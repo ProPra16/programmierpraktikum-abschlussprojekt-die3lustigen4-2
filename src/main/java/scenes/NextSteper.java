@@ -34,10 +34,10 @@ public class NextSteper {
     }
 
     public static CodeFailure compileTestGenerator(String codeName, StringProperty codeProperty, String testName, StringProperty testProperty){
-        CodeFailure compileFailure=new CodeFailure("Compiler Problem:", "", 0);
-        CodeFailure testFailure= new CodeFailure("Test Problem:", "", 0);
+        CodeFailure compileFailure=new CodeFailure("Compiler Problem: ", "", 0);
+        CodeFailure testFailure= new CodeFailure("Test Problem: ", "", 0);
 
-        CompilationUnit code=new CompilationUnit(codeName, codeProperty.getValue(),false);	// Übergabe an Bendisposto-Code
+        CompilationUnit code=new CompilationUnit(codeName, codeProperty.getValue(), false);	// Übergabe an Bendisposto-Code
         CompilationUnit test=new CompilationUnit(testName, testProperty.getValue(), true);
 
         JavaStringCompiler compileFolder = CompilerFactory.getCompiler(code, test);
@@ -47,13 +47,13 @@ public class NextSteper {
         if (compileFolder.getCompilerResult().hasCompileErrors()) {
             compileFailure.hasProblem();
             CompilerResult compilerResult = compileFolder.getCompilerResult();
-            Collection<CompileError> codeerror;
+            Collection<CompileError> codeError;
             if (ExerciseAlternative.writeTest) {
-                codeerror = compilerResult.getCompilerErrorsForCompilationUnit(test);
+                codeError = compilerResult.getCompilerErrorsForCompilationUnit(test);
             }else{
-                codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
+                codeError = compilerResult.getCompilerErrorsForCompilationUnit(code);
             }
-            for (CompileError error : codeerror) {
+            for (CompileError error : codeError) {
                 compileFailure.addMessage(error.toString());
             }
             return compileFailure;
@@ -70,7 +70,6 @@ public class NextSteper {
         }
     }
 
-    /*warum nicht einfach die passed-funktion aus ExceriseAlternative verwenden?*/
     public static void passed() {
          if((ExerciseAlternative.writeTest)&&(!ExerciseAlternative.writeCode)&&(!ExerciseAlternative.refactoring)){
              ExerciseAlternative.writeTest=false;

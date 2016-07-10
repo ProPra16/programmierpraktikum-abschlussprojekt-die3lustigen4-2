@@ -59,46 +59,57 @@ public class Controller implements Initializable{
     String testName;
 
     JavaStringCompiler compileFolder;
+    private Timeline timer;
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
-        labelManager();
-        CodeFailure result= NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
-        if(result.problems() || result.testFailures()) {
+        manageLabels();
+        CodeFailure result = NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
+        if(result.problems()) {
             rueckmeldungProperty.setValue(result.codeAsString());
+        }else if(result.testFailures()){
+            /* Bei der write Test Phase soll man ja einen Test schreiben der Failed um ihn dann neuen Code zu schreiben der diesen Test erfüllt */
+            if(!ExerciseAlternative.writeTest)
+                rueckmeldungProperty.setValue(result.codeAsString());
+            else{
+                rueckmeldungProperty.setValue("Verändere deinen Code nun so, dass der Test erfüllt wird.");
+                giveLabelNewValue();
+                NextSteper.stepAnnouncement();
+                NextSteper.passed();
+            }
+        } else if(ExerciseAlternative.writeTest && !result.testFailures()){
+            rueckmeldungProperty.setValue("Du musst einen Test schreiben der failed!");
         }else{
             rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");
+            giveLabelNewValue();
             NextSteper.stepAnnouncement();
             NextSteper.passed();
         }
-
-      /*  if(!result.problems()){
-            NextSteper.stepAnnouncement();
-        } */
-
     }
 
-
-    //MARKIERUNG
-    public void labelManager() {
+    public void giveLabelNewValue() {
         if (ExerciseAlternative.writeCode) {
             reworkTest.setDisable(true);
-            codeProperty.setValue(writeHereProperty.getValue());
             writeHereProperty.setValue(codeOverview.getText());
-            //     schritt = "Refactorn";
         } else if (ExerciseAlternative.writeTest) {
-            testProperty.setValue(writeHereProperty.getValue());
             reworkTest.setDisable(false);
             writeHereProperty.setValue(codeOverview.getText());
-            //   schritt = "Code schreiben";
         } else {
-            codeProperty.setValue(writeHereProperty.getValue());
-            writeHereProperty.setValue(testOverview.getText());
             reworkTest.setDisable(true);
-            //    schritt = "Test schreiben";
+            writeHereProperty.setValue(testOverview.getText());
         }
     }
 
+    //MARKIERUNG
+    public void manageLabels() {
+        if (ExerciseAlternative.writeCode) {
+            codeProperty.setValue(writeHereProperty.getValue());
+        } else if (ExerciseAlternative.writeTest) {
+            testProperty.setValue(writeHereProperty.getValue());
+        } else {
+            codeProperty.setValue(writeHereProperty.getValue());
+        }
+    }
 
     public void setReworkTest(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -111,6 +122,7 @@ public class Controller implements Initializable{
 
     public void setStart(){
         ExerciseAlternative.start();
+        timer.playFromStart();
         start.setDisable(true);
         reworkTest.setDisable(true);
         codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
@@ -129,12 +141,11 @@ public class Controller implements Initializable{
         aktuellePhase.textProperty().bind(aktuellePhaseProperty);
         rueckmeldung.textProperty().bind(rueckmeldungProperty);
 
-        Timeline timer = new Timeline();
+        timer = new Timeline();
         timeSeconds.set(0);
         timer.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(Integer.MAX_VALUE),
                         new KeyValue(timeSeconds, Integer.MAX_VALUE)));
-        timer.playFromStart();
         timerLabel.textProperty().bind(timeSeconds.asString());
     }
 }

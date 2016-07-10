@@ -24,7 +24,7 @@ import org.junit.Test;
 public class RomanNumbersTest { 
 	@Test 
 	public void testSomething() {
-        assertEqual();
+        assertEquals("hi", RomanNumberConverter.testFunc("hi"));
 	} 
 }
 BabySteps:
