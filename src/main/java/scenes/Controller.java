@@ -48,12 +48,16 @@ public class Controller implements Initializable{
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
+        /** Hab jetzt so einiges durch Probiert aber so weit ich das sehe funktioniert nun alles einwandfrei selbst der
+         * ReworkTest Button. Zum Code ausprobieren würde ich den RealTestKatalog empfehlen. */
+
+        /** Bei der write Test Phase soll man ja einen Test schreiben der Failed,
+         * um dann neuen Code zu schreiben der diesen Test erfüllt. */
         manageLabels();
         CodeFailure result = NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
         if(result.problems()) {
             rueckmeldungProperty.setValue("Rückmeldung:\n" + result.codeAsString());
         }else if(result.testFailures()){
-            /* Bei der write Test Phase soll man ja einen Test schreiben der Failed um ihn dann neuen Code zu schreiben der diesen Test erfüllt */
             if(!ExerciseAlternative.writeTest)
                 rueckmeldungProperty.setValue(result.codeAsString());
             else{
