@@ -9,18 +9,9 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
 import programdata.CodeFailure;
 import programdata.ExerciseAlternative;
-import userInput.CodeInput;
-import userInput.TestInput;
 import vk.core.api.*;
 
 import java.util.Collection;
-
-import static programdata.ExerciseAlternative.actualStep;
-import static programdata.ExerciseAlternative.compileFailure;
-import static programdata.ExerciseAlternative.passed;
-import static scenes.Controller.codeProperty;
-import static scenes.Controller.testProperty;
-import static scenes.Controller.writeHereProperty;
 
 /*********************************************
  * Ziel: Einfache Wartbarkeit der Funktion
@@ -81,6 +72,7 @@ public class NextSteper {
         }
     }
 
+    /*warum nicht einfach die passed-funktion aus ExceriseAlternative verwenden?*/
     public static void passed() {
          if((ExerciseAlternative.writeTest)&&(!ExerciseAlternative.writeCode)&&(!ExerciseAlternative.refactoring)){
              ExerciseAlternative.writeTest=false;

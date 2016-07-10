@@ -6,13 +6,11 @@
 package programdata;
 
 import javafx.beans.property.StringProperty;
-import junit.framework.*;
 import scenes.Controller;
 import scenes.KatalogCreator;
 import userInput.CodeInput;
 import userInput.TestInput;
 import vk.core.api.*;
-import vk.core.api.TestFailure;
 
 import java.util.Collection;
 
@@ -40,8 +38,6 @@ public class ExerciseAlternative {
 
 	//Hiermit wird das Programm erst richtig gestartet
 	public static void start() {
-		//testausgabe
-		KatalogCreator.choosenKatalog.ausgeben();
 		String completeClassHeader = "";
 		String completeTestHeader = "";
 		for (String s: KatalogCreator.choosenKatalog.classHeader)
@@ -116,7 +112,6 @@ public class ExerciseAlternative {
 	}
 
 	public static void reworkTest(){
-	//	Exercise temp = new Exercise
 		writeCode = false;
 		refactoring = false;
 		writeTest = true;
