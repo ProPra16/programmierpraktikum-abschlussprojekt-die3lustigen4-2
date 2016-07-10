@@ -1,14 +1,19 @@
 AufgabenName:
-Römische Zahlen DRITTER KATALOG
+Römische Zahlen Guter KATALOG
 Beschreibung:
-DRITTER
-Konvertiert zahlen
-blablabka
-kblbalab sflöflkfölk!!! lmflew ööööööööööö
+Diese Aufgabe ist für Römische Zahlen Converter!
 Classname:
 RomanNumberConverter
 ClassHeader:
 public class RomanNumberConverter {
+
+    public static void main(String[] args){
+
+    }
+
+    public static String testFunc(String ausgabe){
+            return ausgabe;
+    }
 
 }
 Testname:
@@ -19,7 +24,7 @@ import org.junit.Test;
 public class RomanNumbersTest { 
 	@Test 
 	public void testSomething() {
-
+        assertEqual();
 	} 
 }
 BabySteps:

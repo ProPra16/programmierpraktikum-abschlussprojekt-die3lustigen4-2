@@ -130,8 +130,8 @@ public class Controller implements Initializable{
         reworkTest.setDisable(true);
         codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
         testProperty.setValue(ExerciseAlternative.exerciseTest.asString());
-        codeName= new String(ExerciseAlternative.codeName);
-        testName= new String(ExerciseAlternative.testName);
+        codeName= ExerciseAlternative.codeName;
+        testName= ExerciseAlternative.testName;
     }
 
     //Hier werden die StringPropertys gebinded, sodass wir diese nun von überall aktualisieren können und sich der Text
