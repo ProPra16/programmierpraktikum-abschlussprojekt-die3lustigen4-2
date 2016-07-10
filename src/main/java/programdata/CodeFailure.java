@@ -42,7 +42,7 @@ public class CodeFailure {
         if(this.messageForCode.getValue().equals("")){
             this.messageForCode.setValue(message);
         }else{
-            this.messageForCode.setValue(this.messageForCode.getValue()+ "\n \n" + message);
+            this.messageForCode.setValue(this.messageForCode.getValue()+ "\n\n" + message);
         }
     }
 }
