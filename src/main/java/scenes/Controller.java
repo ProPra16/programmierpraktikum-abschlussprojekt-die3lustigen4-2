@@ -68,31 +68,32 @@ public class Controller implements Initializable{
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
-        String schritt;
-
+      //  String schritt;
+        labelManager();/*
         if(ExerciseAlternative.writeCode){
             reworkTest.setDisable(true);
             codeProperty.setValue(writeHereProperty.getValue());
             writeHereProperty.setValue(codeOverview.getText());
-            schritt = "Refactorn";
+       //     schritt = "Refactorn";
         } else if(ExerciseAlternative.writeTest){
             testProperty.setValue(writeHereProperty.getValue());
             reworkTest.setDisable(false);
             writeHereProperty.setValue(codeOverview.getText());
-            schritt = "Code schreiben";
+         //   schritt = "Code schreiben";
         } else{
             codeProperty.setValue(writeHereProperty.getValue());
             writeHereProperty.setValue(testOverview.getText());
             reworkTest.setDisable(true);
-            schritt = "Test schreiben";
+        //    schritt = "Test schreiben";
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        */
+   /*     Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Hallo Welt");
-        alert.setContentText("Nächster Schritt: " + schritt);
-        alert.showAndWait();
+        alert.setContentText("Nächster Schritt: " + NextSteper.actualStep());
+        alert.showAndWait();*/
 
-        compileFailure=new CodeFailure();
-        testFailure= new CodeFailure();
+        compileFailure=new CodeFailure("Compiler Problem:", "", 0);
+        testFailure= new CodeFailure("Test Problem:", "", 0);
 
         code=new CompilationUnit(codeName, codeProperty.getValue(),false);	// Übergabe an Bendisposto-Code
         test=new CompilationUnit(testName, testProperty.getValue(), true);
@@ -126,6 +127,8 @@ public class Controller implements Initializable{
             if(compileFolder.getTestResult().getNumberOfFailedTests()==0) {
                 passed();
                 actualStep();
+                NextSteper.stepAnnouncement();
+
             }
             Collection<TestFailure> testFehler= compileFolder.getTestResult().getTestFailures();
             for(TestFailure failure: testFehler){
@@ -135,8 +138,46 @@ public class Controller implements Initializable{
         }
 
 
-        passed();
+     //   passed();
     }
+
+
+    //MARKIERUNG
+    public void labelManager() {
+        if (ExerciseAlternative.writeCode) {
+            reworkTest.setDisable(true);
+            codeProperty.setValue(writeHereProperty.getValue());
+            writeHereProperty.setValue(codeOverview.getText());
+            //     schritt = "Refactorn";
+        } else if (ExerciseAlternative.writeTest) {
+            testProperty.setValue(writeHereProperty.getValue());
+            reworkTest.setDisable(false);
+            writeHereProperty.setValue(codeOverview.getText());
+            //   schritt = "Code schreiben";
+        } else {
+            codeProperty.setValue(writeHereProperty.getValue());
+            writeHereProperty.setValue(testOverview.getText());
+            reworkTest.setDisable(true);
+            //    schritt = "Test schreiben";
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void setReworkTest(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
