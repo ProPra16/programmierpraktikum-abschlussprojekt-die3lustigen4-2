@@ -84,6 +84,7 @@ public class Controller implements Initializable{
 
     }
 
+
     //MARKIERUNG
     public void labelManager() {
         if (ExerciseAlternative.writeCode) {
