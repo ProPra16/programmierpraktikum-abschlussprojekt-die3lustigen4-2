@@ -12,11 +12,13 @@ public class CodeFailure {
     StringProperty messageForCode;
     StringProperty messageForTest;
     IntegerProperty line;
+    boolean problems;
 
     public CodeFailure(String code, String test, int line){
         this.messageForCode=new SimpleStringProperty(code);
         this.messageForTest=new SimpleStringProperty(test);
         this.line=new SimpleIntegerProperty(line);
+        this.problems=false;
     }
 
 
@@ -24,6 +26,7 @@ public class CodeFailure {
         this.messageForCode=new SimpleStringProperty("");
         this.messageForTest=new SimpleStringProperty("");
         this.line=new SimpleIntegerProperty(0);
+        this.problems=false;
     }
 
     public StringProperty codeStringProperty(){
@@ -44,5 +47,13 @@ public class CodeFailure {
         }else{
             this.messageForCode.setValue(this.messageForCode.getValue()+ "\n\n" + message);
         }
+    }
+
+    public boolean problems(){
+        return this.problems;
+    }
+
+    public void hasproblem(){
+        this.problems=true;
     }
 }

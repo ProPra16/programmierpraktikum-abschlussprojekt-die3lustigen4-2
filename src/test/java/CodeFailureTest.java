@@ -10,6 +10,7 @@
 import org.junit.Test;
 import programdata.CodeFailure;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class CodeFailureTest{
@@ -45,6 +46,19 @@ public class CodeFailureTest{
         CodeFailure test =new CodeFailure("Testen wir mal", "", 0);
         test.addMessage("die Funktionen.");
         assertEquals(test.codeAsString(), "Testen wir mal\n\ndie Funktionen.");
+    }
+
+    @Test
+    public void problemTest(){
+        CodeFailure test=new CodeFailure();
+        assertEquals(test.problems(), false);
+    }
+
+    @Test
+    public void hasproblemTest(){
+        CodeFailure test=new CodeFailure();
+        test.hasproblem();
+        assertEquals(test.problems(), true);
     }
 
 }

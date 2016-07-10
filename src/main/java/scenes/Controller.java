@@ -68,77 +68,13 @@ public class Controller implements Initializable{
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
-      //  String schritt;
-        labelManager();/*
-        if(ExerciseAlternative.writeCode){
-            reworkTest.setDisable(true);
-            codeProperty.setValue(writeHereProperty.getValue());
-            writeHereProperty.setValue(codeOverview.getText());
-       //     schritt = "Refactorn";
-        } else if(ExerciseAlternative.writeTest){
-            testProperty.setValue(writeHereProperty.getValue());
-            reworkTest.setDisable(false);
-            writeHereProperty.setValue(codeOverview.getText());
-         //   schritt = "Code schreiben";
-        } else{
-            codeProperty.setValue(writeHereProperty.getValue());
-            writeHereProperty.setValue(testOverview.getText());
-            reworkTest.setDisable(true);
-        //    schritt = "Test schreiben";
+        labelManager();
+        CodeFailure result= NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
+        rueckmeldungProperty.setValue(result.codeAsString());
+        if(!result.problems()){
+            NextSteper.stepAnnouncement();
         }
-        */
-   /*     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Hallo Welt");
-        alert.setContentText("Nächster Schritt: " + NextSteper.actualStep());
-        alert.showAndWait();*/
-
-        compileFailure=new CodeFailure("Compiler Problem:", "", 0);
-        testFailure= new CodeFailure("Test Problem:", "", 0);
-
-        code=new CompilationUnit(codeName, codeProperty.getValue(),false);	// Übergabe an Bendisposto-Code
-        test=new CompilationUnit(testName, testProperty.getValue(), true);
-
-        JavaStringCompiler compileFolder;
-
-        compileFolder = CompilerFactory.getCompiler(code, test);
-        compileFolder.compileAndRunTests();
-        if (compileFolder.getCompilerResult().hasCompileErrors()) {
-            CompilerResult compilerResult = compileFolder.getCompilerResult();
-            if (ExerciseAlternative.writeTest) {
-                Collection<CompileError> testerror = compilerResult.getCompilerErrorsForCompilationUnit(test);
-                for (CompileError error : testerror) {
-                    compileFailure.addMessage(error.toString());
-                }
-            }else{
-                if(ExerciseAlternative.refactoring) {
-                    Collection<CompileError> codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
-                    for (CompileError error : codeerror) {
-                        compileFailure.addMessage(error.toString());
-                    }
-                } else {
-                    Collection<CompileError> codeerror = compilerResult.getCompilerErrorsForCompilationUnit(code);
-                    for (CompileError error : codeerror) {
-                        compileFailure.addMessage(error.toString());
-                    }
-                }
-            }
-            rueckmeldungProperty.setValue(compileFailure.codeAsString());
-        }else {
-            if(compileFolder.getTestResult().getNumberOfFailedTests()==0) {
-                passed();
-                actualStep();
-                NextSteper.stepAnnouncement();
-
-            }
-            Collection<TestFailure> testFehler= compileFolder.getTestResult().getTestFailures();
-            for(TestFailure failure: testFehler){
-                testFailure.addMessage(failure.getMessage());
-            }
-            rueckmeldungProperty.setValue(testFailure.codeAsString());
-        }
-
-
-     //   passed();
+        ExerciseAlternative.passed();
     }
 
 
