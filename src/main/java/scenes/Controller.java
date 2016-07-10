@@ -15,10 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import programdata.CodeFailure;
 import programdata.ExerciseAlternative;
-import userInput.CodeInput;
-import userInput.TestInput;
-import vk.core.api.CompilationUnit;
-import vk.core.api.JavaStringCompiler;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,20 +41,9 @@ public class Controller implements Initializable{
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("Aktuelle Phase:");
     public static StringProperty rueckmeldungProperty = new SimpleStringProperty("Rückmeldung:");
 
+    private String codeName;
+    private String testName;
 
-
-    TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
-    CodeInput exerciseCode;
-    CodeFailure compileFailure;
-    CodeFailure testFailure;
-
-    CompilationUnit code;	// Übergabe an Bendisposto-Code
-    CompilationUnit test;
-
-    String codeName;
-    String testName;
-
-    JavaStringCompiler compileFolder;
     private Timeline timer;
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
@@ -66,24 +51,24 @@ public class Controller implements Initializable{
         manageLabels();
         CodeFailure result = NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
         if(result.problems()) {
-            rueckmeldungProperty.setValue(result.codeAsString());
+            rueckmeldungProperty.setValue("Rückmeldung:\n" + result.codeAsString());
         }else if(result.testFailures()){
             /* Bei der write Test Phase soll man ja einen Test schreiben der Failed um ihn dann neuen Code zu schreiben der diesen Test erfüllt */
             if(!ExerciseAlternative.writeTest)
                 rueckmeldungProperty.setValue(result.codeAsString());
             else{
-                rueckmeldungProperty.setValue("Verändere deinen Code nun so, dass der Test erfüllt wird.");
+                rueckmeldungProperty.setValue("Rückmeldung:\nVerändere deinen Code nun so, dass der Test erfüllt wird.");
                 giveLabelNewValue();
                 NextSteper.stepAnnouncement();
-                NextSteper.passed();
+                ExerciseAlternative.passed();
             }
-        } else if(ExerciseAlternative.writeTest && !result.testFailures()){
-            rueckmeldungProperty.setValue("Du musst einen Test schreiben der failed!");
+        }else if(ExerciseAlternative.writeTest && !result.testFailures()){
+            rueckmeldungProperty.setValue("Rückmeldung:\nDu musst einen Test schreiben der failed!");
         }else{
-            rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");
+            rueckmeldungProperty.setValue("Rückmeldung:\nAlles OK! (Compiling and Tests)");
             giveLabelNewValue();
             NextSteper.stepAnnouncement();
-            NextSteper.passed();
+            ExerciseAlternative.passed();
         }
     }
 
@@ -100,7 +85,6 @@ public class Controller implements Initializable{
         }
     }
 
-    //MARKIERUNG
     public void manageLabels() {
         if (ExerciseAlternative.writeCode) {
             codeProperty.setValue(writeHereProperty.getValue());
@@ -113,7 +97,7 @@ public class Controller implements Initializable{
 
     public void setReworkTest(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Hallo Welt");
+        alert.setTitle("Test Korrektur");
         alert.setContentText("Korrigiere nun deinen Test.");
         alert.showAndWait();
         writeHereProperty.setValue(testOverview.getText());
@@ -132,7 +116,7 @@ public class Controller implements Initializable{
     }
 
     //Hier werden die StringPropertys gebinded, sodass wir diese nun von überall aktualisieren können und sich der Text
-    // in den TextAreas automatisch ändert. ich hab jetzt auch mal beide Text
+    // in den TextAreas automatisch ändert.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         codeOverview.textProperty().bind(codeProperty);

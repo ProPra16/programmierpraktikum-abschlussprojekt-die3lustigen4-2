@@ -20,12 +20,6 @@ import java.util.Collection;
 
 public class NextSteper {
 
-    public static String nextStep(){
-        if(ExerciseAlternative.refactoring) return "Code refactorn";
-        if(ExerciseAlternative.writeCode) return "Code schreiben";
-        return "Test schreiben";
-    }
-
     public static void stepAnnouncement(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Nächster Schritt");
@@ -70,6 +64,7 @@ public class NextSteper {
         }
     }
 
+    /*
     public static void passed() {
          if((ExerciseAlternative.writeTest)&&(!ExerciseAlternative.writeCode)&&(!ExerciseAlternative.refactoring)){
              ExerciseAlternative.writeTest=false;
@@ -88,4 +83,5 @@ public class NextSteper {
              ExerciseAlternative.followingStep="Write Code";
          }
     }
+    */
 }

@@ -9,30 +9,18 @@ import scenes.Controller;
 import scenes.KatalogCreator;
 import userInput.CodeInput;
 import userInput.TestInput;
-import vk.core.api.CompilationUnit;
-import vk.core.api.JavaStringCompiler;
 
 public class ExerciseAlternative {
 	public static boolean writeCode;			// aktuelle Stufe (Step) speichern
 	public static boolean writeTest;
 	public static boolean refactoring;
 
-//	static String failure;				// Speicher für zurückgegebene Compilierfehler
-
 	public static TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
 	public static CodeInput exerciseCode;
-	public static CodeFailure compileFailure;
-	public static CodeFailure testFailure;
-
-	static CompilationUnit code;	// Übergabe an Bendisposto-Code
-	static CompilationUnit test;
-
-	static JavaStringCompiler compileFolder;
 
 	public static String codeName;
 	public static String testName;
-	public static String followingStep="write Code";
-
+	public static String followingStep="Write Code";
 
 	//Hiermit wird das Programm erst richtig gestartet
 	public static void start() {
@@ -56,17 +44,18 @@ public class ExerciseAlternative {
 	
 	public static void actualStep(){
 		if(writeCode)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteCode");
+			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nWrite New Code");
 		else if(refactoring)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nrefactoring");
+			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nRefactoring");
 		else if(writeTest)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteTest");
+			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nWrite a failing Test");
 	}
 
 	public static void reworkTest(){
 		writeCode = false;
 		refactoring = false;
 		writeTest = true;
+		followingStep = "Write Code";
 		actualStep();
 	}
 		
@@ -74,12 +63,15 @@ public class ExerciseAlternative {
 		if((writeTest)&&(!writeCode)&&(!refactoring)){
 			writeTest=false;
 			writeCode=true;
+			ExerciseAlternative.followingStep="Refactoring";
 		} else if((!writeTest)&&(writeCode)&&(!refactoring)){
 			writeCode=false;
 			refactoring=true;
+			ExerciseAlternative.followingStep="Write Test";
 		} else if((!writeTest)&&(!writeCode)&&(refactoring)){
 			refactoring=false;
 			writeTest=true;
+			ExerciseAlternative.followingStep="Write Code";
 		}
 		actualStep();
 	}
