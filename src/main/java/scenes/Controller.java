@@ -17,14 +17,11 @@ import programdata.CodeFailure;
 import programdata.ExerciseAlternative;
 import userInput.CodeInput;
 import userInput.TestInput;
-import vk.core.api.*;
+import vk.core.api.CompilationUnit;
+import vk.core.api.JavaStringCompiler;
 
 import java.net.URL;
-import java.util.Collection;
 import java.util.ResourceBundle;
-
-import static programdata.ExerciseAlternative.actualStep;
-import static programdata.ExerciseAlternative.passed;
 
 public class Controller implements Initializable{
 
@@ -70,7 +67,7 @@ public class Controller implements Initializable{
     public void setNextStep(){
         labelManager();
         CodeFailure result= NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
-        if(result.problems() || result.testfailures()) {
+        if(result.problems() || result.testFailures()) {
             rueckmeldungProperty.setValue(result.codeAsString());
         }else{
             rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");

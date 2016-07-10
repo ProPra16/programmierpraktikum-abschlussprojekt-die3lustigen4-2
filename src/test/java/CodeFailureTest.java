@@ -10,7 +10,6 @@
 import org.junit.Test;
 import programdata.CodeFailure;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class CodeFailureTest{
@@ -57,7 +56,7 @@ public class CodeFailureTest{
     @Test
     public void hasproblemTest(){
         CodeFailure test=new CodeFailure();
-        test.hasproblem();
+        test.hasProblem();
         assertEquals(test.problems(), true);
     }
 

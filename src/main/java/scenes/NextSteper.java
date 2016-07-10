@@ -47,7 +47,7 @@ public class NextSteper {
         compileFolder.compileAndRunTests();
 
         if (compileFolder.getCompilerResult().hasCompileErrors()) {
-            compileFailure.hasproblem();
+            compileFailure.hasProblem();
             CompilerResult compilerResult = compileFolder.getCompilerResult();
             Collection<CompileError> codeerror;
             if (ExerciseAlternative.writeTest) {
@@ -63,7 +63,7 @@ public class NextSteper {
             if(compileFolder.getTestResult().getNumberOfFailedTests()==0) {
                 return compileFailure;
             }
-            testFailure.hastestfailures();
+            testFailure.hasTestFailures();
             Collection<TestFailure> testFehler= compileFolder.getTestResult().getTestFailures();
             for(TestFailure failure: testFehler){
                 testFailure.addMessage(failure.getMessage());
