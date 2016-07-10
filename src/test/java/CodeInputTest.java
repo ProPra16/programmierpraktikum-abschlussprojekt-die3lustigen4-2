@@ -12,7 +12,7 @@ public class CodeInputTest{
 
 	@Test
 	public void dummytest() {
-		assertEquals(1,0,0.1);
+		assertEquals(1,1,0.1);
 	}
 	
 	@Test
