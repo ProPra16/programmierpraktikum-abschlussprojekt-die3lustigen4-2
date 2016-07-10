@@ -57,16 +57,18 @@ public class Controller implements Initializable{
         CodeFailure result = NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
         if(result.problems()) {
             rueckmeldungProperty.setValue("Rückmeldung:\n" + result.codeAsString());
-        }else if(result.testFailures()){
+        }else if(result.getNumberOfFailedTests() > 0){
             if(!ExerciseAlternative.writeTest)
                 rueckmeldungProperty.setValue(result.codeAsString());
-            else{
+            else if(result.getNumberOfFailedTests() > 1){
+                rueckmeldungProperty.setValue("Rückmeldung:\nEs muss genau 1 Test fehlschlagen!");
+            }else{
                 rueckmeldungProperty.setValue("Rückmeldung:\nVerändere deinen Code nun so, dass der Test erfüllt wird.");
                 giveLabelNewValue();
                 NextSteper.stepAnnouncement();
                 ExerciseAlternative.passed();
             }
-        }else if(ExerciseAlternative.writeTest && !result.testFailures()){
+        }else if(ExerciseAlternative.writeTest && result.getNumberOfFailedTests() == 0){
             rueckmeldungProperty.setValue("Rückmeldung:\nDu musst einen Test schreiben der failed!");
         }else{
             rueckmeldungProperty.setValue("Rückmeldung:\nAlles OK! (Compiling and Tests)");

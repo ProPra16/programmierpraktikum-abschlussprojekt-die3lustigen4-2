@@ -9,18 +9,17 @@ import javafx.beans.property.StringProperty;
  * Created by tobias on 09.07.16.
  */
 public class CodeFailure {
-    StringProperty messageForCode;
-    StringProperty messageForTest;
-    IntegerProperty line;
-    boolean problems;
-    boolean testFailures;
+    private StringProperty messageForCode;
+    private StringProperty messageForTest;
+    private IntegerProperty line;
+    private boolean problems;
+    private int numberOfFailedTests = 0;
 
     public CodeFailure(String code, String test, int line){
         this.messageForCode=new SimpleStringProperty(code);
         this.messageForTest=new SimpleStringProperty(test);
         this.line=new SimpleIntegerProperty(line);
         this.problems=false;
-        this.testFailures =false;
     }
 
 
@@ -29,7 +28,14 @@ public class CodeFailure {
         this.messageForTest=new SimpleStringProperty("");
         this.line=new SimpleIntegerProperty(0);
         this.problems=false;
-        this.testFailures =false;
+    }
+
+    public void setNumberOfFailedTests(int num){
+        numberOfFailedTests = num;
+    }
+
+    public int getNumberOfFailedTests(){
+        return numberOfFailedTests;
     }
 
     public StringProperty codeStringProperty(){
@@ -54,14 +60,6 @@ public class CodeFailure {
 
     public boolean problems(){
         return this.problems;
-    }
-
-    public boolean testFailures(){
-        return this.testFailures;
-    }
-
-    public void hasTestFailures(){
-        this.testFailures =true;
     }
 
     public void hasProblem(){

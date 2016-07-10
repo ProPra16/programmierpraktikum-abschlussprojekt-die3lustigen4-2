@@ -55,7 +55,7 @@ public class NextSteper {
             if(compileFolder.getTestResult().getNumberOfFailedTests()==0) {
                 return compileFailure;
             }
-            testFailure.hasTestFailures();
+            testFailure.setNumberOfFailedTests(compileFolder.getTestResult().getNumberOfFailedTests());
             Collection<TestFailure> testFehler= compileFolder.getTestResult().getTestFailures();
             for(TestFailure failure: testFehler){
                 testFailure.addMessage(failure.getMessage());
