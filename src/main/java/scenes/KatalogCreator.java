@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -45,18 +44,6 @@ public class KatalogCreator {
             auswahlButtons[j].setPrefSize(800, 600/length);
 
             final Katalog tmpKatalog = kataloge[j];
-            /*
-            String completeClassHeader = "";
-            for (String s: tmpKatalog.classHeader)
-                completeClassHeader = completeClassHeader + s +"\n";
-            final String finalCompleteClassHeader = completeClassHeader;
-
-            String completeTestHeader = "";
-            for (String s: tmpKatalog.testHeader)
-                completeTestHeader = completeTestHeader + s +"\n";
-            final String finalCompleteTestHeader = completeTestHeader;
-            */
-
             auswahlButtons[j].setOnAction(event -> {
                 try {
                     //choosenExercise = new Exercise(tmpKatalog.aufgabenName, finalCompleteClassHeader, tmpKatalog.testName, finalCompleteTestHeader);
