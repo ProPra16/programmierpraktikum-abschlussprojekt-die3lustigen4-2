@@ -50,10 +50,11 @@ public class KatalogCreator {
                     choosenKatalog = tmpKatalog;
                     Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("layout.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
-                    Scene scene = new Scene(newRoot, 1000,800);
+                    Scene scene = new Scene(newRoot);
                     primaryStage.setScene(scene);
                     scene.getStylesheets().add(Main.class.getClassLoader().getResource("design.css").toExternalForm());
                     primaryStage.show();
+                    primaryStage.setFullScreen(true);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

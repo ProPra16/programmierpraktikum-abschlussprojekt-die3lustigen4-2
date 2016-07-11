@@ -65,7 +65,7 @@ public class Controller implements Initializable{
                 ExerciseAlternative.passed();
             }
         }else if(ExerciseAlternative.writeTest && result.getNumberOfFailedTests() == 0){
-            rueckmeldungProperty.setValue("Du musst einen Test schreiben der failed!");
+            rueckmeldungProperty.setValue("Du musst einen Test schreiben der fehlschlägt!");
         }else{
             rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");
             giveLabelNewValue();
