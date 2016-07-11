@@ -18,6 +18,16 @@ public class ExerciseAlternative {
 	public static TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
 	public static CodeInput exerciseCode;
 
+	/******************************************************/
+	// ATDD-Zusatz
+	public static TestInput acceptanceTest;
+	public static String acceptanceTestName;
+	public static boolean writeAcceptanceTest;
+	//											Wenn der Code-Aufbau erfolgreich ist:
+	public boolean ATDD; 						// Diese Variable muss in den Katalog-/chooser migriert werden.
+												// Außerdem müssen die Kataloge angepasst werden.
+	/******************************************************/
+
 	public static String codeName;
 	public static String testName;
 	public static String followingStep="Write Code";
