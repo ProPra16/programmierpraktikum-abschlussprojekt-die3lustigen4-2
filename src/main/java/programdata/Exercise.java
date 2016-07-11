@@ -50,11 +50,11 @@ public class Exercise {
 	public StringProperty actualStep(){
 		//StringProperty temp =new SimpleStringProperty("writeTest");
 		if(writeCode)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteCode");
+			Controller.aktuellePhaseProperty.setValue("writeCode");
 		else if(refactoring)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nrefactoring");
+			Controller.aktuellePhaseProperty.setValue("refactoring");
 		else if(writeTest)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteTest");
+			Controller.aktuellePhaseProperty.setValue("writeTest");
 		return Controller.aktuellePhaseProperty;
 	}
 	
