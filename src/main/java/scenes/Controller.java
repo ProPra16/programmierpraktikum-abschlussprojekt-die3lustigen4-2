@@ -11,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import programdata.CodeFailure;
 import programdata.ExerciseAlternative;
@@ -30,8 +29,6 @@ public class Controller implements Initializable{
     public Label aktuellePhase = new Label();
     public Label rueckmeldung = new Label();
     public Label timerLabel = new Label();
-
-    SimpleIntegerProperty timeSeconds = new SimpleIntegerProperty(0);
 
     public static StringProperty codeProperty = new SimpleStringProperty("CODE");
     public static StringProperty testProperty = new SimpleStringProperty("TESTS");
@@ -130,6 +127,7 @@ public class Controller implements Initializable{
         aktuellePhase.textProperty().bind(aktuellePhaseProperty);
         rueckmeldung.textProperty().bind(rueckmeldungProperty);
 
+        SimpleIntegerProperty timeSeconds = new SimpleIntegerProperty(0);
         timer = new Timeline();
         timeSeconds.set(0);
         timer.getKeyFrames().add(
