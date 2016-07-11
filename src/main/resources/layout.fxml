@@ -51,7 +51,7 @@
             <Separator prefWidth="200.0" />
                 <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                     <children>
-                        <VBox prefWidth="120.0" spacing="10.0">
+                        <VBox prefWidth="160.0" spacing="10.0">
                             <children>
                                 <Label text="Aktuelle Phase" />
                         <Label fx:id="aktuellePhase" wrapText="true" />

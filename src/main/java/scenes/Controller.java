@@ -110,7 +110,7 @@ public class Controller implements Initializable{
         ExerciseAlternative.start();
         timer.playFromStart();
         start.setDisable(true);
-        reworkTest.setDisable(true);
+        nextStep.setDisable(false);
         codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
         testProperty.setValue(ExerciseAlternative.exerciseTest.asString());
         codeName= ExerciseAlternative.codeName;
@@ -126,6 +126,9 @@ public class Controller implements Initializable{
         writeHereProperty.bindBidirectional(writeHere.textProperty());
         aktuellePhase.textProperty().bind(aktuellePhaseProperty);
         rueckmeldung.textProperty().bind(rueckmeldungProperty);
+
+        reworkTest.setDisable(true);
+        nextStep.setDisable(true);
 
         SimpleIntegerProperty timeSeconds = new SimpleIntegerProperty(0);
         timer = new Timeline();
