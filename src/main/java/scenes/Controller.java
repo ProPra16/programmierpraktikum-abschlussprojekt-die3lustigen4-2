@@ -3,6 +3,7 @@ package scenes;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -16,6 +17,7 @@ import programdata.CodeFailure;
 import programdata.ExerciseAlternative;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -40,7 +42,9 @@ public class Controller implements Initializable{
     private String codeName;
     private String testName;
 
-    private Timeline timer;
+    public static boolean runTimer = false;
+    private int minutes = 0;
+    private int seconds = 0;
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
@@ -108,7 +112,7 @@ public class Controller implements Initializable{
 
     public void setStart(){
         ExerciseAlternative.start();
-        timer.playFromStart();
+        startTimer();
         start.setDisable(true);
         nextStep.setDisable(false);
         codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
@@ -130,12 +134,34 @@ public class Controller implements Initializable{
         reworkTest.setDisable(true);
         nextStep.setDisable(true);
 
-        SimpleIntegerProperty timeSeconds = new SimpleIntegerProperty(0);
-        timer = new Timeline();
-        timeSeconds.set(0);
-        timer.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(Integer.MAX_VALUE),
-                        new KeyValue(timeSeconds, Integer.MAX_VALUE)));
-        timerLabel.textProperty().bind(timeSeconds.asString());
     }
+
+    void startTimer(){
+
+        runTimer = true;
+
+        Thread t = new Thread(() -> {
+
+            while (runTimer) {
+                Platform.runLater(() -> {
+                    timerLabel.setText(new DecimalFormat("00").format(minutes) + ":" + new DecimalFormat("00").format(seconds));
+                    seconds++;
+                    if(seconds % 60 == 0){
+                        minutes++;
+                        seconds = 0;
+                    }
+                });
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+        t.start();
+
+    }
+
 }

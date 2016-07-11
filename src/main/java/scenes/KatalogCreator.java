@@ -1,5 +1,6 @@
 package scenes;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -8,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,6 +57,11 @@ public class KatalogCreator {
                     scene.getStylesheets().add(Main.class.getClassLoader().getResource("design.css").toExternalForm());
                     primaryStage.show();
                     primaryStage.setFullScreen(true);
+                    primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                        public void handle(WindowEvent we) {
+                            Controller.runTimer= false;
+                        }
+                    });
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

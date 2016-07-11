@@ -94,7 +94,7 @@
             <HBox alignment="CENTER">
                <children>
                       <Button fx:id="start" mnemonicParsing="false" onAction="#setStart" text="Start" />
-                      <Label fx:id="timerLabel" alignment="CENTER_RIGHT" minWidth="40.0" text="0" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
+                      <Label fx:id="timerLabel" alignment="CENTER_RIGHT" text="00:00" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
                           <padding>
                               <Insets left="10.0" />
                           </padding>
