@@ -27,7 +27,6 @@ public class Controller implements Initializable{
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
-    public HBox buttonBox = new HBox();
     public Label aktuellePhase = new Label();
     public Label rueckmeldung = new Label();
     public Label timerLabel = new Label();
@@ -38,8 +37,8 @@ public class Controller implements Initializable{
     public static StringProperty testProperty = new SimpleStringProperty("TESTS");
     public static StringProperty writeHereProperty = new SimpleStringProperty("");
 
-    public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("Aktuelle Phase:");
-    public static StringProperty rueckmeldungProperty = new SimpleStringProperty("Rückmeldung:");
+    public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
+    public static StringProperty rueckmeldungProperty = new SimpleStringProperty("");
 
     private String codeName;
     private String testName;
@@ -56,22 +55,22 @@ public class Controller implements Initializable{
         manageLabels();
         CodeFailure result = NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
         if(result.problems()) {
-            rueckmeldungProperty.setValue("Rückmeldung:\n" + result.codeAsString());
+            rueckmeldungProperty.setValue(result.codeAsString());
         }else if(result.getNumberOfFailedTests() > 0){
             if(!ExerciseAlternative.writeTest)
                 rueckmeldungProperty.setValue(result.codeAsString());
             else if(result.getNumberOfFailedTests() > 1){
-                rueckmeldungProperty.setValue("Rückmeldung:\nEs muss genau 1 Test fehlschlagen!");
+                rueckmeldungProperty.setValue("Es muss genau 1 Test fehlschlagen!");
             }else{
-                rueckmeldungProperty.setValue("Rückmeldung:\nVerändere deinen Code nun so, dass der Test erfüllt wird.");
+                rueckmeldungProperty.setValue("Verändere deinen Code nun so, dass der Test erfüllt wird.");
                 giveLabelNewValue();
                 NextSteper.stepAnnouncement();
                 ExerciseAlternative.passed();
             }
         }else if(ExerciseAlternative.writeTest && result.getNumberOfFailedTests() == 0){
-            rueckmeldungProperty.setValue("Rückmeldung:\nDu musst einen Test schreiben der failed!");
+            rueckmeldungProperty.setValue("Du musst einen Test schreiben der failed!");
         }else{
-            rueckmeldungProperty.setValue("Rückmeldung:\nAlles OK! (Compiling and Tests)");
+            rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");
             giveLabelNewValue();
             NextSteper.stepAnnouncement();
             ExerciseAlternative.passed();
