@@ -9,7 +9,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        this.primaryStage = primaryStage;
+        Main.primaryStage = primaryStage;
         KatalogCreator.chooseTask(primaryStage);
         primaryStage.setTitle("Wähle einen Katalog aus");
         primaryStage.show();

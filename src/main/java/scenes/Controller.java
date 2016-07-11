@@ -39,7 +39,7 @@ public class Controller implements Initializable{
     private String codeName;
     private String testName;
 
-    public volatile static boolean runTimer = false;
+    volatile static boolean runTimer = false;
     private int minutes = 0;
     private int seconds = 0;
 
@@ -156,7 +156,7 @@ public class Controller implements Initializable{
 
     private void startTimer(int secondsForBabystepps){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -187,21 +187,22 @@ public class Controller implements Initializable{
     }
 
     private void jumpOneStepBack() {
+        resetTimer();
         if (ExerciseAlternative.writeCode) {
             ExerciseAlternative.writeTest = true;
             ExerciseAlternative.writeCode = false;
             ExerciseAlternative.refactoring = false;
             reworkTest.setDisable(true);
             writeHereProperty.setValue(testOverview.getText());
+            rueckmeldungProperty.setValue("Schreibe einen Test der failed-");
         } else if (ExerciseAlternative.writeTest) {
             ExerciseAlternative.writeTest = false;
             ExerciseAlternative.writeCode = false;
             ExerciseAlternative.refactoring = true;
             reworkTest.setDisable(true);
+            rueckmeldungProperty.setValue("Verbessere deinen Code.");
             writeHereProperty.setValue(codeOverview.getText());
         }
-        runTimer = false;
-        startTimer(KatalogCreator.choosenKatalog.secondsForBabystepps);
     }
 
 }
