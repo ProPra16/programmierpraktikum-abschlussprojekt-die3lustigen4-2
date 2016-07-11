@@ -2,11 +2,14 @@ package scenes;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -18,6 +21,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.awt.Font.MONOSPACED;
+
 public class KatalogCreator {
 
     public static Katalog choosenKatalog;
@@ -25,14 +30,16 @@ public class KatalogCreator {
     public static void chooseTask(Stage primaryStage) throws IOException {
         Katalog[] kataloge = createKatalogArr();
         Button[] auswahlButtons = createButtonArr(kataloge.length, primaryStage, kataloge);
-        GridPane root = new GridPane();
+        VBox root = new VBox(10);
+        root.setPadding(new Insets(20));
         root.setAlignment(Pos.CENTER);
-        root.setHgap(35);
-        root.setVgap(35);
 
-        for (int j = 0; j < auswahlButtons.length; j++)
-            root.add(auswahlButtons[j],0,j);
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        for (Button b : auswahlButtons) {
+            b.setFont(Font.font(MONOSPACED,13));
+            b.setAlignment(Pos.TOP_LEFT);
+        }
+        root.getChildren().addAll(auswahlButtons);
+        primaryStage.setScene(new Scene(root));
     }
 
     public static Button[] createButtonArr(int length, Stage primaryStage, Katalog[] kataloge){
@@ -43,7 +50,7 @@ public class KatalogCreator {
             for (String s: kataloge[j].beschreibung)
                 text = text + s + "\n";
             auswahlButtons[j].setText(text);
-            auswahlButtons[j].setPrefSize(800, 600/length);
+            auswahlButtons[j].setPrefSize(500, 600/length);
 
             final Katalog tmpKatalog = kataloge[j];
             auswahlButtons[j].setOnAction(event -> {
@@ -73,6 +80,10 @@ public class KatalogCreator {
     public static Katalog[] createKatalogArr() throws IOException {
         /** Silvan added FileChooser 2.7.2016 */
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Choose Catalog-Folder");
+        alert.setContentText("Bitte wählen Sie den Ordner aus, in dem die Kataloge gespeichert sind.");
+        alert.showAndWait();
         DirectoryChooser dialog = new DirectoryChooser();
         dialog.setTitle("Choose Catalog-Folder");
         File folder = dialog.showDialog(new Stage());
