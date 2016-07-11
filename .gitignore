@@ -4,6 +4,5 @@
 out/
 #src/
 #/Projekt7.iml
-/src/test/java/TestKatalogScann.java
 .gradle
 build

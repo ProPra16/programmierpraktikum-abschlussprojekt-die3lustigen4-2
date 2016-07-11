@@ -12,18 +12,18 @@ public class CodeInput implements ContentContainer{
 	StringProperty quellcode;
 	
 	public CodeInput(String code){
-		this.quellcode=new SimpleStringProperty(code);
+		quellcode=new SimpleStringProperty(code);
 	}
 	
 	public void addCode(String codeToAdd){
-		this.quellcode.setValue(this.quellcode.getValue()+codeToAdd);
+		quellcode.setValue(quellcode.getValue()+codeToAdd);
 	}
 	
 	public String asString(){
-		return this.quellcode.getValue();
+		return quellcode.getValue();
 	}
 	
 	public StringProperty content(){
-		return this.quellcode;
+		return quellcode;
 	}
 }

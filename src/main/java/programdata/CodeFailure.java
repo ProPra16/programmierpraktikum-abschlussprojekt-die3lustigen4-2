@@ -16,7 +16,7 @@ public class CodeFailure {
     private int numberOfFailedTests = 0;
 
     public CodeFailure(String code, String test, int line){
-        this.messageForCode=new SimpleStringProperty(code);
+        messageForCode=new SimpleStringProperty(code);
         this.messageForTest=new SimpleStringProperty(test);
         this.line=new SimpleIntegerProperty(line);
         this.problems=false;
@@ -24,10 +24,10 @@ public class CodeFailure {
 
 
     public CodeFailure(){
-        this.messageForCode=new SimpleStringProperty("");
-        this.messageForTest=new SimpleStringProperty("");
-        this.line=new SimpleIntegerProperty(0);
-        this.problems=false;
+        messageForCode=new SimpleStringProperty("");
+        messageForTest=new SimpleStringProperty("");
+        line=new SimpleIntegerProperty(0);
+        problems=false;
     }
 
     public void setNumberOfFailedTests(int num){
@@ -39,30 +39,30 @@ public class CodeFailure {
     }
 
     public StringProperty codeStringProperty(){
-        return this.messageForCode;
+        return messageForCode;
     }
 
     public StringProperty testStringProperty(){
-        return this.messageForTest;
+        return messageForTest;
     }
 
     public String codeAsString(){
-        return this.messageForCode.getValue();
+        return messageForCode.getValue();
     }
 
     public void addMessage(String message){
-        if(this.messageForCode.getValue().equals("")){
-            this.messageForCode.setValue(message);
+        if(messageForCode.getValue().equals("")){
+            messageForCode.setValue(message);
         }else{
-            this.messageForCode.setValue(this.messageForCode.getValue()+ "\n\n" + message);
+            messageForCode.setValue(messageForCode.getValue()+ "\n\n" + message);
         }
     }
 
     public boolean problems(){
-        return this.problems;
+        return problems;
     }
 
     public void hasProblem(){
-        this.problems=true;
+        problems=true;
     }
 }
