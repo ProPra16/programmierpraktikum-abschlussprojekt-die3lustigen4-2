@@ -2,6 +2,7 @@ AufgabenName:
 Römische Zahlen Guter KATALOG
 Beschreibung:
 Diese Aufgabe ist für Römische Zahlen Converter!
+Mit Babystepps
 Classname:
 RomanNumberConverter
 ClassHeader:
@@ -19,18 +20,19 @@ public class RomanNumberConverter {
 Testname:
 RomanNumbersTest
 TestHeader:
-import static org.junit.Assert.*; 
-import org.junit.Test; 
-public class RomanNumbersTest { 
-	@Test 
+import static org.junit.Assert.*;
+import org.junit.Test;
+public class RomanNumbersTest {
+	@Test
 	public void testSomething() {
         assertEquals("hi", RomanNumberConverter.testFunc("hi"));
-	} 
+	}
 }
 BabySteps:
-false
+true
 TimeForBabystepps:
-0:00
+2:00
 Timetracking:
 true
+
 

@@ -1,6 +1,5 @@
 package scenes;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -9,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +46,6 @@ public class KatalogCreator {
             final Katalog tmpKatalog = kataloge[j];
             auswahlButtons[j].setOnAction(event -> {
                 try {
-                    //choosenExercise = new Exercise(tmpKatalog.aufgabenName, finalCompleteClassHeader, tmpKatalog.testName, finalCompleteTestHeader);
                     choosenKatalog = tmpKatalog;
                     Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("layout.fxml"));
                     primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
@@ -57,11 +54,7 @@ public class KatalogCreator {
                     scene.getStylesheets().add(Main.class.getClassLoader().getResource("design.css").toExternalForm());
                     primaryStage.show();
                     primaryStage.setFullScreen(true);
-                    primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                        public void handle(WindowEvent we) {
-                            Controller.runTimer= false;
-                        }
-                    });
+                    primaryStage.setOnCloseRequest(we -> Controller.runTimer= false);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -108,8 +101,25 @@ public class KatalogCreator {
             }
             boolean babysteps = f.get(++i).equals("true");
             i++;
+            String tmp = f.get(++i);
+            String erstZiffer = "";
+            String zweiteZiffer = "";
+            int secondsForBabystepps = 0;
+            if(!tmp.equals("")){
+                for (int k = 0; k < tmp.length(); k++) {
+                    if(tmp.charAt(k) != ':')
+                        erstZiffer = erstZiffer + tmp.charAt(k);
+                    else{
+                        for (int l = k+1; l < tmp.length(); l++)
+                            zweiteZiffer = zweiteZiffer + tmp.charAt(l);
+                        break;
+                    }
+                }
+                secondsForBabystepps = Integer.parseInt(erstZiffer)*60 + Integer.parseInt(zweiteZiffer);
+            }
+            i++;
             boolean timetracking = f.get(++i).equals("true");
-            katalogArr[j] = new Katalog(aufgabenName, className, testName, babysteps, timetracking, beschreibung, classHeader, testHeader);
+            katalogArr[j] = new Katalog(aufgabenName, className, testName, babysteps, timetracking, beschreibung, classHeader, testHeader, secondsForBabystepps);
         }
         return katalogArr;
     }
