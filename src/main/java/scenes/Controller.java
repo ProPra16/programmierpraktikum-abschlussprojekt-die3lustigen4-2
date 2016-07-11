@@ -26,6 +26,7 @@ public class Controller implements Initializable{
     public Label aktuellePhase = new Label();
     public Label rueckmeldung = new Label();
     public Label timerLabel = new Label();
+    public Label babyLabel = new Label();
 
     public static StringProperty codeProperty = new SimpleStringProperty("CODE");
     public static StringProperty testProperty = new SimpleStringProperty("TESTS");
@@ -33,6 +34,7 @@ public class Controller implements Initializable{
 
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
     public static StringProperty rueckmeldungProperty = new SimpleStringProperty("");
+
 
     private String codeName;
     private String testName;
@@ -108,6 +110,8 @@ public class Controller implements Initializable{
     public void setStart(){
         ExerciseAlternative.start();
         startTimer();
+        if(KatalogCreator.choosenKatalog.babysteps)
+            babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase!");
         start.setDisable(true);
         nextStep.setDisable(false);
         codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());

@@ -112,25 +112,25 @@ public class KatalogCreator {
             }
             boolean babysteps = f.get(++i).equals("true");
             i++;
-            String tmp = f.get(++i);
-            String erstZiffer = "";
-            String zweiteZiffer = "";
+            String minutesForBaby = f.get(++i);
+            String firstNumber = "";
+            String secondNumber = "";
             int secondsForBabystepps = 0;
-            if(!tmp.equals("")){
-                for (int k = 0; k < tmp.length(); k++) {
-                    if(tmp.charAt(k) != ':')
-                        erstZiffer = erstZiffer + tmp.charAt(k);
+            if(!minutesForBaby.equals("")){
+                for (int k = 0; k < minutesForBaby.length(); k++) {
+                    if(minutesForBaby.charAt(k) != ':')
+                        firstNumber = firstNumber + minutesForBaby.charAt(k);
                     else{
-                        for (int l = k+1; l < tmp.length(); l++)
-                            zweiteZiffer = zweiteZiffer + tmp.charAt(l);
+                        for (int l = k+1; l < minutesForBaby.length(); l++)
+                            secondNumber = secondNumber + minutesForBaby.charAt(l);
                         break;
                     }
                 }
-                secondsForBabystepps = Integer.parseInt(erstZiffer)*60 + Integer.parseInt(zweiteZiffer);
+                secondsForBabystepps = Integer.parseInt(firstNumber)*60 + Integer.parseInt(secondNumber);
             }
             i++;
             boolean timetracking = f.get(++i).equals("true");
-            katalogArr[j] = new Katalog(aufgabenName, className, testName, babysteps, timetracking, beschreibung, classHeader, testHeader, secondsForBabystepps);
+            katalogArr[j] = new Katalog(aufgabenName, className, testName, babysteps, timetracking, beschreibung, classHeader, testHeader, secondsForBabystepps, minutesForBaby);
         }
         return katalogArr;
     }
