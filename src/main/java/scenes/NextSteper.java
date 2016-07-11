@@ -22,6 +22,7 @@ public class NextSteper {
 
     public static void stepAnnouncement(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(Main.primaryStage);
         alert.setTitle("Nächster Schritt");
         alert.setContentText(ExerciseAlternative.followingStep);
         alert.showAndWait();

@@ -116,6 +116,7 @@ public class Controller implements Initializable{
 
     public void setReworkTest(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(Main.primaryStage);
         alert.setTitle("Test Korrektur");
         alert.setContentText("Korrigiere nun deinen Test.");
         alert.showAndWait();
