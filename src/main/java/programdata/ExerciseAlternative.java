@@ -44,11 +44,11 @@ public class ExerciseAlternative {
 	
 	public static void actualStep(){
 		if(writeCode)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nWrite New Code");
+			Controller.aktuellePhaseProperty.setValue("Write New Code");
 		else if(refactoring)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nRefactoring");
+			Controller.aktuellePhaseProperty.setValue("Refactoring");
 		else if(writeTest)
-			Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nWrite a failing Test");
+			Controller.aktuellePhaseProperty.setValue("Write a failing Test");
 	}
 
 	public static void reworkTest(){
