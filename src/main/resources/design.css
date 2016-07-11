@@ -8,6 +8,7 @@
 
         -fx-font-family: "CMU Serif";
         -fx-font-weight: bold;
+        -fx-font-size: 18px;
 
 }
 #timerLabel{
@@ -19,10 +20,12 @@
 
 #aktuellePhase{
         -fx-font-weight: normal;
+        -fx-font-size: 12px;
 }
 
 #rueckmeldung{
         -fx-font-weight: normal;
+        -fx-font-size: 12px;
 }
 
 .button{
