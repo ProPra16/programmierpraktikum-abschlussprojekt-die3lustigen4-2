@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -18,14 +17,8 @@
                                     <VBox.margin>
                                         <Insets />
                                     </VBox.margin>
-                           <font>
-                              <Font name="CMU Serif Bold Extended Roman" size="13.0" />
-                           </font>
                                 </Label>
-                                <TextArea fx:id="testOverview" editable="false" VBox.vgrow="ALWAYS">
-                           <font>
-                              <Font name="Monospaced Regular" size="13.0" />
-                           </font></TextArea>
+                                <TextArea fx:id="testOverview" editable="false" VBox.vgrow="ALWAYS" />
                             </children>
                             <HBox.margin>
                                 <Insets left="20.0" right="20.0" />
@@ -37,14 +30,8 @@
                                     <VBox.margin>
                                         <Insets />
                                     </VBox.margin>
-                           <font>
-                              <Font name="CMU Serif Bold Extended Roman" size="13.0" />
-                           </font>
                                 </Label>
-                                <TextArea fx:id="codeOverview" editable="false" VBox.vgrow="ALWAYS">
-                           <font>
-                              <Font name="Monospaced Regular" size="13.0" />
-                           </font></TextArea>
+                                <TextArea fx:id="codeOverview" editable="false" VBox.vgrow="ALWAYS" />
                             </children>
                             <HBox.margin>
                                 <Insets left="20.0" right="20.0" />
@@ -61,64 +48,41 @@
                         <Insets />
                     </opaqueInsets>
                 </HBox>
+            <Separator prefWidth="200.0" />
                 <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                     <children>
-                        <VBox alignment="CENTER" prefHeight="173.0" prefWidth="200.0" spacing="10.0">
+                        <VBox alignment="CENTER" prefWidth="120.0" spacing="10.0">
                             <children>
-                                <Label text="Aktuelle Phase">
-                           <font>
-                              <Font name="CMU Serif Bold Extended Roman" size="13.0" />
-                           </font></Label>
-                        <Label fx:id="aktuellePhase" wrapText="true">
-                           <font>
-                              <Font name="CMU Serif Roman" size="12.0" />
-                           </font>
-                        </Label>
-                                <Region prefHeight="200.0" prefWidth="200.0" />
-                                <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest" text="Test korrigieren">
-                           <font>
-                              <Font name="CMU Sans Serif Bold Extended" size="13.0" />
-                           </font></Button>
+                                <Label text="Aktuelle Phase" />
+                        <Label fx:id="aktuellePhase" wrapText="true" />
+                                <Region VBox.vgrow="ALWAYS" />
+                                <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest" text="Test korrigieren" />
                             </children>
                             <HBox.margin>
                                 <Insets left="20.0" right="20.0" />
                             </HBox.margin>
                         </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
                         <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label text="Aktuelle Eingabe">
                                     <VBox.margin>
                                         <Insets />
                                     </VBox.margin>
-                           <font>
-                              <Font name="CMU Serif Bold Extended Roman" size="13.0" />
-                           </font>
                                 </Label>
-                                <TextArea fx:id="writeHere" VBox.vgrow="ALWAYS">
-                           <font>
-                              <Font name="Monospaced Regular" size="13.0" />
-                           </font></TextArea>
+                                <TextArea fx:id="writeHere" VBox.vgrow="ALWAYS" />
                             </children>
                             <HBox.margin>
                                 <Insets left="20.0" right="20.0" />
                             </HBox.margin>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="160.0" prefWidth="200.0" spacing="10.0">
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <VBox alignment="CENTER" prefWidth="120.0" spacing="10.0">
                             <children>
-                                <Label text="Rückmeldung">
-                           <font>
-                              <Font name="CMU Serif Bold Extended Roman" size="13.0" />
-                           </font></Label>
-                        <Label fx:id="rueckmeldung" wrapText="true">
-                           <font>
-                              <Font name="CMU Serif Roman" size="12.0" />
-                           </font>
-                        </Label>
-                                <Region prefHeight="200.0" prefWidth="200.0" />
-                                <Button fx:id="nextStep" mnemonicParsing="false" onAction="#setNextStep" text="Nächster Schritt">
-                           <font>
-                              <Font name="CMU Sans Serif Bold Extended" size="13.0" />
-                           </font></Button>
+                                <Label text="Rückmeldung" />
+                        <Label fx:id="rueckmeldung" wrapText="true" />
+                                <Region VBox.vgrow="ALWAYS" />
+                                <Button fx:id="nextStep" mnemonicParsing="false" onAction="#setNextStep" text="Nächster Schritt" />
                             </children>
                             <HBox.margin>
                                 <Insets left="20.0" right="20.0" />
@@ -135,18 +99,16 @@
     <top>
         <ToolBar BorderPane.alignment="CENTER">
             <items>
-                <Button fx:id="start" mnemonicParsing="false" onAction="#setStart" text="Start">
-               <font>
-                  <Font name="CMU Sans Serif Bold Extended" size="13.0" />
-               </font></Button>
-                <Label fx:id="timerLabel" text="0">
-                    <padding>
-                        <Insets left="10.0" />
-                    </padding>
-               <font>
-                  <Font name="CMU Sans Serif Bold Extended" size="13.0" />
-               </font>
-                </Label>
+            <HBox alignment="CENTER">
+               <children>
+                      <Button fx:id="start" mnemonicParsing="false" onAction="#setStart" text="Start" />
+                      <Label fx:id="timerLabel" alignment="CENTER_RIGHT" prefWidth="60.0" text="0" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
+                          <padding>
+                              <Insets left="10.0" />
+                          </padding>
+                      </Label>
+               </children>
+            </HBox>
             </items>
         </ToolBar>
     </top>

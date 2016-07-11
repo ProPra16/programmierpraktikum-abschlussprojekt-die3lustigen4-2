@@ -1,0 +1,48 @@
+@font-face {src:url("/fonts/cmunrm.ttf");}
+@font-face {src:url("/fonts/cmunbx.ttf");}
+@font-face {src:url("/fonts/cmunsx.ttf");}
+@font-face {src:url("/fonts/digital-7.ttf");}
+
+
+.label{
+
+        -fx-font-family: "CMU Serif";
+        -fx-font-weight: bold;
+
+}
+#timerLabel{
+        -fx-font-family: "Digital-7";
+        -fx-font-weight: normal;
+        -fx-font-size: 32px;
+        -fx-text-fill: red;
+}
+
+#aktuellePhase{
+        -fx-font-weight: normal;
+}
+
+#rueckmeldung{
+        -fx-font-weight: normal;
+}
+
+.button{
+
+        -fx-font-family: "CMU Sans Serif";
+        -fx-font-weight: bold;
+
+}
+
+#start{}
+#nextStep{}
+#reworkTest{}
+
+
+#writeHere{
+        -fx-font-family: monospaced;
+}
+#codeOverview{
+        -fx-font-family: monospaced;
+}
+#testOverview{
+        -fx-font-family: monospaced;
+}
