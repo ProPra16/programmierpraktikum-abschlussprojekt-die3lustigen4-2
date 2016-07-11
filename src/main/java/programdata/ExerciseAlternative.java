@@ -63,15 +63,15 @@ public class ExerciseAlternative {
 		if((writeTest)&&(!writeCode)&&(!refactoring)){
 			writeTest=false;
 			writeCode=true;
-			ExerciseAlternative.followingStep="Refactoring";
+			followingStep="Refactoring";
 		} else if((!writeTest)&&(writeCode)&&(!refactoring)){
 			writeCode=false;
 			refactoring=true;
-			ExerciseAlternative.followingStep="Write Test";
+			followingStep="Write Test";
 		} else if((!writeTest)&&(!writeCode)&&(refactoring)){
 			refactoring=false;
 			writeTest=true;
-			ExerciseAlternative.followingStep="Write Code";
+			followingStep="Write Code";
 		}
 		actualStep();
 	}

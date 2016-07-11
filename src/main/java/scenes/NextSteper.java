@@ -63,25 +63,4 @@ public class NextSteper {
             return testFailure;
         }
     }
-
-    /*
-    public static void passed() {
-         if((ExerciseAlternative.writeTest)&&(!ExerciseAlternative.writeCode)&&(!ExerciseAlternative.refactoring)){
-             ExerciseAlternative.writeTest=false;
-             ExerciseAlternative.writeCode=true;
-             Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteCode");
-             ExerciseAlternative.followingStep="Refactoring";
-         } else if((!ExerciseAlternative.writeTest)&&(ExerciseAlternative.writeCode)&&(!ExerciseAlternative.refactoring)){
-             ExerciseAlternative.writeCode=false;
-             ExerciseAlternative.refactoring=true;
-             Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nrefactoring");
-             ExerciseAlternative.followingStep="Write Test";
-         } else if((!ExerciseAlternative.writeTest)&&(!ExerciseAlternative.writeCode)&&(ExerciseAlternative.refactoring)){
-             ExerciseAlternative.refactoring=false;
-             ExerciseAlternative.writeTest=true;
-             Controller.aktuellePhaseProperty.setValue("Aktuelle Phase:\nwriteTest");
-             ExerciseAlternative.followingStep="Write Code";
-         }
-    }
-    */
 }
