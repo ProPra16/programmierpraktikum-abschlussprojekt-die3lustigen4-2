@@ -11,7 +11,7 @@
             <children>
                 <HBox alignment="CENTER" VBox.vgrow="SOMETIMES">
                     <children>
-                        <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label text="Tests">
                                     <VBox.margin>
@@ -24,7 +24,7 @@
                                 <Insets left="20.0" right="20.0" />
                             </HBox.margin>
                         </VBox>
-                        <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label text="Code">
                                     <VBox.margin>
@@ -59,15 +59,15 @@
                                 <Label text="Rückmeldung" />
                         <Label fx:id="rueckmeldung" wrapText="true" />
                                 <Region VBox.vgrow="ALWAYS" />
-                                <Button fx:id="nextStep" mnemonicParsing="false" onAction="#setNextStep" text="Nächster Schritt" />
-                                <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest" text="Test korrigieren" />
+                                <Button fx:id="nextStep" mnemonicParsing="false" onAction="#setNextStep" prefWidth="120.0" text="Nächster Schritt" />
+                                <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest" prefWidth="120.0" text="Test korrigieren" />
                             </children>
                             <HBox.margin>
                                 <Insets left="20.0" right="20.0" />
                             </HBox.margin>
                         </VBox>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label text="Aktuelle Eingabe">
                                     <VBox.margin>
@@ -91,14 +91,10 @@
     <top>
         <ToolBar BorderPane.alignment="CENTER">
             <items>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" spacing="10.0">
                <children>
-                      <Button fx:id="start" mnemonicParsing="false" onAction="#setStart" text="Start" />
-                      <Label fx:id="timerLabel" alignment="CENTER_RIGHT" text="00:00" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
-                          <padding>
-                              <Insets left="10.0" />
-                          </padding>
-                      </Label>
+                      <Button fx:id="start" mnemonicParsing="false" onAction="#setStart" prefWidth="120.0" text="Start" />
+                      <Label fx:id="timerLabel" alignment="CENTER_RIGHT" text="00:00" textAlignment="RIGHT" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             </items>
