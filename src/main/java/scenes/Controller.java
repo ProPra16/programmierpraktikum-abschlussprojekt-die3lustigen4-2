@@ -86,14 +86,20 @@ public class Controller implements Initializable{
     }
 
     private void resetTimer() {
-        if(KatalogCreator.choosenKatalog.babysteps) {
-            babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
-            if(KatalogCreator.choosenKatalog.secondsForBabystepps>60)
-                createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps/ 60, 60);
-            else
-                createTimer(0, KatalogCreator.choosenKatalog.secondsForBabystepps);
-        }else
-            createTimer(Integer.MAX_VALUE, 60);
+        if(!aktuellePhaseProperty.get().equals("Refactoring")) {
+            if (KatalogCreator.choosenKatalog.babysteps) {
+                babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
+                if (KatalogCreator.choosenKatalog.secondsForBabystepps > 60)
+                    createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, 60);
+                else
+                    createTimer(0, KatalogCreator.choosenKatalog.secondsForBabystepps);
+            } else
+                createTimer(Integer.MAX_VALUE, 60);
+        }
+        else{
+            timeSeconds.set(0);
+            timeMinutes.set(0);
+        }
     }
 
     public void giveLabelNewValue() {
@@ -206,6 +212,7 @@ public class Controller implements Initializable{
             rueckmeldungProperty.setValue("Verbessere deinen Code.");
             writeHereProperty.setValue(codeOverview.getText());
         }
+        ExerciseAlternative.actualStep();
         resetTimer();
     }
 
