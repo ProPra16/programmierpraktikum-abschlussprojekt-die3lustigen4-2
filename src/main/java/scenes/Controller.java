@@ -186,10 +186,10 @@ public class Controller implements Initializable{
         timeSeconds = new SimpleIntegerProperty(0);
         timerLabelSeconds.textProperty().bind(timeSeconds.asString());
         int timeLimitSecondsLastTime = 0;
-        if(timeLimitSeconds > 60){
+        /*if(timeLimitSeconds > 60){
             timeLimitSecondsLastTime = timeLimitSeconds - 60;
             timeLimitSeconds = timeLimitSeconds - timeLimitSecondsLastTime;
-        }
+        }*/
         timerSeconds.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(timeLimitSeconds),
                         new KeyValue(timeSeconds, timeLimitSeconds)));
