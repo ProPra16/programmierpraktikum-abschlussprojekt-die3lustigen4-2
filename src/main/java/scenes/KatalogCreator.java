@@ -60,7 +60,7 @@ public class KatalogCreator {
                     primaryStage.setScene(scene);
                     scene.getStylesheets().add(Main.class.getClassLoader().getResource("design.css").toExternalForm());
                     primaryStage.show();
-                    primaryStage.setFullScreen(true);
+                    primaryStage.setMaximized(true);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

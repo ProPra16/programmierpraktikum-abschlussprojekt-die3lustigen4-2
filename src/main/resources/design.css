@@ -2,6 +2,7 @@
 @font-face {src:url("/fonts/cmunbx.ttf");}
 @font-face {src:url("/fonts/cmunsx.ttf");}
 @font-face {src:url("/fonts/digital-7.ttf");}
+@font-face {src:url("/fonts/DSDIGI.ttf");}
 
 
 .label{
@@ -12,7 +13,7 @@
 
 }
 #timerLabelSeconds{
-        -fx-font-family: "Digital-7";
+        -fx-font-family: "DS-Digital";
         -fx-font-weight: normal;
         -fx-font-size: 32px;
         -fx-text-fill: red;
