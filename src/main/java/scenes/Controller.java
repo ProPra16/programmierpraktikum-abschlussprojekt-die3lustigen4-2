@@ -141,6 +141,7 @@ public class Controller implements Initializable{
         alert.setContentText("Korrigiere nun deinen Test.");
         alert.showAndWait();
         writeHereProperty.setValue(testOverview.getText());
+        resetTimer();
         ExerciseAlternative.reworkTest();
     }
 
@@ -185,19 +186,25 @@ public class Controller implements Initializable{
         timerSeconds = new Timeline();
         timeSeconds = new SimpleIntegerProperty(0);
         timerLabelSeconds.textProperty().bind(timeSeconds.asString());
-        /*int timeLimitSecondsLastTime = 0;
-        /*if(timeLimitSeconds > 60){
+        int timeLimitSecondsLastTime = 0;
+        if(timeLimitSeconds > 60){
             timeLimitSecondsLastTime = timeLimitSeconds - 60;
             timeLimitSeconds = timeLimitSeconds - timeLimitSecondsLastTime;
-        }*/
+        }
+        final int finalTimeLimitSecondsLastTime = timeLimitSecondsLastTime;
+        final int finalTimeLimitSeconds = timeLimitSeconds;
+
         timerSeconds.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(timeLimitSeconds),
                         new KeyValue(timeSeconds, timeLimitSeconds)));
         timerSeconds.setOnFinished(event ->{
             counter++;
-            if(counter != timeLimitMinutes){
+            if(counter == timeLimitMinutes && finalTimeLimitSecondsLastTime > 0){
                 timeMinutes.set(timeMinutes.getValue() + 1);
-                newTimer(timeLimitMinutes, timeLimitSeconds);
+                newTimer(timeLimitMinutes, finalTimeLimitSecondsLastTime);
+            }else if(counter < timeLimitMinutes){
+                timeMinutes.set(timeMinutes.getValue() + 1);
+                newTimer(timeLimitMinutes, finalTimeLimitSecondsLastTime + finalTimeLimitSeconds);
             } else jumpOneStepBack();
         });
         timerSeconds.playFromStart();
