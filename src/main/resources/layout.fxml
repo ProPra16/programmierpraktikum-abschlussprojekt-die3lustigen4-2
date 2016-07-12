@@ -6,84 +6,84 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.Controller">
     <center>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
-            <children>
-                <HBox alignment="CENTER" VBox.vgrow="SOMETIMES">
-                    <children>
-                        <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
-                            <children>
-                                <Label text="Tests">
-                                    <VBox.margin>
-                                        <Insets />
-                                    </VBox.margin>
-                                </Label>
-                                <TextArea fx:id="testOverview" editable="false" VBox.vgrow="ALWAYS" />
-                            </children>
-                            <HBox.margin>
-                                <Insets left="20.0" right="20.0" />
-                            </HBox.margin>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
-                            <children>
-                                <Label text="Code">
-                                    <VBox.margin>
-                                        <Insets />
-                                    </VBox.margin>
-                                </Label>
-                                <TextArea fx:id="codeOverview" editable="false" VBox.vgrow="ALWAYS" />
-                            </children>
-                            <HBox.margin>
-                                <Insets left="20.0" right="20.0" />
-                            </HBox.margin>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </padding>
-                    <VBox.margin>
-                        <Insets />
-                    </VBox.margin>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </HBox>
-            <Separator prefWidth="200.0" />
-                <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                    <children>
-                        <VBox prefWidth="160.0" spacing="10.0">
-                            <children>
-                                <Label text="Aktuelle Phase" />
-                        <Label fx:id="aktuellePhase" wrapText="true" />
-                                <Region VBox.vgrow="ALWAYS" />
-                                <Label text="Rückmeldung" />
-                        <Label fx:id="rueckmeldung" wrapText="true" />
-                                <Region VBox.vgrow="ALWAYS" />
-                                <Button fx:id="nextStep" mnemonicParsing="false" onAction="#setNextStep" prefWidth="120.0" text="Nächster Schritt" />
-                                <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest" prefWidth="120.0" text="Test korrigieren" />
-                            </children>
-                            <HBox.margin>
-                                <Insets left="20.0" right="20.0" />
-                            </HBox.margin>
-                        </VBox>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
-                            <children>
-                                <Label text="Aktuelle Eingabe">
-                                    <VBox.margin>
-                                        <Insets />
-                                    </VBox.margin>
-                                </Label>
-                                <TextArea fx:id="writeHere" VBox.vgrow="ALWAYS" />
-                            </children>
-                            <HBox.margin>
-                                <Insets left="20.0" right="20.0" />
-                            </HBox.margin>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </padding>
-                </HBox>
-            </children>
+            <HBox alignment="CENTER" VBox.vgrow="SOMETIMES">
+                <children>
+                    <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label text="Tests">
+                                <VBox.margin>
+                                    <Insets/>
+                                </VBox.margin>
+                            </Label>
+                            <TextArea fx:id="testOverview" editable="false" VBox.vgrow="ALWAYS"/>
+                        </children>
+                        <HBox.margin>
+                            <Insets left="20.0" right="20.0"/>
+                        </HBox.margin>
+                    </VBox>
+                    <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label text="Code">
+                                <VBox.margin>
+                                    <Insets/>
+                                </VBox.margin>
+                            </Label>
+                            <TextArea fx:id="codeOverview" editable="false" VBox.vgrow="ALWAYS"/>
+                        </children>
+                        <HBox.margin>
+                            <Insets left="20.0" right="20.0"/>
+                        </HBox.margin>
+                    </VBox>
+                </children>
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+            </HBox>
+            <Separator prefWidth="200.0"/>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                <children>
+                    <VBox prefWidth="160.0" spacing="10.0">
+                        <children>
+                            <Label text="Aktuelle Phase"/>
+                            <Label fx:id="aktuellePhase" wrapText="true"/>
+                            <Region VBox.vgrow="ALWAYS"/>
+                            <Label text="Rückmeldung"/>
+                            <Label fx:id="rueckmeldung" wrapText="true"/>
+                            <Region VBox.vgrow="ALWAYS"/>
+                            <Button fx:id="nextStep" mnemonicParsing="false" onAction="#setNextStep" prefWidth="120.0"
+                                    text="Nächster Schritt"/>
+                            <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest"
+                                    prefWidth="120.0" text="Test korrigieren"/>
+                        </children>
+                        <HBox.margin>
+                            <Insets left="20.0" right="20.0"/>
+                        </HBox.margin>
+                    </VBox>
+                    <Separator orientation="VERTICAL" prefHeight="200.0"/>
+                    <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label text="Aktuelle Eingabe">
+                                <VBox.margin>
+                                    <Insets/>
+                                </VBox.margin>
+                            </Label>
+                            <TextArea fx:id="writeHere" VBox.vgrow="ALWAYS"/>
+                        </children>
+                        <HBox.margin>
+                            <Insets left="20.0" right="20.0"/>
+                        </HBox.margin>
+                    </VBox>
+                </children>
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+            </HBox>
         </VBox>
     </center>
     <top>

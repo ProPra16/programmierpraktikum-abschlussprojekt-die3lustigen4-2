@@ -32,8 +32,8 @@ public class Controller implements Initializable{
     public Label timerLabelSeconds = new Label();
     public Label babyLabel = new Label();
 
-    public static StringProperty codeProperty = new SimpleStringProperty("CODE");
-    public static StringProperty testProperty = new SimpleStringProperty("TESTS");
+    public static StringProperty codeProperty = new SimpleStringProperty("");
+    public static StringProperty testProperty = new SimpleStringProperty("");
     public static StringProperty writeHereProperty = new SimpleStringProperty("");
 
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
@@ -68,20 +68,20 @@ public class Controller implements Initializable{
             }else{
                 rueckmeldungProperty.setValue("Verändere deinen Code nun so, dass der Test erfüllt wird.");
                 giveLabelNewValue();
-                NextSteper.stepAnnouncement();
                 ExerciseAlternative.passed();
                 timerSeconds.stop();
                 resetTimer();
+                NextSteper.stepAnnouncement();
             }
         }else if(ExerciseAlternative.writeTest && result.getNumberOfFailedTests() == 0){
             rueckmeldungProperty.setValue("Du musst einen Test schreiben der fehlschlägt!");
         }else{
             rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");
             giveLabelNewValue();
-            NextSteper.stepAnnouncement();
             ExerciseAlternative.passed();
             timerSeconds.stop();
             resetTimer();
+            NextSteper.stepAnnouncement();
         }
     }
 
@@ -185,7 +185,7 @@ public class Controller implements Initializable{
         timerSeconds = new Timeline();
         timeSeconds = new SimpleIntegerProperty(0);
         timerLabelSeconds.textProperty().bind(timeSeconds.asString());
-        int timeLimitSecondsLastTime = 0;
+        /*int timeLimitSecondsLastTime = 0;
         /*if(timeLimitSeconds > 60){
             timeLimitSecondsLastTime = timeLimitSeconds - 60;
             timeLimitSeconds = timeLimitSeconds - timeLimitSecondsLastTime;
