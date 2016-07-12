@@ -1,6 +1,9 @@
 package scenes;
 
-import javafx.application.Platform;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.Initializable;
@@ -8,11 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.util.Duration;
 import programdata.CodeFailure;
 import programdata.ExerciseAlternative;
 
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -25,7 +28,8 @@ public class Controller implements Initializable{
     public TextArea writeHere = new TextArea();
     public Label aktuellePhase = new Label();
     public Label rueckmeldung = new Label();
-    public Label timerLabel = new Label();
+    public Label timerLabelMinutes = new Label();
+    public Label timerLabelSeconds = new Label();
     public Label babyLabel = new Label();
 
     public static StringProperty codeProperty = new SimpleStringProperty("CODE");
@@ -39,9 +43,11 @@ public class Controller implements Initializable{
     private String codeName;
     private String testName;
 
-    volatile static boolean runTimer = false;
-    private int minutes = 0;
-    private int seconds = 0;
+    private Timeline timerSeconds;
+    private int counter;
+
+    private SimpleIntegerProperty timeSeconds;
+    private SimpleIntegerProperty timeMinutes;
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep(){
@@ -64,6 +70,7 @@ public class Controller implements Initializable{
                 giveLabelNewValue();
                 NextSteper.stepAnnouncement();
                 ExerciseAlternative.passed();
+                timerSeconds.stop();
                 resetTimer();
             }
         }else if(ExerciseAlternative.writeTest && result.getNumberOfFailedTests() == 0){
@@ -73,16 +80,20 @@ public class Controller implements Initializable{
             giveLabelNewValue();
             NextSteper.stepAnnouncement();
             ExerciseAlternative.passed();
+            timerSeconds.stop();
             resetTimer();
         }
     }
 
     private void resetTimer() {
         if(KatalogCreator.choosenKatalog.babysteps) {
-            if(ExerciseAlternative.writeCode || ExerciseAlternative.writeTest)
-            runTimer = false;
-            startTimer(KatalogCreator.choosenKatalog.secondsForBabystepps);
-        }
+            babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
+            if(KatalogCreator.choosenKatalog.secondsForBabystepps>60)
+                createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps/ 60, 60);
+            else
+                createTimer(0, KatalogCreator.choosenKatalog.secondsForBabystepps);
+        }else
+            createTimer(Integer.MAX_VALUE, 60);
     }
 
     public void giveLabelNewValue() {
@@ -101,16 +112,16 @@ public class Controller implements Initializable{
     public void manageLabels() {
         if (ExerciseAlternative.writeCode) {
             if(KatalogCreator.choosenKatalog.babysteps) {
-                runTimer = false;
-                timerLabel.setText("Keine Zeitbegrenzung.");
+                //runTimer = false;
+                //timerLabel.setText("Keine Zeitbegrenzung.");
             }
             codeProperty.setValue(writeHereProperty.getValue());
         } else if (ExerciseAlternative.writeTest) {
             testProperty.setValue(writeHereProperty.getValue());
         } else {
             codeProperty.setValue(writeHereProperty.getValue());
-            if(KatalogCreator.choosenKatalog.babysteps)
-                startTimer(KatalogCreator.choosenKatalog.secondsForBabystepps);
+            //if(KatalogCreator.choosenKatalog.babysteps)
+                //startTimer(KatalogCreator.choosenKatalog.secondsForBabystepps);
         }
     }
 
@@ -126,11 +137,7 @@ public class Controller implements Initializable{
 
     public void setStart(){
         ExerciseAlternative.start();
-        if(KatalogCreator.choosenKatalog.babysteps) {
-            babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
-            startTimer(KatalogCreator.choosenKatalog.secondsForBabystepps);
-        }else
-            startTimer(Integer.MAX_VALUE);
+        resetTimer();
         start.setDisable(true);
         nextStep.setDisable(false);
         codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
@@ -154,47 +161,43 @@ public class Controller implements Initializable{
 
     }
 
-    private void startTimer(int secondsForBabystepps){
-        try {
-            Thread.sleep(1100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        runTimer = true;
-        minutes = 0;
-        seconds = 0;
-        new Thread(() -> {
-
-            while (runTimer) {
-                Platform.runLater(() -> timerLabel.setText(new DecimalFormat("00").format(minutes) + ":" + new DecimalFormat("00").format(seconds)));
-                seconds++;
-                if(seconds == secondsForBabystepps) {
-                    runTimer = false;
-                    jumpOneStepBack();
-                }
-                if(seconds % 60 == 0){
-                    minutes++;
-                    seconds = 0;
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }).start();
+    private void createTimer(int timeLimitMinutes, int timeLimitSeconds) {
+        timeSeconds = new SimpleIntegerProperty(0);
+        timeMinutes = new SimpleIntegerProperty(0);
+        if(timeLimitMinutes > 0)
+            counter = 0;
+        else counter = -1;
+        newTimer(timeLimitMinutes ,timeLimitSeconds);
+        timerLabelSeconds.textProperty().bind(timeSeconds.asString());
+        timerLabelMinutes.textProperty().bind(timeMinutes.asString());
     }
 
+    private void newTimer(int timeLimitMinutes, int timeLimitSeconds) {
+        timerSeconds = new Timeline();
+        timeSeconds = new SimpleIntegerProperty(0);
+        timerLabelSeconds.textProperty().bind(timeSeconds.asString());
+        timerSeconds.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(timeLimitSeconds),
+                        new KeyValue(timeSeconds, timeLimitSeconds)));
+        timerSeconds.setOnFinished(event ->{
+            counter++;
+            if(counter != timeLimitMinutes){
+                timeMinutes.set(timeMinutes.getValue() + 1);
+                newTimer(timeLimitMinutes, timeLimitSeconds);
+            } else jumpOneStepBack();
+        });
+        timerSeconds.playFromStart();
+    }
+
+
     private void jumpOneStepBack() {
-        resetTimer();
         if (ExerciseAlternative.writeCode) {
             ExerciseAlternative.writeTest = true;
             ExerciseAlternative.writeCode = false;
             ExerciseAlternative.refactoring = false;
             reworkTest.setDisable(true);
             writeHereProperty.setValue(testOverview.getText());
-            rueckmeldungProperty.setValue("Schreibe einen Test der failed-");
+            rueckmeldungProperty.setValue("Schreibe einen Test der failed.");
         } else if (ExerciseAlternative.writeTest) {
             ExerciseAlternative.writeTest = false;
             ExerciseAlternative.writeCode = false;
@@ -203,6 +206,7 @@ public class Controller implements Initializable{
             rueckmeldungProperty.setValue("Verbessere deinen Code.");
             writeHereProperty.setValue(codeOverview.getText());
         }
+        resetTimer();
     }
 
 }
