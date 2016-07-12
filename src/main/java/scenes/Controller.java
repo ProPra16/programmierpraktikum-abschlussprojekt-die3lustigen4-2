@@ -89,9 +89,12 @@ public class Controller implements Initializable{
         if(!aktuellePhaseProperty.get().equals("Refactoring")) {
             if (KatalogCreator.choosenKatalog.babysteps) {
                 babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
-                if (KatalogCreator.choosenKatalog.secondsForBabystepps > 60)
-                    createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, 60);
-                else
+                if (KatalogCreator.choosenKatalog.secondsForBabystepps > 60) {
+                    if(KatalogCreator.choosenKatalog.secondsForBabystepps % 60 == 0)
+                        createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, 60);
+                    else
+                        createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, KatalogCreator.choosenKatalog.secondsForBabystepps % 60 + 60);
+                }else
                     createTimer(0, KatalogCreator.choosenKatalog.secondsForBabystepps);
             } else
                 createTimer(Integer.MAX_VALUE, 60);
@@ -182,6 +185,11 @@ public class Controller implements Initializable{
         timerSeconds = new Timeline();
         timeSeconds = new SimpleIntegerProperty(0);
         timerLabelSeconds.textProperty().bind(timeSeconds.asString());
+        int timeLimitSecondsLastTime = 0;
+        if(timeLimitSeconds > 60){
+            timeLimitSecondsLastTime = timeLimitSeconds - 60;
+            timeLimitSeconds = timeLimitSeconds - timeLimitSecondsLastTime;
+        }
         timerSeconds.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(timeLimitSeconds),
                         new KeyValue(timeSeconds, timeLimitSeconds)));
@@ -194,7 +202,6 @@ public class Controller implements Initializable{
         });
         timerSeconds.playFromStart();
     }
-
 
     private void jumpOneStepBack() {
         if (ExerciseAlternative.writeCode) {
