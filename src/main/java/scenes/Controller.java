@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import programdata.CodeFailure;
 import programdata.Exercise;
@@ -30,7 +32,10 @@ public class Controller implements Initializable{
     public Label rueckmeldung = new Label();
     public Label timerLabelMinutes = new Label();
     public Label timerLabelSeconds = new Label();
+    public Label timerLabelSeconds1 = new Label();
     public Label babyLabel = new Label();
+
+    public ImageView picture = new ImageView();
 
     private static StringProperty codeProperty = new SimpleStringProperty("");
     private static StringProperty testProperty = new SimpleStringProperty("");
@@ -71,6 +76,7 @@ public class Controller implements Initializable{
                 Exercise.passed();
                 timerSeconds.stop();
                 resetTimer();
+                changeView();
                 NextSteper.stepAnnouncement();
             }
         }else if(Exercise.writeTest && result.getNumberOfFailedTests() == 0){
@@ -81,8 +87,13 @@ public class Controller implements Initializable{
             Exercise.passed();
             timerSeconds.stop();
             resetTimer();
+            changeView();
             NextSteper.stepAnnouncement();
+
+
         }
+
+
     }
 
     private void resetTimer() {
@@ -222,6 +233,25 @@ public class Controller implements Initializable{
         }
         Exercise.actualStep();
         resetTimer();
+        changeView();
+    }
+
+    private void changeView(){
+
+        if(Exercise.refactoring) {
+            writeHere.setStyle("-fx-text-fill: black;");
+            picture.setRotate(120);
+
+        }
+        else if(Exercise.writeCode){
+            writeHere.setStyle("-fx-text-fill: green;");
+            picture.setRotate(240);
+        }
+        else if(Exercise.writeTest){
+            writeHere.setStyle("-fx-text-fill: red;");
+            picture.setRotate(0);
+        }
+
     }
 
 }

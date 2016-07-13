@@ -12,14 +12,37 @@
         -fx-font-size: 16px;
 
 }
+#picture{
+        -fx-image: url("image.png");
+
+}
 #timerLabelSeconds{
         -fx-font-family: "DS-Digital";
         -fx-font-weight: normal;
         -fx-font-size: 32px;
         -fx-text-fill: red;
 }
+#timerLabelSeconds1{
+        -fx-font-family: "DS-Digital";
+        -fx-font-weight: normal;
+        -fx-font-size: 32px;
+        -fx-text-fill: red;
+}
+
+#timerLabelMiddle{
+        -fx-font-family: "DS-Digital";
+        -fx-font-weight: normal;
+        -fx-font-size: 20px;
+        -fx-text-fill: red;
+}
 
 #timerLabelMinutes{
+        -fx-font-family: "DS-Digital";
+        -fx-font-weight: normal;
+        -fx-font-size: 32px;
+        -fx-text-fill: red;
+}
+#timerLabelMinutes1{
         -fx-font-family: "DS-Digital";
         -fx-font-weight: normal;
         -fx-font-size: 32px;
@@ -43,6 +66,7 @@
 
 }
 
+
 #start{}
 #nextStep{}
 #reworkTest{}
@@ -50,6 +74,7 @@
 
 #writeHere{
         -fx-font-family: monospaced;
+        -fx-text-fill: red;
 }
 #codeOverview{
         -fx-font-family: monospaced;
