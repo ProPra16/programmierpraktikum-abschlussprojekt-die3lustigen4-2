@@ -5,6 +5,8 @@ package programdata;
  */
 
 
+import scenes.Controller;
+
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,15 +51,15 @@ public class Tracker {
     }
 
     public static TrackStep generateStep(){
-        int nowTime=124;
+        int nowTime= 15 ;
         int testDuration=13;
         int codeDuration=24;
         int refactorDuration=15;
 
         int stepDuration=18;
-        String aktuellePhase="Test";
-        String content="Testcontent";
-        String failures="FehlerContent";
+        String aktuellePhase=Controller.aktuellePhaseProperty.getValue();
+        String content=Controller.writeHereProperty.getValue();
+        String failures=Controller.rueckmeldungProperty.getValue();
         TrackStep temp = new TrackStep(nowTime, testDuration, codeDuration, refactorDuration, stepDuration, aktuellePhase, content, failures);
         return temp;
     }

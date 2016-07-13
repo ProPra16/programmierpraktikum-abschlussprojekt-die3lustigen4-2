@@ -45,7 +45,7 @@ public class Controller implements Initializable{
     public static StringProperty writeHereProperty = new SimpleStringProperty("");
 
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
-    private static StringProperty rueckmeldungProperty = new SimpleStringProperty("");
+    public static StringProperty rueckmeldungProperty = new SimpleStringProperty("");
 
 
     private String codeName;
@@ -56,6 +56,10 @@ public class Controller implements Initializable{
 
     private SimpleIntegerProperty timeSeconds;
     private SimpleIntegerProperty timeMinutes;
+
+    public Timeline getTimerSeconds(){
+        return timerSeconds;
+    }
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"k
     public void setNextStep(){
