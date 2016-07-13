@@ -11,17 +11,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import programdata.CodeFailure;
 import programdata.Exercise;
 import programdata.Tracker;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
-import static scenes.KatalogCreator.choosenKatalog;
 
 public class Controller implements Initializable{
 
@@ -47,7 +47,6 @@ public class Controller implements Initializable{
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
     public static StringProperty rueckmeldungProperty = new SimpleStringProperty("");
 
-
     private String codeName;
     private String testName;
 
@@ -62,7 +61,7 @@ public class Controller implements Initializable{
     }
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"k
-    public void setNextStep(){
+    public void setNextStep() throws IOException {
         /** Hab jetzt so einiges durch Probiert aber so weit ich das sehe funktioniert nun alles einwandfrei selbst der
          * ReworkTest Button. Zum Code ausprobieren würde ich den RealTestKatalog empfehlen. */
 
@@ -72,7 +71,7 @@ public class Controller implements Initializable{
         manageLabels();
         /**************************************/
         //Trackingergänzungen
-        if(!choosenKatalog.withBabysteps()) {
+        if(!KatalogCreator.choosenKatalog.withBabysteps()) {
             Tracker.writeStep();
         }
         /**************************************/
@@ -89,6 +88,7 @@ public class Controller implements Initializable{
                 giveLabelNewValue();
                 Exercise.passed();
                 timerSeconds.stop();
+                safeDate();
                 changeView();
                 NextSteper.stepAnnouncement();
                 resetTimer();
@@ -101,25 +101,43 @@ public class Controller implements Initializable{
             Exercise.passed();
             timerSeconds.stop();
             changeView();
+            safeDate();
             NextSteper.stepAnnouncement();
             resetTimer();
 
         }
+    }
 
-
+    /**Hier eine Funktion mit der man das aktuelle Datum+Zeit abspeichern kann. Ich weiß bloß noch nicht wie man es
+     * hinkriegt die Daten in Statistics.txt zu speichern ohne den vollständigen Pfad anzugeben.
+     * Ich kann erst später weiter arbeiten aber wollte das kurz pushen falls das hier jemand verwenden möchte.
+     *
+     * @throws IOException
+     */
+    private void safeDate() throws IOException {
+        LocalDateTime time = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm:ss");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        /*
+        final Path p =Paths.get("/home/leander/workspace/Projekt7-/src/main/resources/Statistic.txt");
+        File statistics = new File("/home/leander/workspace/Projekt7-/src/main/resources/Statistic.txt");
+        Files.write(p, time.format(formatter).getBytes());
+        */
+        System.out.println(time.format(formatter));
+        System.out.println(time.format(formatter2));
     }
 
     private void resetTimer() {
         if(!aktuellePhaseProperty.get().equals("Refactoring")) {
-            if (choosenKatalog.babysteps) {
-                babyLabel.setText("Du hast " + choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
-                if (choosenKatalog.secondsForBabystepps > 60) {
-                    if(choosenKatalog.secondsForBabystepps % 60 == 0)
-                        createTimer(choosenKatalog.secondsForBabystepps / 60, 60);
+            if (KatalogCreator.choosenKatalog.babysteps) {
+                babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
+                if (KatalogCreator.choosenKatalog.secondsForBabystepps > 60) {
+                    if(KatalogCreator.choosenKatalog.secondsForBabystepps % 60 == 0)
+                        createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, 60);
                     else
-                        createTimer(choosenKatalog.secondsForBabystepps / 60, choosenKatalog.secondsForBabystepps % 60 + 60);
+                        createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, KatalogCreator.choosenKatalog.secondsForBabystepps % 60 + 60);
                 }else
-                    createTimer(0, choosenKatalog.secondsForBabystepps);
+                    createTimer(0, KatalogCreator.choosenKatalog.secondsForBabystepps);
             } else
                 createTimer(Integer.MAX_VALUE, 60);
         }
@@ -155,7 +173,7 @@ public class Controller implements Initializable{
     public void setReworkTest(){
         /**************************************/
         //Trackingergänzungen
-        if(!choosenKatalog.withBabysteps()) {
+        if(!KatalogCreator.choosenKatalog.withBabysteps()) {
             Tracker.writeStep();
         }
         /**************************************/
@@ -174,7 +192,7 @@ public class Controller implements Initializable{
 
         /**************************************/
         //Trackingergänzungen
-        if(!choosenKatalog.withBabysteps()) {
+        if(!KatalogCreator.choosenKatalog.withBabysteps()) {
             Tracker.startTrack();
         }
         /**************************************/

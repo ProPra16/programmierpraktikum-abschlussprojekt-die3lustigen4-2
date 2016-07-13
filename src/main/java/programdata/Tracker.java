@@ -33,7 +33,7 @@ public class Tracker {
 
     public static void startTrack(){
         Charset charset= Charset.forName("UTF-8");
-        ArrayList<String> titel= new ArrayList<String>();
+        ArrayList<String> titel= new ArrayList<>();
         titel.add("Trackingfile");
         titel.add("");
         try {

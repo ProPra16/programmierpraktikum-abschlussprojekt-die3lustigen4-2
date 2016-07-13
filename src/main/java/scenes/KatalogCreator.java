@@ -79,7 +79,7 @@ public class KatalogCreator {
         DirectoryChooser dialog = new DirectoryChooser();
         dialog.setTitle("Choose Catalog-Folder");
         File folder = dialog.showDialog(new Stage());
-        String path = folder.getAbsolutePath();
+        final String path = folder.getAbsolutePath();
 
         File[] listOfFiles = folder.listFiles();
         //Einlesen der Katalogkomponenten wie aufgaben Name oder Beschreibung
