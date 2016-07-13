@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.Controller">
     <center>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
            <children>
@@ -21,9 +23,9 @@
                        <Insets />
                    </opaqueInsets>
                   <children>
-                      <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                      <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets />
                           </HBox.margin>
                          <children>
                              <Label text="Tests">
@@ -33,16 +35,27 @@
                              </Label>
                              <TextArea fx:id="testOverview" editable="false" VBox.vgrow="ALWAYS" />
                          </children>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
                       </VBox>
                   <VBox alignment="CENTER">
                      <children>
-                        <ImageView fx:id="picture" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
-                             <Button fx:id="nextStep" mnemonicParsing="false" onAction="#setNextStep" prefWidth="120.0" text="Nächster Schritt" />
+                             <Label text="Aktuelle Phase" underline="true" />
+                        <ImageView fx:id="picture" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <effect>
+                              <Glow level="0.7" />
+                           </effect>
+                        </ImageView>
+                             <Button fx:id="nextStep" mnemonicParsing="false" onAction="#setNextStep" prefWidth="200.0" text="Nächster Schritt" />
                      </children>
                   </VBox>
-                      <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                      <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets />
                           </HBox.margin>
                          <children>
                              <Label text="Code">
@@ -52,6 +65,9 @@
                              </Label>
                              <TextArea fx:id="codeOverview" editable="false" VBox.vgrow="ALWAYS" />
                          </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                       </VBox>
                   </children>
                </HBox>
@@ -61,31 +77,35 @@
                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                    </padding>
                   <children>
-                      <VBox prefWidth="160.0" spacing="10.0">
+                      <VBox prefWidth="200.0" spacing="10.0">
                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets right="10.0" />
                           </HBox.margin>
                          <children>
-                             <Label text="Aktuelle Phase" />
-                             <Label fx:id="aktuellePhase" wrapText="true" />
-                             <Region VBox.vgrow="ALWAYS" />
-                             <Label text="Rückmeldung" />
-                             <Label fx:id="rueckmeldung" wrapText="true" />
-                             <Region VBox.vgrow="ALWAYS" />
-                             <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest" prefWidth="120.0" text="Test korrigieren" />
+                             <Label text="Rückmeldung">
+                                 <VBox.margin>
+                                     <Insets />
+                                 </VBox.margin>
+                             </Label>
+                        <Label fx:id="rueckmeldung" alignment="TOP_LEFT" minHeight="150.0" prefWidth="200.0" wrapText="true">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <effect>
+                              <Glow level="1.0" />
+                           </effect>
+                        </Label>
+                        <Region VBox.vgrow="ALWAYS" />
+                             <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest" prefWidth="200.0" text="Test korrigieren" />
                          </children>
                       </VBox>
                       <Separator orientation="VERTICAL" prefHeight="200.0" />
                       <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets left="10.0" />
                           </HBox.margin>
                          <children>
-                             <Label text="Aktuelle Eingabe">
-                                 <VBox.margin>
-                                     <Insets />
-                                 </VBox.margin>
-                             </Label>
+                        <Label text="Aktuelle Eingabe" />
                              <TextArea fx:id="writeHere" VBox.vgrow="ALWAYS" />
                          </children>
                       </VBox>
@@ -95,24 +115,40 @@
         </VBox>
     </center>
     <top>
-        <ToolBar BorderPane.alignment="CENTER">
+        <ToolBar nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER_LEFT">
            <items>
-               <HBox alignment="CENTER">
+               <HBox alignment="CENTER_LEFT" fillHeight="false">
                   <children>
-                      <Button fx:id="start" mnemonicParsing="false" onAction="#setStart" prefWidth="120.0" text="Start">
+                      <Button fx:id="start" mnemonicParsing="false" onAction="#setStart" prefWidth="200.0" text="Start">
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets left="10.0" right="20.0" />
                      </HBox.margin></Button>
-                      <Label fx:id="timerLabelMinutes" alignment="CENTER_RIGHT" minWidth="20.0" text="0" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
+                      <Label fx:id="timerLabelMinutes" alignment="CENTER_RIGHT" minHeight="39.0" minWidth="80.0" text="0" textAlignment="RIGHT">
                      <padding>
-                        <Insets right="10.0" />
-                     </padding></Label>
-                      <Label fx:id="timerLabelMiddle" alignment="CENTER_RIGHT" text=":" textAlignment="RIGHT" HBox.hgrow="ALWAYS" />
-                      <Label fx:id="timerLabelSeconds" alignment="BOTTOM_LEFT" minWidth="120.0" text="0" HBox.hgrow="ALWAYS">
+                        <Insets left="20.0" right="10.0" />
+                     </padding>
+                     <effect>
+                        <Bloom threshold="0.0" />
+                     </effect></Label>
+                      <Label fx:id="timerLabelMiddle" alignment="CENTER" minHeight="39.0" text=":" textAlignment="RIGHT">
+                     <effect>
+                        <Bloom threshold="0.0" />
+                     </effect></Label>
+                      <Label fx:id="timerLabelSeconds" minHeight="39.0" minWidth="60.0" text="0">
                      <padding>
-                        <Insets left="10.0" />
-                     </padding></Label>
-                      <Label fx:id="babyLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" textAlignment="RIGHT" HBox.hgrow="ALWAYS" />
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                     <effect>
+                        <Bloom threshold="0.0" />
+                     </effect></Label>
+                       <Label fx:id="babyLabel" alignment="CENTER_RIGHT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" minHeight="39.0" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                     <effect>
+                        <Glow level="1.0" />
+                     </effect>
+                  </Label>
                   </children>
                </HBox>
            </items>

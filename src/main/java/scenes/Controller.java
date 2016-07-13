@@ -36,11 +36,9 @@ public class Controller implements Initializable{
     public Label rueckmeldung = new Label();
     public Label timerLabelMinutes = new Label();
     public Label timerLabelSeconds = new Label();
-    public Label timerLabelSeconds1 = new Label();
     public Label babyLabel = new Label();
 
     public ImageView picture = new ImageView();
-    private double anglerest = 0;
 
     private static StringProperty codeProperty = new SimpleStringProperty("");
     private static StringProperty testProperty = new SimpleStringProperty("");
@@ -86,7 +84,7 @@ public class Controller implements Initializable{
             else if(result.getNumberOfFailedTests() > 1){
                 rueckmeldungProperty.setValue("Es muss genau 1 Test fehlschlagen!");
             }else{
-                rueckmeldungProperty.setValue("Verändere deinen Code nun so, dass der Test erfüllt wird.");
+                rueckmeldungProperty.setValue("Veraendere deinen Code nun so, dass der Test erfuellt wird.");
                 giveLabelNewValue();
                 Exercise.passed();
                 timerSeconds.stop();
@@ -96,7 +94,7 @@ public class Controller implements Initializable{
                 resetTimer();
             }
         }else if(Exercise.writeTest && result.getNumberOfFailedTests() == 0){
-            rueckmeldungProperty.setValue("Du musst einen Test schreiben der fehlschlägt!");
+            rueckmeldungProperty.setValue("Du musst einen Test schreiben der fehlschlaegt!");
         }else{
             rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");
             giveLabelNewValue();
@@ -132,7 +130,7 @@ public class Controller implements Initializable{
     private void resetTimer() {
         if(!aktuellePhaseProperty.get().equals("Refactoring")) {
             if (KatalogCreator.choosenKatalog.babysteps) {
-                babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
+                babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, ausser der Refactor-Phase!");
                 if (KatalogCreator.choosenKatalog.secondsForBabystepps > 60) {
                     if(KatalogCreator.choosenKatalog.secondsForBabystepps % 60 == 0)
                         createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, 60);
@@ -269,7 +267,7 @@ public class Controller implements Initializable{
             Exercise.refactoring = false;
             reworkTest.setDisable(true);
             writeHereProperty.setValue(testOverview.getText());
-            rueckmeldungProperty.setValue("Schreibe einen Test der failed.");
+            rueckmeldungProperty.setValue("Schreibe einen Test der fehlschlaegt.");
         } else if (Exercise.writeTest) {
             Exercise.writeTest = false;
             Exercise.writeCode = false;
@@ -304,7 +302,6 @@ public class Controller implements Initializable{
         RotateTransition rt = new RotateTransition(Duration.millis(1500), picture);
         rt.setToAngle(angle);
         rt.play();
-        anglerest = angle;
 
     }
 

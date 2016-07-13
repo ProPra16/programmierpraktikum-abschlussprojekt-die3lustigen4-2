@@ -10,6 +10,7 @@
         -fx-font-family: "CMU Serif";
         -fx-font-weight: bold;
         -fx-font-size: 16px;
+        -fx-text-fill: #555555;
 
 }
 
@@ -35,19 +36,16 @@
         -fx-font-weight: normal;
         -fx-font-size: 32px;
         -fx-text-fill: red;
+        -fx-background-color: black;
 }
-#timerLabelSeconds1{
-        -fx-font-family: "DS-Digital";
-        -fx-font-weight: normal;
-        -fx-font-size: 32px;
-        -fx-text-fill: red;
-}
+
 
 #timerLabelMiddle{
         -fx-font-family: "DS-Digital";
         -fx-font-weight: normal;
         -fx-font-size: 20px;
         -fx-text-fill: red;
+        -fx-background-color: black;
 }
 
 #timerLabelMinutes{
@@ -55,12 +53,7 @@
         -fx-font-weight: normal;
         -fx-font-size: 32px;
         -fx-text-fill: red;
-}
-#timerLabelMinutes1{
-        -fx-font-family: "DS-Digital";
-        -fx-font-weight: normal;
-        -fx-font-size: 32px;
-        -fx-text-fill: red;
+        -fx-background-color: black;
 }
 
 #aktuellePhase{
@@ -69,8 +62,12 @@
 }
 
 #rueckmeldung{
+        -fx-font-family: "DS-Digital";
         -fx-font-weight: normal;
-        -fx-font-size: 13px;
+        -fx-font-size: 28px;
+        -fx-text-fill: red;
+        -fx-background-color: black;
+
 }
 
 
@@ -78,6 +75,15 @@
 #start{}
 #nextStep{}
 #reworkTest{}
+#babyLabel{
+
+        -fx-font-family: "DS-Digital";
+        -fx-font-weight: normal;
+        -fx-font-size: 28px;
+        -fx-text-fill: red;
+        -fx-background-color: black;
+
+}
 
 
 #writeHere{
