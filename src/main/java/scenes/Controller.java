@@ -100,7 +100,6 @@ public class Controller implements Initializable{
             changeView();
             NextSteper.stepAnnouncement();
 
-
         }
 
 

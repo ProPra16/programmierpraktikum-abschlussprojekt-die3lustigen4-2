@@ -29,7 +29,7 @@ public class KatalogCreator {
         Katalog[] kataloge = createKatalogArr();
         Button[] auswahlButtons = createButtonArr(kataloge.length, primaryStage, kataloge);
         VBox root = new VBox(10);
-        root.setPadding(new Insets(20));
+        root.setPadding(new Insets(20,40,20,40));
         root.setAlignment(Pos.CENTER);
 
         for (Button b : auswahlButtons) {

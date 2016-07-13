@@ -55,7 +55,7 @@ public class Exercise {
 		writeCode = false;
 		refactoring = false;
 		writeTest = true;
-		followingStep = "Write Code";
+		followingStep = "Write Test";
 		actualStep();
 	}
 		
@@ -63,15 +63,15 @@ public class Exercise {
 		if((writeTest)&&(!writeCode)&&(!refactoring)){
 			writeTest=false;
 			writeCode=true;
-			followingStep="Refactoring";
+			followingStep="Write Code";
 		} else if((!writeTest)&&(writeCode)&&(!refactoring)){
 			writeCode=false;
 			refactoring=true;
-			followingStep="Write Test";
+			followingStep="Refactoring";
 		} else if((!writeTest)&&(!writeCode)&&(refactoring)){
 			refactoring=false;
 			writeTest=true;
-			followingStep="Write Code";
+			followingStep="Write Test";
 		}
 		actualStep();
 	}
