@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 /*******************************************
  * Klasse zur Verwaltung der Tracking-Datei
  ******************************************/
+
 public class Tracker {
     final static Path p= Paths.get("Tracked.txt");
     public static int testDuration;
@@ -35,7 +36,7 @@ public class Tracker {
     }
 
 
-    public TrackStep generateTrackStep(){
+    public static TrackStep generateTrackStep(){
         TrackStep temp = new TrackStep();
         return temp;
     }
