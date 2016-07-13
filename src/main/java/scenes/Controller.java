@@ -58,9 +58,6 @@ public class Controller implements Initializable{
     private SimpleIntegerProperty timeSeconds;
     private SimpleIntegerProperty timeMinutes;
 
-    public Timeline getTimerSeconds(){
-        return timerSeconds;
-    }
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"k
     public void setNextStep() throws IOException {
