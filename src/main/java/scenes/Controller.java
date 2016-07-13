@@ -85,9 +85,9 @@ public class Controller implements Initializable{
                 giveLabelNewValue();
                 Exercise.passed();
                 timerSeconds.stop();
-                resetTimer();
                 changeView();
                 NextSteper.stepAnnouncement();
+                resetTimer();
             }
         }else if(Exercise.writeTest && result.getNumberOfFailedTests() == 0){
             rueckmeldungProperty.setValue("Du musst einen Test schreiben der fehlschlägt!");
@@ -96,9 +96,9 @@ public class Controller implements Initializable{
             giveLabelNewValue();
             Exercise.passed();
             timerSeconds.stop();
-            resetTimer();
             changeView();
             NextSteper.stepAnnouncement();
+            resetTimer();
 
         }
 
