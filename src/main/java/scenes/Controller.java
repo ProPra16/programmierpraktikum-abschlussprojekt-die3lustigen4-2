@@ -2,6 +2,7 @@ package scenes;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,7 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import programdata.CodeFailure;
@@ -39,6 +39,7 @@ public class Controller implements Initializable{
     public Label babyLabel = new Label();
 
     public ImageView picture = new ImageView();
+    private double anglerest = 0;
 
     private static StringProperty codeProperty = new SimpleStringProperty("");
     private static StringProperty testProperty = new SimpleStringProperty("");
@@ -265,19 +266,37 @@ public class Controller implements Initializable{
 
     private void changeView(){
 
+        double angle = 0;
+
         if(Exercise.refactoring) {
             writeHere.setStyle("-fx-text-fill: black;");
-            picture.setRotate(120);
-
+            angle = 120;
         }
         else if(Exercise.writeCode){
             writeHere.setStyle("-fx-text-fill: green;");
-            picture.setRotate(240);
+            angle = 240;
         }
         else if(Exercise.writeTest){
             writeHere.setStyle("-fx-text-fill: red;");
-            picture.setRotate(0);
+            angle = 0;
         }
+        double add = anglerest;
+        anglerest = angle;
+        if(angle != 0)
+            anglerest = 360 - angle;
+        angle +=add;
+        if(angle >= 360)
+            angle = angle - 360;
+        if(angle <= -360)
+            angle = angle + 360;
+        if(angle > 180)
+            angle = angle - 360;
+        if(angle < -180)
+            angle = 360+angle;
+
+        RotateTransition rt = new RotateTransition(Duration.millis(2000), picture);
+        rt.setByAngle(angle);
+        rt.play();
 
     }
 
