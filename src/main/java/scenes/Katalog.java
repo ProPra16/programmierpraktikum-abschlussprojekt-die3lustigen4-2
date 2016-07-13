@@ -51,4 +51,8 @@ public class Katalog {
         System.out.println(minutesForBaby);
         System.out.println(timetracking);
     }
+
+    public boolean withBabysteps(){
+        return babysteps;
+    }
 }

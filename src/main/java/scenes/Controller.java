@@ -14,9 +14,12 @@ import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 import programdata.CodeFailure;
 import programdata.Exercise;
+import programdata.Tracker;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static scenes.KatalogCreator.choosenKatalog;
 
 public class Controller implements Initializable{
 
@@ -56,7 +59,14 @@ public class Controller implements Initializable{
 
         /** Bei der write Test Phase soll man ja einen Test schreiben der Failed,
          * um dann neuen Code zu schreiben der diesen Test erfüllt. */
+
         manageLabels();
+        /**************************************/
+        //Trackingergänzungen
+        if(!choosenKatalog.withBabysteps()) {
+            Tracker.writeStep();
+        }
+        /**************************************/
         CodeFailure result = NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
         if(result.problems()) {
             rueckmeldungProperty.setValue(result.codeAsString());
@@ -87,15 +97,15 @@ public class Controller implements Initializable{
 
     private void resetTimer() {
         if(!aktuellePhaseProperty.get().equals("Refactoring")) {
-            if (KatalogCreator.choosenKatalog.babysteps) {
-                babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
-                if (KatalogCreator.choosenKatalog.secondsForBabystepps > 60) {
-                    if(KatalogCreator.choosenKatalog.secondsForBabystepps % 60 == 0)
-                        createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, 60);
+            if (choosenKatalog.babysteps) {
+                babyLabel.setText("Du hast " + choosenKatalog.minutesForBaby + " Minuten für jede Phase, außer der Refactor Phase!");
+                if (choosenKatalog.secondsForBabystepps > 60) {
+                    if(choosenKatalog.secondsForBabystepps % 60 == 0)
+                        createTimer(choosenKatalog.secondsForBabystepps / 60, 60);
                     else
-                        createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, KatalogCreator.choosenKatalog.secondsForBabystepps % 60 + 60);
+                        createTimer(choosenKatalog.secondsForBabystepps / 60, choosenKatalog.secondsForBabystepps % 60 + 60);
                 }else
-                    createTimer(0, KatalogCreator.choosenKatalog.secondsForBabystepps);
+                    createTimer(0, choosenKatalog.secondsForBabystepps);
             } else
                 createTimer(Integer.MAX_VALUE, 60);
         }
@@ -129,6 +139,12 @@ public class Controller implements Initializable{
     }
 
     public void setReworkTest(){
+        /**************************************/
+        //Trackingergänzungen
+        if(!choosenKatalog.withBabysteps()) {
+            Tracker.writeStep();
+        }
+        /**************************************/
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(Main.primaryStage);
         alert.setTitle("Test Korrektur");
@@ -141,6 +157,14 @@ public class Controller implements Initializable{
 
     public void setStart(){
         Exercise.start();
+
+        /**************************************/
+        //Trackingergänzungen
+        if(!choosenKatalog.withBabysteps()) {
+            Tracker.startTrack();
+        }
+        /**************************************/
+
         resetTimer();
         start.setDisable(true);
         nextStep.setDisable(false);
