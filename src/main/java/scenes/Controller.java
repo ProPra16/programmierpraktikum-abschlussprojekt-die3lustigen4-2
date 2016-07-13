@@ -289,33 +289,22 @@ public class Controller implements Initializable{
 
         if(Exercise.refactoring) {
             writeHere.setStyle("-fx-text-fill: black;");
-            angle = 120;
+            angle = -240;
         }
         else if(Exercise.writeCode){
             writeHere.setStyle("-fx-text-fill: green;");
-            angle = 240;
+            angle = -120;
         }
         else if(Exercise.writeTest){
             writeHere.setStyle("-fx-text-fill: red;");
             angle = 0;
         }
-        double add = anglerest;
-        anglerest = angle;
-        if(angle != 0)
-            anglerest = 360 - angle;
-        angle +=add;
-        if(angle >= 360)
-            angle = angle - 360;
-        if(angle <= -360)
-            angle = angle + 360;
-        if(angle > 180)
-            angle = angle - 360;
-        if(angle < -180)
-            angle = 360+angle;
 
-        RotateTransition rt = new RotateTransition(Duration.millis(2000), picture);
-        rt.setByAngle(angle);
+
+        RotateTransition rt = new RotateTransition(Duration.millis(1500), picture);
+        rt.setToAngle(angle);
         rt.play();
+        anglerest = angle;
 
     }
 
