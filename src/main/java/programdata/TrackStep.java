@@ -5,6 +5,8 @@ package programdata;
  */
 
 
+import java.util.ArrayList;
+
 /****************************************************************
  * Klasse zum Abspeichern eines Trackingschritts
  ****************************************************************/
@@ -18,7 +20,9 @@ public class TrackStep {
     String aktuellePhase;
     String content;
     String failures;
-}
+
+    public TrackStep(){
+    }
 
     public TrackStep(int testDuration, int codeDuration, int refactorDuration, int stepDuration, String aktuellePhase, String content, String failures) {
         this.testDuration=testDuration;
@@ -30,17 +34,18 @@ public class TrackStep {
         this.failures=failures;
     }
 
-    public String asString() {
-        String temp = "Zeit in der Phase zur Testgestaltung" + testDuration + "\n";
-        temp += "Zeit in der Phase zur Codegestaltung" + codeDuration + "\n";
-        temp += "Zeit in der Refactoring-Phase" + refactorDuration + "\n";
-        temp += "\n";
-        temp += "Zeit der aktuellen Phase (" + aktuellePhase + "): " + stepDuration + "\n";
-        temp += content + "\n";
-        temp += "\n";
-        temp += "Compilier-Fehler und fehlgechlagene Tests: \n";
-        temp += failures;
-        temp += "\n \n";
+    public ArrayList<String> asStringArrayList() {
+        ArrayList <String> temp = new ArrayList<String>();
+        temp.add("Zeit in der Phase zur Testgestaltung" + testDuration + "\n");
+        temp.add("Zeit in der Phase zur Codegestaltung" + codeDuration + "\n");
+        temp.add("Zeit in der Refactoring-Phase" + refactorDuration + "\n");
+        temp.add("\n");
+        temp.add("Zeit der aktuellen Phase (" + aktuellePhase + "): " + stepDuration + "\n");
+        temp.add(content + "\n");
+        temp.add("\n");
+        temp.add("Compilier-Fehler und fehlgechlagene Tests: \n");
+        temp.add(failures);
+        temp.add("\n \n");
         return temp;
     }
 }
