@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 import programdata.CodeFailure;
-import programdata.ExerciseAlternative;
+import programdata.Exercise;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,12 +32,12 @@ public class Controller implements Initializable{
     public Label timerLabelSeconds = new Label();
     public Label babyLabel = new Label();
 
-    public static StringProperty codeProperty = new SimpleStringProperty("");
-    public static StringProperty testProperty = new SimpleStringProperty("");
+    private static StringProperty codeProperty = new SimpleStringProperty("");
+    private static StringProperty testProperty = new SimpleStringProperty("");
     public static StringProperty writeHereProperty = new SimpleStringProperty("");
 
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
-    public static StringProperty rueckmeldungProperty = new SimpleStringProperty("");
+    private static StringProperty rueckmeldungProperty = new SimpleStringProperty("");
 
 
     private String codeName;
@@ -61,24 +61,24 @@ public class Controller implements Initializable{
         if(result.problems()) {
             rueckmeldungProperty.setValue(result.codeAsString());
         }else if(result.getNumberOfFailedTests() > 0){
-            if(!ExerciseAlternative.writeTest)
+            if(!Exercise.writeTest)
                 rueckmeldungProperty.setValue(result.codeAsString());
             else if(result.getNumberOfFailedTests() > 1){
                 rueckmeldungProperty.setValue("Es muss genau 1 Test fehlschlagen!");
             }else{
                 rueckmeldungProperty.setValue("Verändere deinen Code nun so, dass der Test erfüllt wird.");
                 giveLabelNewValue();
-                ExerciseAlternative.passed();
+                Exercise.passed();
                 timerSeconds.stop();
                 resetTimer();
                 NextSteper.stepAnnouncement();
             }
-        }else if(ExerciseAlternative.writeTest && result.getNumberOfFailedTests() == 0){
+        }else if(Exercise.writeTest && result.getNumberOfFailedTests() == 0){
             rueckmeldungProperty.setValue("Du musst einen Test schreiben der fehlschlägt!");
         }else{
             rueckmeldungProperty.setValue("Alles OK! (Compiling and Tests)");
             giveLabelNewValue();
-            ExerciseAlternative.passed();
+            Exercise.passed();
             timerSeconds.stop();
             resetTimer();
             NextSteper.stepAnnouncement();
@@ -105,11 +105,11 @@ public class Controller implements Initializable{
         }
     }
 
-    public void giveLabelNewValue() {
-        if (ExerciseAlternative.writeCode) {
+    private void giveLabelNewValue() {
+        if (Exercise.writeCode) {
             reworkTest.setDisable(true);
             writeHereProperty.setValue(codeOverview.getText());
-        } else if (ExerciseAlternative.writeTest) {
+        } else if (Exercise.writeTest) {
             reworkTest.setDisable(false);
             writeHereProperty.setValue(codeOverview.getText());
         } else {
@@ -118,19 +118,13 @@ public class Controller implements Initializable{
         }
     }
 
-    public void manageLabels() {
-        if (ExerciseAlternative.writeCode) {
-            if(KatalogCreator.choosenKatalog.babysteps) {
-                //runTimer = false;
-                //timerLabel.setText("Keine Zeitbegrenzung.");
-            }
+    private void manageLabels() {
+        if (Exercise.writeCode) {
             codeProperty.setValue(writeHereProperty.getValue());
-        } else if (ExerciseAlternative.writeTest) {
+        } else if (Exercise.writeTest) {
             testProperty.setValue(writeHereProperty.getValue());
         } else {
             codeProperty.setValue(writeHereProperty.getValue());
-            //if(KatalogCreator.choosenKatalog.babysteps)
-                //startTimer(KatalogCreator.choosenKatalog.secondsForBabystepps);
         }
     }
 
@@ -142,18 +136,18 @@ public class Controller implements Initializable{
         alert.showAndWait();
         writeHereProperty.setValue(testOverview.getText());
         resetTimer();
-        ExerciseAlternative.reworkTest();
+        Exercise.reworkTest();
     }
 
     public void setStart(){
-        ExerciseAlternative.start();
+        Exercise.start();
         resetTimer();
         start.setDisable(true);
         nextStep.setDisable(false);
-        codeProperty.setValue(ExerciseAlternative.exerciseCode.asString());
-        testProperty.setValue(ExerciseAlternative.exerciseTest.asString());
-        codeName= ExerciseAlternative.codeName;
-        testName= ExerciseAlternative.testName;
+        codeProperty.setValue(Exercise.exerciseCode.asString());
+        testProperty.setValue(Exercise.exerciseTest.asString());
+        codeName= Exercise.codeName;
+        testName= Exercise.testName;
     }
 
     //Hier werden die StringPropertys gebinded, sodass wir diese nun von überall aktualisieren können und sich der Text
@@ -211,22 +205,22 @@ public class Controller implements Initializable{
     }
 
     private void jumpOneStepBack() {
-        if (ExerciseAlternative.writeCode) {
-            ExerciseAlternative.writeTest = true;
-            ExerciseAlternative.writeCode = false;
-            ExerciseAlternative.refactoring = false;
+        if (Exercise.writeCode) {
+            Exercise.writeTest = true;
+            Exercise.writeCode = false;
+            Exercise.refactoring = false;
             reworkTest.setDisable(true);
             writeHereProperty.setValue(testOverview.getText());
             rueckmeldungProperty.setValue("Schreibe einen Test der failed.");
-        } else if (ExerciseAlternative.writeTest) {
-            ExerciseAlternative.writeTest = false;
-            ExerciseAlternative.writeCode = false;
-            ExerciseAlternative.refactoring = true;
+        } else if (Exercise.writeTest) {
+            Exercise.writeTest = false;
+            Exercise.writeCode = false;
+            Exercise.refactoring = true;
             reworkTest.setDisable(true);
             rueckmeldungProperty.setValue("Verbessere deinen Code.");
             writeHereProperty.setValue(codeOverview.getText());
         }
-        ExerciseAlternative.actualStep();
+        Exercise.actualStep();
         resetTimer();
     }
 

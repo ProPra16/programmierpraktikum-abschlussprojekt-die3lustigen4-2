@@ -25,7 +25,7 @@ public class KatalogCreator {
 
     public static Katalog choosenKatalog;
 
-    public static void chooseTask(Stage primaryStage) throws IOException {
+    static void chooseTask(Stage primaryStage) throws IOException {
         Katalog[] kataloge = createKatalogArr();
         Button[] auswahlButtons = createButtonArr(kataloge.length, primaryStage, kataloge);
         VBox root = new VBox(10);
@@ -40,7 +40,7 @@ public class KatalogCreator {
         primaryStage.setScene(new Scene(root));
     }
 
-    public static Button[] createButtonArr(int length, Stage primaryStage, Katalog[] kataloge){
+    private static Button[] createButtonArr(int length, Stage primaryStage, Katalog[] kataloge){
         Button[] auswahlButtons = new Button[length];
         for (int j = 0; j < length; j++) {
             auswahlButtons[j] = new Button();
@@ -69,7 +69,7 @@ public class KatalogCreator {
         return auswahlButtons;
     }
 
-    public static Katalog[] createKatalogArr() throws IOException {
+    private static Katalog[] createKatalogArr() throws IOException {
         /** Silvan added FileChooser 2.7.2016 */
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

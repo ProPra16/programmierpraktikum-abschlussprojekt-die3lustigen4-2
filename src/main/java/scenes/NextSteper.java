@@ -8,7 +8,7 @@ package scenes;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
 import programdata.CodeFailure;
-import programdata.ExerciseAlternative;
+import programdata.Exercise;
 import vk.core.api.*;
 
 import java.util.Collection;
@@ -18,17 +18,17 @@ import java.util.Collection;
  * nextStep durch Auslagerung
  *********************************************/
 
-public class NextSteper {
+class NextSteper {
 
-    public static void stepAnnouncement(){
+    static void stepAnnouncement(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(Main.primaryStage);
         alert.setTitle("Nächster Schritt");
-        alert.setContentText(ExerciseAlternative.followingStep);
+        alert.setContentText(Exercise.followingStep);
         alert.showAndWait();
     }
 
-    public static CodeFailure compileTestGenerator(String codeName, StringProperty codeProperty, String testName, StringProperty testProperty){
+    static CodeFailure compileTestGenerator(String codeName, StringProperty codeProperty, String testName, StringProperty testProperty){
         CodeFailure compileFailure=new CodeFailure("Compiler Problem: ", "", 0);
         CodeFailure testFailure= new CodeFailure("Test Problem: ", "", 0);
 
@@ -43,7 +43,7 @@ public class NextSteper {
             compileFailure.hasProblem();
             CompilerResult compilerResult = compileFolder.getCompilerResult();
             Collection<CompileError> codeError;
-            if (ExerciseAlternative.writeTest) {
+            if (Exercise.writeTest) {
                 codeError = compilerResult.getCompilerErrorsForCompilationUnit(test);
             }else{
                 codeError = compilerResult.getCompilerErrorsForCompilationUnit(code);

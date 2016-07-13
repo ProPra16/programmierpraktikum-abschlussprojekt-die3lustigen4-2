@@ -3,88 +3,77 @@
  * Programmablaufs
  *****************************************/
 
-
 package programdata;
 
-import javafx.beans.property.StringProperty;
 import scenes.Controller;
+import scenes.KatalogCreator;
 import userInput.CodeInput;
 import userInput.TestInput;
-import vk.core.api.CompilationUnit;
-import vk.core.api.CompilerFactory;
-import vk.core.api.JavaStringCompiler;
 
 public class Exercise {
-	boolean writeCode;			// aktuelle Stufe (Step) speichern
-	boolean writeTest;
-	boolean refactoring;
-	
-	String exerciseName;		// Name der Aufgabe (für public class..)
-	String failure;				// Speicher für zurückgegebene Compilierfehler
-	
-	TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
-	CodeInput exerciseCode;
-	
-	CompilationUnit code;	// Übergabe an Bendisposto-Code
-	CompilationUnit test;
-	
-	JavaStringCompiler compileFolder;
-	
-	
-	public Exercise(String exerciseName, String exerciseFramework, String testName, String testFramework){
-		this.exerciseName=exerciseName;
-		this.writeCode= false;
-		this.writeTest=true;
-		this.refactoring=false;
-		this.code=new CompilationUnit(exerciseName, exerciseFramework, false);
-		this.test=new CompilationUnit(testName, testFramework, true);
+	public static boolean writeCode;			// aktuelle Stufe (Step) speichern
+	public static boolean writeTest;
+	public static boolean refactoring;
+
+	public static TestInput exerciseTest;		// Speicher für Usereingaben (Labelinhalte)
+	public static CodeInput exerciseCode;
+
+	public static String codeName;
+	public static String testName;
+	public static String followingStep="Write Code";
+
+	//Hiermit wird das Programm erst richtig gestartet
+	public static void start() {
+		String completeClassHeader = "";
+		String completeTestHeader = "";
+		for (String s: KatalogCreator.choosenKatalog.classHeader)
+			completeClassHeader = completeClassHeader + s +"\n";
+		for (String s: KatalogCreator.choosenKatalog.testHeader)
+			completeTestHeader = completeTestHeader + s +"\n";
+
+		writeTest = true;
+		writeCode = false;
+		refactoring = false;
+		exerciseCode = new CodeInput(completeClassHeader);
+		exerciseTest = new TestInput(completeTestHeader);
+		codeName = KatalogCreator.choosenKatalog.getClassName();
+		testName = KatalogCreator.choosenKatalog.getTestName();
+		Controller.writeHereProperty.setValue(exerciseTest.asString());
+		actualStep();																	//Markierung
 	}
 	
-	public StringProperty actualCode(){
-		if(writeTest){
-			return this.exerciseTest.content();
-		}
-		return this.exerciseCode.content();
-	}
-	
-	public StringProperty actualStep(){
-		//StringProperty temp =new SimpleStringProperty("writeTest");
+	public static void actualStep(){
 		if(writeCode)
-			Controller.aktuellePhaseProperty.setValue("writeCode");
+			Controller.aktuellePhaseProperty.setValue("Write New Code");
 		else if(refactoring)
-			Controller.aktuellePhaseProperty.setValue("refactoring");
+			Controller.aktuellePhaseProperty.setValue("Refactoring");
 		else if(writeTest)
-			Controller.aktuellePhaseProperty.setValue("writeTest");
-		return Controller.aktuellePhaseProperty;
-	}
-	
-	public void nextStep(){
-		if(writeTest){
-			this.compileFolder = CompilerFactory.getCompiler(this.code, this.test);
-			compileFolder.compileAndRunTests();
-			//if(hasC)
-				// TODO hier fehlt noch was
-		}
+			Controller.aktuellePhaseProperty.setValue("Write a failing Test");
 	}
 
+	public static void reworkTest(){
+		writeCode = false;
+		refactoring = false;
+		writeTest = true;
+		followingStep = "Write Code";
+		actualStep();
+	}
 		
-	public void passed(){
+	public static void passed(){
 		if((writeTest)&&(!writeCode)&&(!refactoring)){
-			this.writeTest=false;
-			this.writeCode=true;
-			return;
+			writeTest=false;
+			writeCode=true;
+			followingStep="Refactoring";
+		} else if((!writeTest)&&(writeCode)&&(!refactoring)){
+			writeCode=false;
+			refactoring=true;
+			followingStep="Write Test";
+		} else if((!writeTest)&&(!writeCode)&&(refactoring)){
+			refactoring=false;
+			writeTest=true;
+			followingStep="Write Code";
 		}
-		
-		if((!writeTest)&&(writeCode)&&(!refactoring)){
-			this.writeCode=false;
-			this.refactoring=true;
-			return;
-		}
-
-		if((!writeTest)&&(!writeCode)&&(refactoring)){
-			this.refactoring=false;
-			this.writeTest=true;
-			return;
-		}
+		actualStep();
 	}
+
 }

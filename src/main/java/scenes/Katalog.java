@@ -6,16 +6,16 @@ public class Katalog {
 
     String minutesForBaby;
     int secondsForBabystepps;
-    String aufgabenName;
-    String className;
-    String testName;
+    private String aufgabenName;
+    private String className;
+    private String testName;
     boolean babysteps;
-    boolean timetracking;
+    private boolean timetracking;
     ArrayList<String> beschreibung;
     public ArrayList<String> classHeader;
     public ArrayList<String> testHeader;
 
-    public Katalog(String aufgabenName, String className, String testName, boolean babysteps, boolean timetracking, ArrayList<String> beschreibung, ArrayList<String> classHeader, ArrayList<String> testHeader, int secondsForBabystepps, String minutesForBaby){
+    Katalog(String aufgabenName, String className, String testName, boolean babysteps, boolean timetracking, ArrayList<String> beschreibung, ArrayList<String> classHeader, ArrayList<String> testHeader, int secondsForBabystepps, String minutesForBaby){
         this.aufgabenName = aufgabenName;
         this.className = className;
         this.testName = testName;
