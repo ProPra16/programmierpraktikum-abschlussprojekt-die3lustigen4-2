@@ -323,6 +323,17 @@ public class Controller implements Initializable{
         final Label caption = new Label("");
         caption.setStyle("-fx-font-family: \"CMU Serif\"; -fx-font-weight: bold; -fx-text-fill: white; ");
 
+        for (final PieChart.Data data : pieChartData) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+                    new EventHandler<MouseEvent>() {
+                        @Override public void handle(MouseEvent e) {
+                            caption.setTranslateX(e.getSceneX());
+                            caption.setTranslateY(e.getSceneY());
+                            caption.setText(String.valueOf(data.getPieValue()) + " Sekunden");
+                        }
+                    });
+        }
+
 
     }
 

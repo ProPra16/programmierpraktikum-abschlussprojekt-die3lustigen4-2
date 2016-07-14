@@ -14,18 +14,14 @@ import java.util.ArrayList;
  ****************************************************************/
 
 public class TrackStep {
-    private final LocalDateTime time;
-    public static int testDuration=0;
-    public static int codeDuration=0;
-    public static int refactorDuration=0;
 
     private String aktuellePhase;
     private String content;
     private String failures;
-    private final int refactorDuration;
+    public static int refactorDuration;
     private final LocalDateTime time;
-    private final int testDuration;
-    private final int codeDuration;
+    public static int testDuration;
+    public static int codeDuration;
     private  int stepDuration;
 
     TrackStep(String aktuellePhase, String content, String failures, int stepDuration, LocalDateTime time, int testDuration, int codeDuration, int refactorDuration) {
