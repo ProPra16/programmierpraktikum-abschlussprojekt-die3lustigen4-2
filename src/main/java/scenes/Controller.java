@@ -7,15 +7,24 @@ import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import programdata.CodeFailure;
 import programdata.Exercise;
+import programdata.TrackStep;
 import programdata.Tracker;
 
 import java.io.IOException;
@@ -28,6 +37,7 @@ public class Controller implements Initializable{
     public Button nextStep = new Button();
     public Button reworkTest = new Button();
     public Button start = new Button();
+    public Button analyseButton = new Button();
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
@@ -277,6 +287,43 @@ public class Controller implements Initializable{
         RotateTransition rt = new RotateTransition(Duration.millis(1500), picture);
         rt.setToAngle(angle);
         rt.play();
+    }
+
+    public void setOpenAnalyser(){
+
+        Stage analyseStage = new Stage();
+        Scene ananlyseScene = new Scene(new Group());
+        analyseStage.setTitle("Tracking");
+        analyseStage.setWidth(500);
+        analyseStage.setHeight(500);
+
+        PieChart.Data testData = new PieChart.Data("Tests schreiben", TrackStep.testDuration);
+        PieChart.Data codeData = new PieChart.Data("Code schreiben", TrackStep.codeDuration);
+        PieChart.Data refactorData = new PieChart.Data("Refactoring", TrackStep.refactorDuration);
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        testData,
+                        codeData,
+                        refactorData);
+        final PieChart chart = new PieChart(pieChartData);
+
+        testData.getNode().setStyle("-fx-pie-color: red;");
+        codeData.getNode().setStyle("-fx-pie-color: limegreen;");
+        refactorData.getNode().setStyle("-fx-pie-color: black;");
+        chart.setTitle("Zeitbedarf insgesamt");
+        chart.setStyle("-fx-font-family: \"CMU Serif\"; -fx-font-weight: bold;");
+        chart.setLegendVisible(false);
+
+        ((Group) ananlyseScene.getRoot()).getChildren().add(chart);
+
+
+        analyseStage.setScene(ananlyseScene);
+        analyseStage.show();
+
+        final Label caption = new Label("");
+        caption.setStyle("-fx-font-family: \"CMU Serif\"; -fx-font-weight: bold; -fx-text-fill: white; ");
+
+
     }
 
 }

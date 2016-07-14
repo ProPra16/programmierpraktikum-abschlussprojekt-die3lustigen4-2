@@ -15,11 +15,11 @@ import java.util.ArrayList;
  * Klasse zum Abspeichern eines Trackingschritts
  ****************************************************************/
 
-class TrackStep {
+public class TrackStep {
     private final LocalDateTime time;
-    private int testDuration=0;
-    private int codeDuration=0;
-    private int refactorDuration=0;
+    public static int testDuration=0;
+    public static int codeDuration=0;
+    public static int refactorDuration=0;
 
     private int stepDuration=0;
     private String aktuellePhase;
