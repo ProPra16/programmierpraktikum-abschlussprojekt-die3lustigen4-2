@@ -21,7 +21,6 @@ import programdata.Tracker;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -85,7 +84,6 @@ public class Controller implements Initializable{
                 giveLabelNewValue();
                 Exercise.passed();
                 timerSeconds.stop();
-                safeDate();
                 changeView();
                 NextSteper.stepAnnouncement();
                 resetTimer();
@@ -98,30 +96,10 @@ public class Controller implements Initializable{
             Exercise.passed();
             timerSeconds.stop();
             changeView();
-            safeDate();
             NextSteper.stepAnnouncement();
             resetTimer();
 
         }
-    }
-
-    /**Hier eine Funktion mit der man das aktuelle Datum+Zeit abspeichern kann. Ich weiß bloß noch nicht wie man es
-     * hinkriegt die Daten in Statistics.txt zu speichern ohne den vollständigen Pfad anzugeben.
-     * Ich kann erst später weiter arbeiten aber wollte das kurz pushen falls das hier jemand verwenden möchte.
-     *
-     *
-     */
-    private void safeDate() throws IOException {
-        LocalDateTime time = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm:ss");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-        /*
-        final Path p =Paths.get("/home/leander/workspace/Projekt7-/src/main/resources/Statistic.txt");
-        File statistics = new File("/home/leander/workspace/Projekt7-/src/main/resources/Statistic.txt");
-        Files.write(p, time.format(formatter).getBytes());
-        */
-        System.out.println(time.format(formatter));
-        System.out.println(time.format(formatter2));
     }
 
     private void resetTimer() {
