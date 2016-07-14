@@ -56,7 +56,7 @@ public class Controller implements Initializable{
     private SimpleIntegerProperty timeMinutes;
 
 
-    //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
+    //wird in der fxml datei eingebunden mit: onAction="#setNextStep"k
     public void setNextStep() throws IOException {
         /** Hab jetzt so einiges durch Probiert aber so weit ich das sehe funktioniert nun alles einwandfrei selbst der
          * ReworkTest Button. Zum Code ausprobieren würde ich den RealTestKatalog empfehlen. */
