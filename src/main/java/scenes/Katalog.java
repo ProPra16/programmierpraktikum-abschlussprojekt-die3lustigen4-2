@@ -38,21 +38,14 @@ public class Katalog {
 
     public void ausgeben(){
         System.out.println(aufgabenName);
-        for (String s: beschreibung)
-            System.out.println(s);
+        beschreibung.forEach(System.out::println);
         System.out.println(className);
-        for (String s: classHeader)
-            System.out.println(s);
+        classHeader.forEach(System.out::println);
         System.out.println(testName);
-        for (String s: testHeader)
-            System.out.println(s);
+        testHeader.forEach(System.out::println);
         System.out.println(babysteps);
         System.out.println(secondsForBabystepps);
         System.out.println(minutesForBaby);
         System.out.println(timetracking);
-    }
-
-    public boolean withBabysteps(){
-        return babysteps;
     }
 }

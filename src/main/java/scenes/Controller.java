@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -295,7 +294,6 @@ public class Controller implements Initializable{
     }
 
     public void setOpenAnalyser(){
-
         Stage analyseStage = new Stage();
         analyseStage.initOwner(Main.primaryStage);
         Scene ananlyseScene = new Scene(new Group());
@@ -322,12 +320,10 @@ public class Controller implements Initializable{
 
         for (PieChart.Data data : pieChartData) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED,
-                    new EventHandler<MouseEvent>() {
-                        @Override public void handle(MouseEvent e) {
-                            caption.setTranslateX(e.getSceneX());
-                            caption.setTranslateY(e.getSceneY());
-                            caption.setText(String.valueOf((int) data.getPieValue()) + " s");
-                        }
+                    e -> {
+                        caption.setTranslateX(e.getSceneX());
+                        caption.setTranslateY(e.getSceneY());
+                        caption.setText(String.valueOf((int) data.getPieValue()) + " s");
                     });
         }
 
