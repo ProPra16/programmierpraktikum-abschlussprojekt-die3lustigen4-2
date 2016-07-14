@@ -161,6 +161,7 @@ public class Controller implements Initializable{
             Tracker.writeStep();
         }
         /**************************************/
+        timerSeconds.stop();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(Main.primaryStage);
         alert.setTitle("Test Korrektur");
