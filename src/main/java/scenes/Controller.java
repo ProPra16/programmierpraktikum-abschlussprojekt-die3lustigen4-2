@@ -295,7 +295,7 @@ public class Controller implements Initializable{
         Scene ananlyseScene = new Scene(new Group());
         analyseStage.setTitle("Tracking");
         analyseStage.setWidth(500);
-        analyseStage.setHeight(500);
+        analyseStage.setHeight(400);
 
         PieChart.Data testData = new PieChart.Data("Tests schreiben", TrackStep.testDuration);
         PieChart.Data codeData = new PieChart.Data("Code schreiben", TrackStep.codeDuration);
@@ -305,34 +305,43 @@ public class Controller implements Initializable{
                         testData,
                         codeData,
                         refactorData);
-        final PieChart chart = new PieChart(pieChartData);
+        PieChart chart = new PieChart(pieChartData);
 
         testData.getNode().setStyle("-fx-pie-color: red;");
         codeData.getNode().setStyle("-fx-pie-color: limegreen;");
         refactorData.getNode().setStyle("-fx-pie-color: black;");
-        chart.setTitle("Zeitbedarf insgesamt");
-        chart.setStyle("-fx-font-family: \"CMU Serif\"; -fx-font-weight: bold;");
-        chart.setLegendVisible(false);
 
-        ((Group) ananlyseScene.getRoot()).getChildren().add(chart);
+        Label tLabel = new Label(String.valueOf(TrackStep.testDuration));
+        tLabel.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; ");
 
+        Label cLabel = new Label(String.valueOf(TrackStep.testDuration));
+        cLabel.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; ");
 
-        analyseStage.setScene(ananlyseScene);
-        analyseStage.show();
+        Label rLabel = new Label(String.valueOf(TrackStep.testDuration));
+        rLabel.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; ");
 
-        final Label caption = new Label("");
-        caption.setStyle("-fx-font-family: \"CMU Serif\"; -fx-font-weight: bold; -fx-text-fill: white; ");
+        Label caption = new Label("");
+        caption.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; ");
 
-        for (final PieChart.Data data : pieChartData) {
-            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+        for (PieChart.Data data : pieChartData) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED,
                     new EventHandler<MouseEvent>() {
                         @Override public void handle(MouseEvent e) {
                             caption.setTranslateX(e.getSceneX());
                             caption.setTranslateY(e.getSceneY());
-                            caption.setText(String.valueOf(data.getPieValue()) + " Sekunden");
+                            caption.setText(String.valueOf((int) data.getPieValue()) + " Sekunden");
                         }
                     });
         }
+
+        chart.setTitle("Zeitbedarf insgesamt");
+        chart.setStyle("-fx-font-family: \"CMU Serif\"; -fx-font-weight: bold;");
+        chart.setLegendVisible(false);
+
+        ((Group) ananlyseScene.getRoot()).getChildren().addAll(chart, caption, tLabel,cLabel,rLabel);
+
+        analyseStage.setScene(ananlyseScene);
+        analyseStage.show();
 
 
     }
