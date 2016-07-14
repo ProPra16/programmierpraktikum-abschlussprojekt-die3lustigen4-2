@@ -294,6 +294,7 @@ public class Controller implements Initializable{
     public void setOpenAnalyser(){
 
         Stage analyseStage = new Stage();
+        analyseStage.initOwner(Main.primaryStage);
         Scene ananlyseScene = new Scene(new Group());
         analyseStage.setTitle("Tracking");
         analyseStage.setWidth(500);
