@@ -5,8 +5,6 @@ package programdata;
  */
 
 
-import scenes.Controller;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,40 +19,24 @@ public class TrackStep {
     public static int codeDuration=0;
     public static int refactorDuration=0;
 
-    private int stepDuration=0;
     private String aktuellePhase;
     private String content;
     private String failures;
+    private final int refactorDuration;
+    private final LocalDateTime time;
+    private final int testDuration;
+    private final int codeDuration;
+    private  int stepDuration;
 
-    TrackStep(String aktuellePhase, String content, String failures) {
-        time = LocalDateTime.now();
-
-        int min, sec;
-        if(time.getMinute() - Controller.startDate.getMinute() >= 0)
-            min = time.getMinute() - Controller.startDate.getMinute();
-        else min = 60 + time.getMinute() - Controller.startDate.getMinute();
-        if(time.getSecond() - Controller.startDate.getSecond() >= 0)
-            sec = time.getSecond() - Controller.startDate.getSecond();
-        else{
-            min--;
-            sec = 60 + time.getSecond() - Controller.startDate.getSecond();
-        }
-
-        Controller.startDate = time;
-
-        stepDuration= min*60 + sec;
-        if(Exercise.writeTest){
-            testDuration += stepDuration ;
-        }
-        else if(Exercise.writeCode){
-            codeDuration += stepDuration;
-        }
-        else if(Exercise.refactoring){
-            refactorDuration += stepDuration;
-        }
-        this.aktuellePhase=aktuellePhase;
-        this.content=content;
-        this.failures=failures;
+    TrackStep(String aktuellePhase, String content, String failures, int stepDuration, LocalDateTime time, int testDuration, int codeDuration, int refactorDuration) {
+        this.aktuellePhase= aktuellePhase;
+        this.content= content;
+        this.failures= failures;
+        this.time = time;
+        this.testDuration = testDuration;
+        this.codeDuration = codeDuration;
+        this.stepDuration = stepDuration;
+        this.refactorDuration = refactorDuration;
     }
 
     ArrayList<String> asStringArrayList() {
