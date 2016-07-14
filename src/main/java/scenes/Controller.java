@@ -189,6 +189,7 @@ public class Controller implements Initializable{
         start.setDisable(true);
         picture.setDisable(false);
         nextStep.setDisable(false);
+        analyseButton.setDisable(false);
         codeProperty.setValue(Exercise.exerciseCode.asString());
         testProperty.setValue(Exercise.exerciseTest.asString());
         codeName= Exercise.codeName;
@@ -205,6 +206,7 @@ public class Controller implements Initializable{
         rueckmeldung.textProperty().bind(rueckmeldungProperty);
 
         reworkTest.setDisable(true);
+        analyseButton.setDisable(true);
         nextStep.setDisable(true);
         picture.setDisable(true);
 
