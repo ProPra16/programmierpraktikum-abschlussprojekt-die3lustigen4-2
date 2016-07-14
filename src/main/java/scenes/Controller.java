@@ -54,6 +54,7 @@ public class Controller implements Initializable{
 
     private SimpleIntegerProperty timeSeconds;
     private SimpleIntegerProperty timeMinutes;
+    public static LocalDateTime startDate;
 
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"k
@@ -190,6 +191,7 @@ public class Controller implements Initializable{
         /**************************************/
         //Trackingergänzungen
         if(KatalogCreator.choosenKatalog.timetracking) {
+            startDate = LocalDateTime.now();
             Tracker.startTrack();
         }
         /**************************************/
