@@ -8,6 +8,7 @@ package programdata;
 import javafx.animation.Timeline;
 import scenes.Controller;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,58 +21,48 @@ import java.util.ArrayList;
  ******************************************/
 
 public class Tracker {
-    final static Path p= Paths.get("Tracked.txt");
+    private final static Path p= Paths.get("Tracked.txt");
     public static int nowTime;
     public static int testDuration;
     public static int codeDuration;
     public static int refactorDuration;
-    public static Timeline timeline;
+    private static Timeline timeline;
 
-    public static void startTrackTimer(){
+    private static void startTrackTimer(){
         timeline= new Timeline();
     }
 
-    public static int getTimerSeconds(){
+    static int getTimerSeconds(){
         return (int) timeline.getCurrentTime().toSeconds();
     }
 
-    public static void deleteLastTrack(){
-        try{
-            Files.delete(p);
-        }catch(Exception e){
-        }
+    public static void deleteLastTrack() throws IOException {
+        Files.delete(p);
     }
 
-    public static void startTrack(){
+    public static void startTrack() throws IOException {
         Charset charset= Charset.forName("UTF-8");
         ArrayList<String> titel= new ArrayList<>();
         titel.add("Trackingfile");
         titel.add("");
-        try {
-            Files.write (p, titel, charset);
-        }catch(Exception e){
-        }
+        Files.write (p, titel, charset);
         startTrackTimer();
     }
 
-    public static void trackWriter(TrackStep step){
+    private static void trackWriter(TrackStep step) throws IOException {
         Charset charset= Charset.forName("UTF-8");
-        try {
-            Files.write(p, step.asStringArrayList(), charset, StandardOpenOption.APPEND);
-        }catch(Exception e){
-        }
+        Files.write(p, step.asStringArrayList(), charset, StandardOpenOption.APPEND);
     }
 
-    public static TrackStep generateStep(){
+    private static TrackStep generateStep(){
 
         String aktuellePhase=Controller.aktuellePhaseProperty.getValue();
         String content=Controller.writeHereProperty.getValue();
         String failures=Controller.rueckmeldungProperty.getValue();
-        TrackStep temp = new TrackStep(aktuellePhase, content, failures);
-        return temp;
+        return new TrackStep(aktuellePhase, content, failures);
     }
 
-    public static void writeStep(){
+    public static void writeStep() throws IOException {
         trackWriter(generateStep());
     }
 }

@@ -32,7 +32,6 @@ public class Controller implements Initializable{
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
-    public Label aktuellePhase = new Label();
     public Label rueckmeldung = new Label();
     public Label timerLabelMinutes = new Label();
     public Label timerLabelSeconds = new Label();
@@ -57,7 +56,7 @@ public class Controller implements Initializable{
     private SimpleIntegerProperty timeMinutes;
 
 
-    //wird in der fxml datei eingebunden mit: onAction="#setNextStep"k
+    //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
     public void setNextStep() throws IOException {
         /** Hab jetzt so einiges durch Probiert aber so weit ich das sehe funktioniert nun alles einwandfrei selbst der
          * ReworkTest Button. Zum Code ausprobieren würde ich den RealTestKatalog empfehlen. */
@@ -68,7 +67,7 @@ public class Controller implements Initializable{
         manageLabels();
         /**************************************/
         //Trackingergänzungen
-        if(!KatalogCreator.choosenKatalog.withBabysteps()) {
+        if(KatalogCreator.choosenKatalog.timetracking) {
             Tracker.writeStep();
         }
         /**************************************/
@@ -109,7 +108,7 @@ public class Controller implements Initializable{
      * hinkriegt die Daten in Statistics.txt zu speichern ohne den vollständigen Pfad anzugeben.
      * Ich kann erst später weiter arbeiten aber wollte das kurz pushen falls das hier jemand verwenden möchte.
      *
-     * @throws IOException
+     *
      */
     private void safeDate() throws IOException {
         LocalDateTime time = LocalDateTime.now();
@@ -167,10 +166,10 @@ public class Controller implements Initializable{
         }
     }
 
-    public void setReworkTest(){
+    public void setReworkTest() throws IOException {
         /**************************************/
         //Trackingergänzungen
-        if(!KatalogCreator.choosenKatalog.withBabysteps()) {
+        if(KatalogCreator.choosenKatalog.timetracking) {
             Tracker.writeStep();
         }
         /**************************************/
@@ -184,12 +183,13 @@ public class Controller implements Initializable{
         Exercise.reworkTest();
     }
 
-    public void setStart(){
+    public void setStart() throws IOException {
         Exercise.start();
+        KatalogCreator.choosenKatalog.ausgeben();
 
         /**************************************/
         //Trackingergänzungen
-        if(!KatalogCreator.choosenKatalog.withBabysteps()) {
+        if(KatalogCreator.choosenKatalog.timetracking) {
             Tracker.startTrack();
         }
         /**************************************/
@@ -210,7 +210,6 @@ public class Controller implements Initializable{
         codeOverview.textProperty().bind(codeProperty);
         testOverview.textProperty().bind(testProperty);
         writeHereProperty.bindBidirectional(writeHere.textProperty());
-        aktuellePhase.textProperty().bind(aktuellePhaseProperty);
         rueckmeldung.textProperty().bind(rueckmeldungProperty);
 
         reworkTest.setDisable(true);
@@ -295,11 +294,9 @@ public class Controller implements Initializable{
             angle = 0;
         }
 
-
         RotateTransition rt = new RotateTransition(Duration.millis(1500), picture);
         rt.setToAngle(angle);
         rt.play();
-
     }
 
 }

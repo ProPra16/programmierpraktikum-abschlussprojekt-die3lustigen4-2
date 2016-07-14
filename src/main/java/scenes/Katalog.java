@@ -10,7 +10,7 @@ public class Katalog {
     private String className;
     private String testName;
     boolean babysteps;
-    private boolean timetracking;
+    boolean timetracking;
     ArrayList<String> beschreibung;
     public ArrayList<String> classHeader;
     public ArrayList<String> testHeader;
