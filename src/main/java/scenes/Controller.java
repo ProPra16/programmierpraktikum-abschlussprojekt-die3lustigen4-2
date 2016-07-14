@@ -38,6 +38,7 @@ public class Controller implements Initializable{
     public Button reworkTest = new Button();
     public Button start = new Button();
     public Button analyseButton = new Button();
+    public Button fullscreen = new Button();
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
@@ -337,6 +338,14 @@ public class Controller implements Initializable{
         analyseStage.setScene(ananlyseScene);
         analyseStage.show();
 
+
+    }
+
+    public void setFullscreen(){
+
+        if(Main.primaryStage.isFullScreen())
+            Main.primaryStage.setFullScreen(false);
+        else Main.primaryStage.setFullScreen(true);
 
     }
 
