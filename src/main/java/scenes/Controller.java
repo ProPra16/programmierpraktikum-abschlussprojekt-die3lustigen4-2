@@ -186,6 +186,7 @@ public class Controller implements Initializable{
 
         resetTimer();
         start.setDisable(true);
+        picture.setDisable(false);
         nextStep.setDisable(false);
         codeProperty.setValue(Exercise.exerciseCode.asString());
         testProperty.setValue(Exercise.exerciseTest.asString());
@@ -204,6 +205,7 @@ public class Controller implements Initializable{
 
         reworkTest.setDisable(true);
         nextStep.setDisable(true);
+        picture.setDisable(true);
 
     }
 

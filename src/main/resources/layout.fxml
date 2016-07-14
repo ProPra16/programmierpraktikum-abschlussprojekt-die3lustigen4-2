@@ -42,7 +42,7 @@
                       <VBox alignment="CENTER">
                          <children>
                              <Label text="Aktuelle Phase" underline="true" />
-                             <ImageView fx:id="picture" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                             <ImageView fx:id="picture" fitHeight="250.0" fitWidth="250.0" onMouseClicked="#setNextStep" pickOnBounds="true" preserveRatio="true">
                                  <VBox.margin>
                                      <Insets />
                                  </VBox.margin>
