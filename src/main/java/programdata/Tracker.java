@@ -23,11 +23,16 @@ import java.util.ArrayList;
 public class Tracker {
     private final static Path p= Paths.get("Tracked.txt");
 
+    /*******************************
+     * Das hier sind die Variablen die für den Graphen benötigt werden,
+     */
     private static int testDuration=0;
     private static int codeDuration= 0;
     private static int refactorDuration=0;
 
-
+    /**
+     * Könnte gelöscht werden...
+     */
     public static void deleteLastTrack() throws IOException {
         Files.delete(p);
     }
