@@ -35,7 +35,6 @@ public class Controller implements Initializable{
     public Label timerLabelMinutes = new Label();
     public Label timerLabelSeconds = new Label();
     public Label babyLabel = new Label();
-
     public ImageView picture = new ImageView();
 
     private static StringProperty codeProperty = new SimpleStringProperty("");
@@ -105,7 +104,7 @@ public class Controller implements Initializable{
     private void resetTimer() {
         if(!aktuellePhaseProperty.get().equals("Refactoring")) {
             if (KatalogCreator.choosenKatalog.babysteps) {
-                babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten für jede Phase, ausser der Refactor-Phase!");
+                babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten fuer jede Phase, ausser der Refactor-Phase!");
                 if (KatalogCreator.choosenKatalog.secondsForBabystepps > 60) {
                     if(KatalogCreator.choosenKatalog.secondsForBabystepps % 60 == 0)
                         createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, 60);
