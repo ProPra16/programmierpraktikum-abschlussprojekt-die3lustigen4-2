@@ -56,7 +56,7 @@ public class KatalogCreator {
                 try {
                     choosenKatalog = tmpKatalog;
                     Parent newRoot = FXMLLoader.load(Main.class.getClassLoader().getResource("layout.fxml"));
-                    primaryStage.setTitle("TDD by Tobias Quest, Tobias Hojka, Leander Nachtmann, Silvan Habenicht");
+                    primaryStage.setTitle("TDD by Silvan Habenicht, Leander Nachtmann, Tobias Quest");
                     Scene scene = new Scene(newRoot);
                     primaryStage.setScene(scene);
                     scene.getStylesheets().add(Main.class.getClassLoader().getResource("design.css").toExternalForm());
