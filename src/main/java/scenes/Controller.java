@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import programdata.CodeFailure;
@@ -189,6 +190,7 @@ public class Controller implements Initializable{
         start.setDisable(true);
         picture.setDisable(false);
         nextStep.setDisable(false);
+        analyseButton.setDisable(false);
         codeProperty.setValue(Exercise.exerciseCode.asString());
         testProperty.setValue(Exercise.exerciseTest.asString());
         codeName= Exercise.codeName;
@@ -205,6 +207,7 @@ public class Controller implements Initializable{
         rueckmeldung.textProperty().bind(rueckmeldungProperty);
 
         reworkTest.setDisable(true);
+        analyseButton.setDisable(true);
         nextStep.setDisable(true);
         picture.setDisable(true);
 
@@ -296,7 +299,7 @@ public class Controller implements Initializable{
 
         Stage analyseStage = new Stage();
         analyseStage.initOwner(Main.primaryStage);
-        Scene ananlyseScene = new Scene(new Group());
+        Scene ananlyseScene = new Scene(new Group(), Color.LIGHTGRAY);
         analyseStage.setTitle("Tracking");
         analyseStage.setWidth(500);
         analyseStage.setHeight(400);
