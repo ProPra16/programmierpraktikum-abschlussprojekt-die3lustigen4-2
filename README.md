@@ -4,4 +4,4 @@
 # Zum ausführen muss src/main/java/scenes/Main.java ausgeführt werden
 # BlackCritical = Leander Nachtmann
 # toque100 = Tobias Quest
-# sihab100 = Silvan Habenicht
+# sihab101 = Silvan Habenicht
