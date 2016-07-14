@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.DirectoryChooser;
@@ -75,6 +76,8 @@ public class KatalogCreator {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Choose Catalog-Folder");
         alert.setContentText("Bitte wählen Sie den Ordner aus, in dem die Kataloge gespeichert sind.");
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setStyle("-fx-font-family: \"CMU Serif\"; -fx-font-weight: bold;");
         alert.showAndWait();
         DirectoryChooser dialog = new DirectoryChooser();
         dialog.setTitle("Choose Catalog-Folder");

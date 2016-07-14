@@ -7,10 +7,10 @@
 
 .label{
 
-        -fx-font-family: "CMU Serif";
-        -fx-font-weight: bold;
-        -fx-font-size: 16px;
-        -fx-text-fill: #555555;
+    -fx-font-family: "CMU Serif";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #555555;
 
 }
 
@@ -69,8 +69,6 @@
         -fx-background-color: black;
 
 }
-
-
 
 #start{}
 #nextStep{}
