@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import programdata.CodeFailure;
@@ -297,7 +298,7 @@ public class Controller implements Initializable{
     public void setOpenAnalyser(){
         Stage analyseStage = new Stage();
         analyseStage.initOwner(Main.primaryStage);
-        Scene ananlyseScene = new Scene(new Group());
+        Scene ananlyseScene = new Scene(new Group(), Color.LIGHTGRAY);
         analyseStage.setTitle("Tracking");
         analyseStage.setWidth(500);
         analyseStage.setHeight(400);
