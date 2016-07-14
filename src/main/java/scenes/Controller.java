@@ -41,7 +41,7 @@ public class Controller implements Initializable{
     public TextArea testOverview = new TextArea();
     public TextArea codeOverview = new TextArea();
     public TextArea writeHere = new TextArea();
-    public Label rueckmeldung = new Label();
+    public TextArea rueckmeldung = new TextArea();
     public Label timerLabelMinutes = new Label();
     public Label timerLabelSeconds = new Label();
     public Label babyLabel = new Label();
@@ -311,17 +311,8 @@ public class Controller implements Initializable{
         codeData.getNode().setStyle("-fx-pie-color: limegreen;");
         refactorData.getNode().setStyle("-fx-pie-color: black;");
 
-        Label tLabel = new Label(String.valueOf(TrackStep.testDuration));
-        tLabel.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; ");
-
-        Label cLabel = new Label(String.valueOf(TrackStep.testDuration));
-        cLabel.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; ");
-
-        Label rLabel = new Label(String.valueOf(TrackStep.testDuration));
-        rLabel.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; ");
-
         Label caption = new Label("");
-        caption.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; ");
+        caption.setStyle("-fx-font-family: \"CMU Serif\"; -fx-text-fill: white; -fx-font-size: 20px;");
 
         for (PieChart.Data data : pieChartData) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -329,7 +320,7 @@ public class Controller implements Initializable{
                         @Override public void handle(MouseEvent e) {
                             caption.setTranslateX(e.getSceneX());
                             caption.setTranslateY(e.getSceneY());
-                            caption.setText(String.valueOf((int) data.getPieValue()) + " Sekunden");
+                            caption.setText(String.valueOf((int) data.getPieValue()) + " s");
                         }
                     });
         }
@@ -338,7 +329,7 @@ public class Controller implements Initializable{
         chart.setStyle("-fx-font-family: \"CMU Serif\"; -fx-font-weight: bold;");
         chart.setLegendVisible(false);
 
-        ((Group) ananlyseScene.getRoot()).getChildren().addAll(chart, caption, tLabel,cLabel,rLabel);
+        ((Group) ananlyseScene.getRoot()).getChildren().addAll(chart, caption);
 
         analyseStage.setScene(ananlyseScene);
         analyseStage.show();

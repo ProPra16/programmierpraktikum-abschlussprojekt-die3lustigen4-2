@@ -64,11 +64,49 @@
 #rueckmeldung{
         -fx-font-family: "DS-Digital";
         -fx-font-weight: normal;
-        -fx-font-size: 22px;
+        -fx-font-size: 20px;
         -fx-text-fill: red;
-        -fx-background-color: black;
 
 }
+
+#rueckmeldung .content{
+                    -fx-background-color: black;
+                }
+
+#rueckmeldung .scroll-bar:vertical .track{
+    -fx-background-color:black;
+    -fx-border-color:black;
+    -fx-background-radius: 0em;
+    -fx-border-radius:2em;
+    -fx-padding:0;
+
+}
+
+#rueckmeldung .scroll-bar .increment-button ,
+#rueckmeldung .scroll-bar .decrement-button {
+
+     -fx-background-color:black;
+     -fx-background-radius: 0em;
+     -fx-padding:0;
+
+}
+#rueckmeldung .scroll-bar .increment-arrow,
+#rueckmeldung .scroll-bar .decrement-arrow{
+     -fx-shape: " ";
+     -fx-background-radius: 0em;
+     -fx-padding:0;
+
+}
+#rueckmeldung .scroll-bar .thumb {
+    -fx-background-color:red;
+    -fx-background-insets: 4, 0, 0;
+    -fx-background-radius: 0em;
+    -fx-padding:0;
+
+}
+
+
+
 
 #start{}
 #nextStep{}
