@@ -157,14 +157,15 @@ public class Controller implements Initializable{
         alert.setTitle("Test Korrektur");
         alert.setContentText("Korrigiere nun deinen Test.");
         alert.showAndWait();
+        rueckmeldungProperty.setValue("Du musst einen Test schreiben der fehlschlaegt!");
         writeHereProperty.setValue(testOverview.getText());
         resetTimer();
         Exercise.reworkTest();
+        changeView();
     }
 
     public void setStart() throws IOException {
         Exercise.start();
-        KatalogCreator.choosenKatalog.ausgeben();
 
         /**************************************/
         //Trackingergänzungen
