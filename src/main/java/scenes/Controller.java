@@ -292,7 +292,7 @@ public class Controller implements Initializable{
         rt.play();
     }
 
-    public void setOpenAnalyser(){
+    public void setOpenAnalyzer(){
         Stage analyseStage = new Stage();
         analyseStage.initOwner(Main.primaryStage);
         Scene ananlyseScene = new Scene(new Group(), Color.LIGHTGRAY);

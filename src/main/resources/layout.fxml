@@ -87,7 +87,7 @@
                     <Button fx:id="reworkTest" mnemonicParsing="false" onAction="#setReworkTest"
                             prefWidth="200.0" text="Test korrigieren"/>
                     <Button fx:id="analyseButton" layoutX="10.0" layoutY="211.0" mnemonicParsing="false"
-                            onAction="#setOpenAnalyser" prefWidth="200.0" text="Analyse zeigen"/>
+                            onAction="#setOpenAnalyzer" prefWidth="200.0" text="Analyse zeigen"/>
                 </VBox>
                 <Separator orientation="VERTICAL" prefHeight="200.0"/>
                 <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
