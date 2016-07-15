@@ -111,13 +111,13 @@ public class Controller implements Initializable{
         if(!aktuellePhaseProperty.get().equals("Refactoring")) {
             if (KatalogCreator.choosenKatalog.babysteps) {
                 babyLabel.setText("Du hast " + KatalogCreator.choosenKatalog.minutesForBaby + " Minuten fuer jede Phase, ausser der Refactor-Phase!");
-                if (KatalogCreator.choosenKatalog.secondsForBabystepps > 60) {
-                    if(KatalogCreator.choosenKatalog.secondsForBabystepps % 60 == 0)
-                        createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, 60);
+                if (KatalogCreator.choosenKatalog.secondsForBabysteps > 60) {
+                    if(KatalogCreator.choosenKatalog.secondsForBabysteps % 60 == 0)
+                        createTimer(KatalogCreator.choosenKatalog.secondsForBabysteps / 60, 60);
                     else
-                        createTimer(KatalogCreator.choosenKatalog.secondsForBabystepps / 60, KatalogCreator.choosenKatalog.secondsForBabystepps % 60 + 60);
+                        createTimer(KatalogCreator.choosenKatalog.secondsForBabysteps / 60, KatalogCreator.choosenKatalog.secondsForBabysteps % 60 + 60);
                 }else
-                    createTimer(0, KatalogCreator.choosenKatalog.secondsForBabystepps);
+                    createTimer(0, KatalogCreator.choosenKatalog.secondsForBabysteps);
             } else
                 createTimer(Integer.MAX_VALUE, 60);
         }

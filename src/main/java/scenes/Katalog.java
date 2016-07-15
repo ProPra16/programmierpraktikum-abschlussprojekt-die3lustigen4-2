@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Katalog {
 
     final String minutesForBaby;
-    final int secondsForBabystepps;
+    final int secondsForBabysteps;
     final private String aufgabenName;
     final private String className;
     final private String testName;
@@ -15,7 +15,7 @@ public class Katalog {
     final public ArrayList<String> classHeader;
     final public ArrayList<String> testHeader;
 
-    Katalog(String aufgabenName, String className, String testName, boolean babysteps, boolean timetracking, ArrayList<String> beschreibung, ArrayList<String> classHeader, ArrayList<String> testHeader, int secondsForBabystepps, String minutesForBaby){
+    Katalog(String aufgabenName, String className, String testName, boolean babysteps, boolean timetracking, ArrayList<String> beschreibung, ArrayList<String> classHeader, ArrayList<String> testHeader, int secondsForBabysteps, String minutesForBaby){
         this.aufgabenName = aufgabenName;
         this.className = className;
         this.testName = testName;
@@ -24,7 +24,7 @@ public class Katalog {
         this.beschreibung = beschreibung;
         this.classHeader = classHeader;
         this.testHeader = testHeader;
-        this.secondsForBabystepps = secondsForBabystepps;
+        this.secondsForBabysteps = secondsForBabysteps;
         this.minutesForBaby = minutesForBaby;
     }
 
@@ -44,7 +44,7 @@ public class Katalog {
         System.out.println(testName);
         testHeader.forEach(System.out::println);
         System.out.println(babysteps);
-        System.out.println(secondsForBabystepps);
+        System.out.println(secondsForBabysteps);
         System.out.println(minutesForBaby);
         System.out.println(timetracking);
     }
