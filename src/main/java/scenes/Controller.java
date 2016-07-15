@@ -29,7 +29,6 @@ import programdata.Tracker;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -63,7 +62,6 @@ public class Controller implements Initializable{
 
     private SimpleIntegerProperty timeSeconds;
     private SimpleIntegerProperty timeMinutes;
-    public static LocalDateTime startDate;
 
 
     //wird in der fxml datei eingebunden mit: onAction="#setNextStep"
@@ -74,13 +72,6 @@ public class Controller implements Initializable{
         /** Bei der write Test Phase soll man ja einen Test schreiben der Failed,
          * um dann neuen Code zu schreiben der diesen Test erfüllt. */
 
-        manageLabels();
-        /**************************************/
-        //Trackingergänzungen
-        if(KatalogCreator.choosenKatalog.timetracking) {
-            Tracker.writeStep();
-        }
-        /**************************************/
         CodeFailure result = NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
         if(result.problems()) {
             rueckmeldungProperty.setValue(result.codeAsString());
@@ -108,7 +99,9 @@ public class Controller implements Initializable{
             changeView();
             NextSteper.stepAnnouncement();
             resetTimer();
-
+        }
+        if(KatalogCreator.choosenKatalog.timetracking) {
+            Tracker.writeStep();
         }
     }
 
@@ -133,6 +126,7 @@ public class Controller implements Initializable{
     }
 
     private void giveLabelNewValue() {
+        manageLabels();
         if (Exercise.writeCode) {
             reworkTest.setDisable(true);
             writeHereProperty.setValue(codeOverview.getText());
@@ -181,7 +175,7 @@ public class Controller implements Initializable{
         /**************************************/
         //Trackingergänzungen
         if(KatalogCreator.choosenKatalog.timetracking) {
-            startDate = LocalDateTime.now();
+            analyseButton.setDisable(false);
             Tracker.startTrack();
         }
         /**************************************/
@@ -190,7 +184,6 @@ public class Controller implements Initializable{
         start.setDisable(true);
         picture.setDisable(false);
         nextStep.setDisable(false);
-        analyseButton.setDisable(false);
         codeProperty.setValue(Exercise.exerciseCode.asString());
         testProperty.setValue(Exercise.exerciseTest.asString());
         codeName= Exercise.codeName;

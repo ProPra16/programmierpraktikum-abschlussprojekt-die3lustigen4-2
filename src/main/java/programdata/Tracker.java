@@ -22,13 +22,10 @@ import java.util.ArrayList;
 
 public class Tracker {
     private final static Path p= Paths.get("Tracked.txt");
-
-    /*******************************
-     * Das hier sind die Variablen die für den Graphen benötigt werden,
-     */
     private static int testDuration=0;
     private static int codeDuration= 0;
     private static int refactorDuration=0;
+    private static LocalDateTime startDate;
 
     /**
      * Könnte gelöscht werden...
@@ -38,6 +35,7 @@ public class Tracker {
     }
 
     public static void startTrack() throws IOException {
+        startDate = LocalDateTime.now();
         Charset charset= Charset.forName("UTF-8");
         ArrayList<String> titel= new ArrayList<>();
         titel.add("Trackingfile");
@@ -57,17 +55,17 @@ public class Tracker {
         LocalDateTime time = LocalDateTime.now();
 
         int min, sec;
-        if(time.getMinute() - Controller.startDate.getMinute() >= 0)
-            min = time.getMinute() - Controller.startDate.getMinute();
-        else min = 60 + time.getMinute() - Controller.startDate.getMinute();
-        if(time.getSecond() - Controller.startDate.getSecond() >= 0)
-            sec = time.getSecond() - Controller.startDate.getSecond();
+        if(time.getMinute() - startDate.getMinute() >= 0)
+            min = time.getMinute() - startDate.getMinute();
+        else min = 60 + time.getMinute() - startDate.getMinute();
+        if(time.getSecond() - startDate.getSecond() >= 0)
+            sec = time.getSecond() - startDate.getSecond();
         else{
             min--;
-            sec = 60 + time.getSecond() - Controller.startDate.getSecond();
+            sec = 60 + time.getSecond() - startDate.getSecond();
         }
 
-        Controller.startDate = time;
+        startDate = time;
 
         int stepDuration= min*60 + sec;
         if(Exercise.writeTest){
