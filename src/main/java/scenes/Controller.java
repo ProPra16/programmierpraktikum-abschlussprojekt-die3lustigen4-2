@@ -323,7 +323,8 @@ public class Controller implements Initializable{
                     e -> {
                         caption.setTranslateX(e.getSceneX());
                         caption.setTranslateY(e.getSceneY());
-                        caption.setText(new DecimalFormat("00").format(((int)data.getPieValue())/60) + ":" + new DecimalFormat("00").format(((int)data.getPieValue())%60));
+                        caption.setText(new DecimalFormat("00").format(((int)data.getPieValue())/60) + ":" +
+                                new DecimalFormat("00").format(((int)data.getPieValue())%60));
                     });
         }
 
