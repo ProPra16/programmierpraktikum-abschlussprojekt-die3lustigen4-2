@@ -29,6 +29,7 @@ import programdata.Tracker;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -322,7 +323,7 @@ public class Controller implements Initializable{
                     e -> {
                         caption.setTranslateX(e.getSceneX());
                         caption.setTranslateY(e.getSceneY());
-                        caption.setText(String.valueOf((int) data.getPieValue()) + " s");
+                        caption.setText(new DecimalFormat("00").format(((int)data.getPieValue())/60) + ":" + new DecimalFormat("00").format(((int)data.getPieValue())%60));
                     });
         }
 
