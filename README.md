@@ -5,3 +5,4 @@
 # BlackCritical = Leander Nachtmann
 # toque100 = Tobias Quest
 # sihab101 = Silvan Habenicht
+# xyZis = Tobias Hojka (aus dem Projekt und Programmierpraktikum 2016 ausgetreten)
