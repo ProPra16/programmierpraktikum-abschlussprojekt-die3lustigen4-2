@@ -1,11 +1,7 @@
 AufgabenName:
 Römische Zahlen ZWEITER KATALOG
 Beschreibung:
-ZWEITER
-Konvertiert zahlen
-blablabka
-kblbalab
-
+Katalog Roman
 Classname:
 RomanNumberConverter
 ClassHeader:

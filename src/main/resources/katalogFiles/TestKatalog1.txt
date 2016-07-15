@@ -2,13 +2,7 @@ AufgabenName:
 Römische Zahlen ERSTER KATALOG
 Beschreibung:
 ERSTER
-Gaaaaaaanzzzz ttttoolll
-erfegege
-rgergeg
-egegreherg
-gegegege
-egegergerg
-ergeg
+Katalog
 Classname:
 RomanNumberConverter
 ClassHeader:

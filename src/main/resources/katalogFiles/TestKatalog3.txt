@@ -2,9 +2,8 @@ AufgabenName:
 Römische Zahlen DRITTER KATALOG
 Beschreibung:
 DRITTER
+Katalog
 Konvertiert zahlen
-blablabka
-kblbalab sflöflkfölk!!! lmflew ööööööööööö
 Classname:
 RomanNumberConverter
 ClassHeader:
