@@ -1,7 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 .gitignore
 .idea/
-out/
 #src/
 #/Projekt7.iml
 .gradle

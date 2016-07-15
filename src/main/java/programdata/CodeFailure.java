@@ -1,7 +1,5 @@
 package programdata;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -9,16 +7,14 @@ import javafx.beans.property.StringProperty;
  * Created by tobias on 09.07.16.
  */
 public class CodeFailure {
-    private StringProperty messageForCode;
-    private StringProperty messageForTest;
-    private IntegerProperty line;
+    final private StringProperty messageForCode;
+    final private StringProperty messageForTest;
     private boolean problems;
     private int numberOfFailedTests = 0;
 
     public CodeFailure(String code, String test, int line){
         messageForCode=new SimpleStringProperty(code);
         this.messageForTest=new SimpleStringProperty(test);
-        this.line=new SimpleIntegerProperty(line);
         this.problems=false;
     }
 
@@ -26,7 +22,6 @@ public class CodeFailure {
     public CodeFailure(){
         messageForCode=new SimpleStringProperty("");
         messageForTest=new SimpleStringProperty("");
-        line=new SimpleIntegerProperty(0);
         problems=false;
     }
 

@@ -15,14 +15,14 @@ import java.util.ArrayList;
 
 public class TrackStep {
 
-    private String aktuellePhase;
-    private String content;
-    private String failures;
+    final private String aktuellePhase;
+    final private String content;
+    final private String failures;
     public static int refactorDuration;
     private final LocalDateTime time;
     public static int testDuration;
     public static int codeDuration;
-    private  int stepDuration;
+    final private int stepDuration;
 
     TrackStep(String aktuellePhase, String content, String failures, int stepDuration, LocalDateTime time, int testDuration, int codeDuration, int refactorDuration) {
         this.aktuellePhase= aktuellePhase;

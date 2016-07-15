@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class CodeInput implements ContentContainer{
-	private StringProperty quellcode;
+	final private StringProperty quellcode;
 	
 	public CodeInput(String code){
 		quellcode=new SimpleStringProperty(code);

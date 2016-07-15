@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Katalog {
 
-    String minutesForBaby;
-    int secondsForBabystepps;
-    private String aufgabenName;
-    private String className;
-    private String testName;
-    boolean babysteps;
-    boolean timetracking;
-    ArrayList<String> beschreibung;
-    public ArrayList<String> classHeader;
-    public ArrayList<String> testHeader;
+    final String minutesForBaby;
+    final int secondsForBabystepps;
+    final private String aufgabenName;
+    final private String className;
+    final private String testName;
+    final boolean babysteps;
+    final boolean timetracking;
+    final ArrayList<String> beschreibung;
+    final public ArrayList<String> classHeader;
+    final public ArrayList<String> testHeader;
 
     Katalog(String aufgabenName, String className, String testName, boolean babysteps, boolean timetracking, ArrayList<String> beschreibung, ArrayList<String> classHeader, ArrayList<String> testHeader, int secondsForBabystepps, String minutesForBaby){
         this.aufgabenName = aufgabenName;
