@@ -1,0 +1,78 @@
+\documentclass[10pt]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{ulem}
+
+\begin{document}
+
+\begin{center}
+
+\section*{Systembeschreibung zum Projekt7: TestDrivenDevelopment(TDD)}
+
+\end{center}
+\bigskip
+Unser Programm besteht aus vier Scenes:
+\medskip
+\begin{itemize}
+
+\item Der Hauptscene mit dem eigentlichen Programm
+\item Der Analyse Scene für die Analyse des Timetracking Features
+\item Der Katalogauswahl Scene um eine Aufgabe auszuwählen
+\item Der Directorychooser Scene
+
+\end{itemize}
+\medskip
+Das Programm beginnt mit der Directorychooser Scene zur Auswahl des Verzeichnisses in welchem die Kataloge hinterlegt werden. Nach der Auswahl werden diese in der Klasse KatalogCreator.java eingelesen. Dabei haben wir uns für das .txt Format entschieden nach folgendem Layout:
+\begin{itemize}
+
+\item[] AufgabenName:
+
+\item[] Beschreibung:
+
+\item[] Classname:
+
+\item[] ClassHeader:
+
+\item[] Testname:
+
+\item[] TestHeader:
+
+\item[]BabySteps: true/false
+\item[] TimeForBabystepps: Minuten:Sekunden (kann auch leer gelassen werden falls Babystepps false sind)
+\item[] Timetracking: true/false
+\end{itemize}
+\medskip
+Die einzelnen Dateien werden mit \verb+Files.readAllLines+ zu einer ArrayList gemacht und aus dieser werden die einzelnen Attribute ausgelesen. Daraus wird dann ein Array aus Katalogen erstellt, in dem die jeweiligen Werte zur späteren Verwendung gespeichert werden. In der Funktion \verb+createButtonArr()+ wird dann aus dem Katalog Array ein Button Array erstellt mit dem richtigen Format für die Buttons und der setOnAction-Funktion. Schließlich wird das ButtonArray returned und in eine GridPane eingebunden mit dem die Katalogauswahl Scene erstellt wird. In dem setOnAction-Event der Buttons wird eine neue Scene erstellt, nämlich die für das Hauptprogramm, außerdem wird in der Static-Variable \verb+choosenKatalog+ der ausgewählte Katalog, des dementsprechenden Buttons gespeichert für die spätere Verwendung.
+
+Nach Klicken des Buttons befindet sich der Nutzer im Hauptprogramm, wo zunächst \verb+Controller.initialize()+  aufgerufen wird um die Labels und TextAreas an ihre Integer/String Properties zu binden. Dann muss der Nutzer den start-Button auswählen wodurch die \verb+setStart()+ Methode aufgerufen wird. Der Timer wird dann mit \verb+resetTimer()+ gestartet und die TextAreas erhalten ihre vorgegeben Test- und Code-Header. Falls das timetracking Feature \verb+true+ ist für diesen Katalog wird auch dieses gestartet.
+
+\verb+ResetTimer()+ ist eine Funktion zum Erstellen oder Reset des Timers. Sie rechnet die \verb+secondsForBabysteps+ aus dem choosenKatalog in die richtigen Werte um, um damit die \verb+createTimer()+ Funktion aufzurufen. \verb+createTimer()+ setzt lediglich ein paar Variabeln neu bzw. wieder zurück. Das eigentliche erstellen des Timers erfolgt in \verb+newTimer()+ , wo einen Timer erzeugt wird, der sich bei Zeitangaben > 1 Minute nach 60 Sekunden wieder selbst neu erzeugt und den Propertywert für die Minute um 1 erhöht. Die \verb+counter+ Variable dient hierbei dazu dafür zu sorgen, dass der Timer nach der richtigen Anzahl Minuten aufhört. 
+Falls man einen Katalog auswählt der ohne Babystepfeature läuft, wird \verb+timeLimitMinutes+ auf \verb+Integer.MAX_VALUE+ ; gesetzt damit er (fast) endlos weiter läuft.
+
+Der Timer ist in der Lage jede Zeit richtig auszuführen, also auch so etwas wie 00:15 oder 2:13.
+Sollte er (bei eingeschalteten Babysteps) ablaufen, wird \verb+jumpOneStepBack()+ aufgerufen, um eine TDD Phase zurück zu springen (Auch hier wird dann der Timer zurücksetzt).
+
+Nun weiter zum Aufruf der \verb+setStart()+ Funktion des Start-Buttons: Hier wird nun \verb+Excercise.start()+ ausgeführt. In der Exercise Klasse wird der \linebreak \verb+choosenKatalog+ ausgelesen um z.B die ClassHeader oder TestHeader zu erstellen.
+
+Falls nun der Nutzer den NextStepp-Button anklickt, wird die Funktion \verb+setNextStep()+ aufgerufen.
+Hier wird zu allererst der neue Code zum compilen in \verb+NextSteper.compileTestGenerator+ aufgerufen (dazu gleich mehr). Nun werden die Ergebnisse des Compilier-Versuchs ausgewertet. Bei einem CompileError wird dieser im Rückmeldungs-Label angezeigt. Ebenso wenn es fehlgeschlagene Tests außerhalb der Test-Schreiben-Phase gibt. Innerhalb der Test-Schreiben-Phase ist es wiederum entscheidend wie viele fehlschlagen. Bei mehr als einem wird der Nutzer darauf hingewiesen das nur ein Test fehlschlagen darf. Bei genau einem wird er in die nächste Phase weitergeleitet mit allen dazu gehörigen Funktionen (neuen Timer erstellen,  TextAreas neu Texte zuweisen, Alert anzeigen, Grafik rotieren lassen).
+Bei nicht fehlschlagendem Test in der Test-Schreiben-Phase wird der Nutzer aufgefordert einen solchen zu verfassen.
+Wenn keine dieser Bedingungen zutrifft, handelt es sich um Code aus der Refactor- oder Code-Schreiben-Phase der erfolgreich compiliert wurde und alle Tests erfüllt; somit wird auch hier der Nutzer in die nächste Phase weitergeleitet.
+Zuletzt werden noch die Daten für das Tracking abgespeichert.
+
+Nun zur Klasse NextSteper:
+In der Funktion \verb+compileTestGenerator()+ wird der Code aus den Text-Areas mithilfe der virtual-kata-lib compiliert. Es werden zwei Instanzen der Klasse \verb+CodeFailure+ für die spätere Rückgabe erstellt, eine für Code und eine für Test Probleme. Es werden zwei \verb+CompilationUnits+ an die \verb+CompilerFactory+ übergeben um einen JavaStringCompiler zu erhalten, auf dem \verb+compileAndRunTests()+ aufgerufen wird.
+Entweder kommt es dann zu Compiler-Errors welche in der \verb+CodeFailure+ Klasse \verb+compileFailure+ gespeichert werden oder es gibt keine Errors, dann muss geguckt werden ob es noch FailedTest gab, welche dann zum \verb+testFailure+ Objekt hinzugefügt werden, falls vorhanden.
+
+Das Tracking wird über die Klassen \verb+Tracker+ und \verb+TrackStep+ realisiert.
+In der \verb+Tracker.startTracker()+ Funktion wird der Tracker initialisiert mit einem startDate als Anfangszeit und einer ArrayList zum erstellen der Ausgabe. Die Trackingausgabe erfolgt in einer Tracked.txt Datei die im Projekt-Ordner liegt. Jedes mal wenn \verb+setNextStep()+ aufgerufen wird, wird \verb+writeStep+ aufgerufen. Hier wird ein \verb+TrackStep+ Objekt in der \verb+generateStep()+ Funktion erzeugt und an \verb+trackWriter+ übergeben um es in die File zu speichern. \verb+GenerateStep()+ erzeugt dann eine neue \verb+LocalDateTime+ Variable und berechnet die Differenz zur vorherigen Zeit, die immer in \verb+startTime+ gespeichert ist, aus. Außerdem wird der Inhalt der Labels für Rückmeldung und aktuelle Phase, sowie der Inhalt der TextArea zum Code schreiben an den Constructor von TrackStep übergeben.
+TrackStep speichert diese Information dann in Instanzvariablen ab, welche in \verb+TrackStep.asStringArrayList+ verwendet werden um die Ausgabe für den User zu erzeugen. Diese erzeugte ArrayList wird dann in \verb+Tracker.trackWriter+ in die Datei geschrieben.
+
+Wenn TimeTracking aktiv ist kann der User den Analyse-Button drücken um eine neue Scene mit einer Grafik zur Analyse des Zeitverbrauchs öffnen. Das Diagramm wird in \verb+setOpenAnalyzer+ erstellt. Dazu werden aus den Tracking Daten die insgesamt verstrichene Zeit für die Test-, Code-, und Refactorphase in einem PieChart Objekt gespeichert. Jeder Abschnitt erhält seinen eigenen CSS Style und einen EventHandler der dafür sorgt, dass man, wenn man mit der Maus über die einzelnen Abschnitte fährt die verstrichene Zeit in Sekunden angezeigt bekommt.
+
+Zuletzt gibt es noch einen Fullscreen Button, zum Wechsel in oder aus dem Fullscreenmode.
+
+\end{document}
