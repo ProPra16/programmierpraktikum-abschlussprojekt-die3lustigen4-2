@@ -48,9 +48,9 @@ public class Tracker {
         Files.write(p, step.asStringArrayList(), charset, StandardOpenOption.APPEND);
     }
 
-    private static TrackStep generateStep(){
+    private static TrackStep generateStep(boolean stepPassed){
         String aktuellePhase=Controller.aktuellePhaseProperty.getValue();
-        String content=Controller.writeHereProperty.getValue();
+        String content;
         String failures=Controller.rueckmeldungProperty.getValue();
         LocalDateTime time = LocalDateTime.now();
 
@@ -66,21 +66,37 @@ public class Tracker {
         }
 
         startDate = time;
-
         int stepDuration= min*60 + sec;
-        if(Exercise.writeTest){
-            testDuration += stepDuration ;
-        }
-        else if(Exercise.writeCode){
-            codeDuration += stepDuration;
-        }
-        else if(Exercise.refactoring){
-            refactorDuration += stepDuration;
+        if(stepPassed) {
+            if (Exercise.writeTest) {
+                content = Controller.codeProperty.getValue();
+                refactorDuration += stepDuration;
+                aktuellePhase = Exercise.followingStep;
+            } else if (Exercise.writeCode) {
+                content = Controller.testProperty.getValue();
+                testDuration += stepDuration;
+                aktuellePhase = Exercise.followingStep;
+            } else {
+                content = Controller.codeProperty.getValue();
+                codeDuration += stepDuration;
+                aktuellePhase = Exercise.followingStep;
+            }
+        } else{
+            if (Exercise.writeTest) {
+                content = Controller.testProperty.getValue();
+                testDuration += stepDuration;
+            } else if (Exercise.writeCode) {
+                content = Controller.codeProperty.getValue();
+                codeDuration += stepDuration;
+            } else {
+                content = Controller.codeProperty.getValue();
+                refactorDuration += stepDuration;
+            }
         }
         return new TrackStep(aktuellePhase, content, failures, stepDuration, time, testDuration, codeDuration, refactorDuration);
     }
 
-    public static void writeStep() throws IOException {
-        trackWriter(generateStep());
+    public static void writeStep(boolean stepPassed) throws IOException {
+        trackWriter(generateStep(stepPassed));
     }
 }

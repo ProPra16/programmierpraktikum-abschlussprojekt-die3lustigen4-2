@@ -47,8 +47,8 @@ public class Controller implements Initializable{
     public Label babyLabel = new Label();
     public ImageView picture = new ImageView();
 
-    private static StringProperty codeProperty = new SimpleStringProperty("");
-    private static StringProperty testProperty = new SimpleStringProperty("");
+    public static StringProperty codeProperty = new SimpleStringProperty("");
+    public static StringProperty testProperty = new SimpleStringProperty("");
     public static StringProperty writeHereProperty = new SimpleStringProperty("");
 
     public static StringProperty aktuellePhaseProperty = new SimpleStringProperty("");
@@ -71,8 +71,9 @@ public class Controller implements Initializable{
 
         /** Bei der write Test Phase soll man ja einen Test schreiben der Failed,
          * um dann neuen Code zu schreiben der diesen Test erfüllt. */
+        boolean stepPassed = false;
 
-        CodeFailure result = NextSteper.compileTestGenerator(codeName, codeProperty, testName, testProperty);
+        CodeFailure result = manageLabels();
         if(result.problems()) {
             rueckmeldungProperty.setValue(result.codeAsString());
         }else if(result.getNumberOfFailedTests() > 0){
@@ -88,6 +89,7 @@ public class Controller implements Initializable{
                 changeView();
                 NextSteper.stepAnnouncement();
                 resetTimer();
+                stepPassed = true;
             }
         }else if(Exercise.writeTest && result.getNumberOfFailedTests() == 0){
             rueckmeldungProperty.setValue("Du musst einen Test schreiben der fehlschlaegt!");
@@ -99,10 +101,10 @@ public class Controller implements Initializable{
             changeView();
             NextSteper.stepAnnouncement();
             resetTimer();
+            stepPassed = true;
         }
-        if(KatalogCreator.choosenKatalog.timetracking) {
-            Tracker.writeStep();
-        }
+        if(KatalogCreator.choosenKatalog.timetracking)
+            Tracker.writeStep(stepPassed);
     }
 
     private void resetTimer() {
@@ -126,26 +128,28 @@ public class Controller implements Initializable{
     }
 
     private void giveLabelNewValue() {
-        manageLabels();
         if (Exercise.writeCode) {
             reworkTest.setDisable(true);
+            codeProperty.setValue(writeHereProperty.getValue());
             writeHereProperty.setValue(codeOverview.getText());
         } else if (Exercise.writeTest) {
             reworkTest.setDisable(false);
+            testProperty.setValue(writeHereProperty.getValue());
             writeHereProperty.setValue(codeOverview.getText());
         } else {
             reworkTest.setDisable(true);
+            codeProperty.setValue(writeHereProperty.getValue());
             writeHereProperty.setValue(testOverview.getText());
         }
     }
 
-    private void manageLabels() {
+    private CodeFailure manageLabels() {
         if (Exercise.writeCode) {
-            codeProperty.setValue(writeHereProperty.getValue());
+            return NextSteper.compileTestGenerator(codeName, writeHereProperty, testName, testProperty);
         } else if (Exercise.writeTest) {
-            testProperty.setValue(writeHereProperty.getValue());
+            return NextSteper.compileTestGenerator(codeName, codeProperty, testName, writeHereProperty);
         } else {
-            codeProperty.setValue(writeHereProperty.getValue());
+            return NextSteper.compileTestGenerator(codeName, writeHereProperty, testName, testProperty);
         }
     }
 
@@ -153,7 +157,7 @@ public class Controller implements Initializable{
         /**************************************/
         //Trackingergänzungen
         if(KatalogCreator.choosenKatalog.timetracking) {
-            Tracker.writeStep();
+            Tracker.writeStep(false);
         }
         /**************************************/
         timerSeconds.stop();

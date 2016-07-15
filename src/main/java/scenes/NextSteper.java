@@ -24,7 +24,7 @@ class NextSteper {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(Main.primaryStage);
         alert.setTitle("Nächster Schritt");
-        alert.setContentText(Exercise.followingStep);
+        alert.setContentText(Controller.aktuellePhaseProperty.getValue());
         alert.showAndWait();
     }
 

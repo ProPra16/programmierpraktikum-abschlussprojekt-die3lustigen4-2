@@ -46,7 +46,7 @@ public class TrackStep {
         temp.add("Aktuelles Datum + Zeit: " + time.format(formatter) + "\n");
         temp.add(content);
         temp.add("");
-        temp.add("Compilier-Fehler und fehlgechlagene Tests: ");
+        temp.add("Compilier-Fehler, fehlgeschlagene Tests und Rückmeldungen: ");
         temp.add(failures);
         temp.add("");
         temp.add("");
